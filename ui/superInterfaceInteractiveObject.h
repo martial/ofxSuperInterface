@@ -19,7 +19,7 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     
     public:
     superInterfaceInteractiveObject();
-    void setup(ofxSuperInterface   * mom);
+    void setup(ofxSuperInterface   * mom, string label);
     void update();
     void draw();
     
@@ -60,6 +60,7 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     
 
     ofEvent<superInterfaceEventArgs>   eventMouseDown;
+	ofEvent<superInterfaceEventArgs>   eventChangePos;
     
     private :
     

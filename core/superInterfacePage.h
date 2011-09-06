@@ -19,14 +19,13 @@ public:
     
     
     superInterfacePage();
-    virtual void setup(ofxSuperInterface * mom);
+    virtual void setup(ofxSuperInterface * mom, int pageNumber);
     virtual void update();
     virtual void draw();
     
     void addComponent(superInterfaceComponent * component);
     void removeComponentByLabel(string label);
     
-    bool enabled;
     
 #if !defined( TARGET_OF_IPHONE ) 
     
@@ -50,6 +49,10 @@ public:
     ofxSuperInterface               * mom;
     
     vector<superInterfaceComponent*> components;
+    
+    bool enabled;
+    int pageNumber;
+    string xmlPath;
 
     
 private:

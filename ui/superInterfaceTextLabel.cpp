@@ -14,10 +14,9 @@ superInterfaceTextLabel::superInterfaceTextLabel() {
 }
 void superInterfaceTextLabel::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, string label) {
     
-    superInterfaceComponent::setup(mom);
+    superInterfaceComponent::setup(mom, label);
     
     this->gridPos.set(xGridPos, xGridPos);
-    this->settings->label = label;
     
     // just to fix width and height on setup
     //getBox();

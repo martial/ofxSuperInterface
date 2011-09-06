@@ -29,7 +29,9 @@ public:
     
     superInterfaceHSlider           xUnitSlider;
     superInterfaceHSlider           yUnitSlider;
+	superInterfaceSimpleButton      gridBtn;
     superInterfaceSimpleButton      saveBtn;
+	superInterfaceSimpleButton      positionBtn;
     superInterfaceHTextLabel        label;
     
     

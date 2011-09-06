@@ -19,7 +19,7 @@ class superInterfaceComponent : public superInterfaceInteractiveObject {
 public:
     
     superInterfaceComponent();
-    void setup(ofxSuperInterface   * mom);
+    void setup(ofxSuperInterface   * mom, string label);
     void setAssets( superInterfaceAssets * assets);
     void update();
     void draw();
@@ -29,9 +29,7 @@ public:
     void onMouseMoved();
     void onMouseReleased();
     
-    
-   
-  
+      
     
     
 };

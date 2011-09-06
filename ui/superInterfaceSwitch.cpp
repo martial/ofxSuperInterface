@@ -17,14 +17,14 @@ superInterfaceSwitch::superInterfaceSwitch () {
     value = NULL;
 }
 
-void superInterfaceSwitch::setup(ofxSuperInterface   * mom,bool &value) {
+void superInterfaceSwitch::setup(ofxSuperInterface   * mom, string label, bool &value ) {
     this->value = &value;
-    superInterfaceInteractiveObject::setup(mom);
+    superInterfaceInteractiveObject::setup(mom, label);
 }
 
-void superInterfaceSwitch::setup(ofxSuperInterface   * mom) {
+void superInterfaceSwitch::setup(ofxSuperInterface   * mom, string label) {
     this->value = &inherentValue;
-    superInterfaceInteractiveObject::setup(mom);
+    superInterfaceInteractiveObject::setup(mom, label);
 }
 
 void superInterfaceSwitch::update() {
@@ -45,7 +45,8 @@ void superInterfaceSwitch::isEnabled(bool b) {
 }
 
 void superInterfaceSwitch::toggle () {
-    
+		
+	ofLog(OF_LOG_NOTICE, "toggle");
       *value=! *value;
     
 }

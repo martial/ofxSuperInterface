@@ -12,8 +12,8 @@
 superInterfaceComponent::superInterfaceComponent(){
     
 }
-void superInterfaceComponent::setup(ofxSuperInterface   * mom){
-     superInterfaceInteractiveObject::setup(mom);
+void superInterfaceComponent::setup(ofxSuperInterface   * mom, string label){
+     superInterfaceInteractiveObject::setup(mom, label);
 }
 
 

@@ -12,8 +12,10 @@
 superInterfacePage::superInterfacePage(){
      enabled = true;
 }
-void superInterfacePage::setup(ofxSuperInterface * mom){
+void superInterfacePage::setup(ofxSuperInterface * mom, int pageNumber){
     this->mom = mom;
+    this->pageNumber = pageNumber;
+    
     bgColor.set(0,0,0);
    
     
@@ -27,12 +29,7 @@ void superInterfacePage::update(){
 }
 void superInterfacePage::draw(){
     
-    //ofSetColor(bgColor);
-    //ofRect(0,0,ofGetWidth(), ofGetHeight());
-    
-    
-    
-    
+  
     for ( int i = 0; i<components.size(); i++) {
         components[i]->draw();
     }
@@ -67,12 +64,15 @@ void superInterfacePage::mouseMoved(ofMouseEventArgs &e){
     
 }
 void superInterfacePage::mouseDragged(ofMouseEventArgs &e){
-     
+	
+    for ( int i = 0; i<components.size(); i++) {
+        components[i]->mouseMoved(e);
+    }
 }
 
 void superInterfacePage::mousePressed(ofMouseEventArgs &e){
     
-  
+  ofLog(OF_LOG_NOTICE, "mouse pressed from page.");
     
     for ( int i = 0; i<components.size(); i++) {
         components[i]->mousePressed(e);

@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef  SUPINT
+#ifndef SUPINT
 #define SUPINT
 
 #include "ofMain.h"
@@ -29,10 +29,10 @@ public:
     void update();
     void draw();
     
-    void addPage();
+    void addPage(int pageNumber);
     void showPage(int id);
     
-    void addComponent(superInterfaceComponent * component, int pageNum);
+    void addComponent(superInterfaceComponent * component, int pageNumber);
     void removeComponent();
     
     
@@ -42,41 +42,50 @@ public:
     void enablePositionMode(bool bActive);
     
     void                addSettingsPage();
-    superInterfacePage * getCurrentPage();
+    
     
     
     
     #if !defined( TARGET_OF_IPHONE ) 
     
     void mouseMoved(ofMouseEventArgs &e ){
+		
         menuPage.mouseMoved(e);
         if(bShowSettings) { settingsPage.mouseMoved(e); return; }
-        getCurrentPage().mouseMoved(e);
+        dataManager.getPage(currentPage)->mouseMoved(e);
     };
     void mouseDragged(ofMouseEventArgs &e){
         menuPage.mouseDragged(e);
         if(bShowSettings) { settingsPage.mouseDragged(e); return; }
-        getCurrentPage().mouseDragged(e);
+         dataManager.getPage(currentPage)->mouseDragged(e);
     };
-    void mousePressed(ofMouseEventArgs &e){getCurrentPage().mousePressed(e);};
-    void mouseReleased(ofMouseEventArgs &en){getCurrentPage().mouseReleased(e);};
+    void mousePressed(ofMouseEventArgs &e){
+		menuPage.mousePressed(e);
+		if(bShowSettings) { settingsPage.mousePressed(e); return; }
+		dataManager.getPage(currentPage)->mousePressed(e);
+	};
+    void mouseReleased(ofMouseEventArgs &e){
+		menuPage.mouseReleased(e);
+		if(bShowSettings) { settingsPage.mouseReleased(e); return; }
+		dataManager.getPage(currentPage)->mouseReleased(e);
+	};
     
     #else
     
     void touchDown(ofTouchEventArgs &touch){
         menuPage.touchDown(touch);
         if(bShowSettings) { settingsPage.touchDown(touch); return; }
-        getCurrentPage()->touchDown(touch);
+         dataManager.getPage(currentPage)->touchDown(touch);
     }
     void touchMoved(ofTouchEventArgs &touch){
         menuPage.touchMoved(touch);
         if(bShowSettings) { settingsPage.touchMoved(touch); return; }
-        getCurrentPage()->touchMoved(touch);
+		dataManager.getPage(currentPage)->touchMoved(touch);
     };  
     void touchUp(ofTouchEventArgs &touch){
          menuPage.touchUp(touch);
          if(bShowSettings) { settingsPage.touchUp(touch); return; }
-         getCurrentPage()->touchUp(touch);
+		 dataManager.getPage(currentPage)->touchUp(touch);
     };  
     void touchDoubleTap(ofTouchEventArgs &touch){getCurrentPage()->touchDoubleTap(touch);}; 
     void touchCancelled(ofTouchEventArgs &touch){getCurrentPage()->touchCancelled(touch);};
@@ -96,8 +105,7 @@ private:
     
     superInterfaceDataManager           dataManager;
     
-    vector<superInterfaceComponent*>    components;
-    vector<superInterfacePage*>         pages;
+
     
     superInterfaceSettingsPage          settingsPage;
     superInterfaceMenuPage              menuPage;

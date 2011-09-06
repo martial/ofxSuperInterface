@@ -23,7 +23,10 @@ void ofxSuperInterface::setup(string initialDirectory) {
     dir.open(initialDirectory + "superInterface");
     if (!dir.exists()) dir.create();
     dir.open(initialDirectory+"superInterface/layouts");
-    if (!dir.exists()) dir.create();
+    if (!dir.exists()) {
+        dir.create();
+        ofLog(OF_LOG_NOTICE, "create layout folder");
+    }
     
     
     
@@ -33,23 +36,19 @@ void ofxSuperInterface::setup(string initialDirectory) {
     ofRegisterTouchEvents(this);
     #endif
     
-    dataManager.setup(&settings, &settingsPage);
+    dataManager.setup(this, &settings, &settingsPage);
     dataManager.loadSettings(initialDirectory);
     
     //settings.setupDefaults();
     assets.setup(&settings);
     
     addSettingsPage();
-    
-    bShowGrid = true;
-   
+       
     bPositionMode = false;
     
     showPage(0);
     
-    
-    
-    //menuPage.settingsBtn.value = &bShowSettings;
+;
     
 }
 
@@ -65,6 +64,8 @@ void ofxSuperInterface::addSettingsPage () {
     // settings will be our page 0
     settingsPage.setup(this);
     menuPage.setup(this);
+    
+    
     //pages.push_back(&settingsPage);
     
     // then we always create an empty page;
@@ -82,10 +83,17 @@ void ofxSuperInterface::toggleSettings() {
 }
 
 void ofxSuperInterface::update(){
+	
+	
+	
+	for ( int i = 0; i<dataManager.components.size(); i++) {
+		dataManager.components[i]->bEnabled = !bPositionMode;
+	}
+	
     
     if ( bShowSettings ) settingsPage.update();
     menuPage.update();
-    superInterfacePage * currentP = getCurrentPage();
+    superInterfacePage * currentP = dataManager.getPage(currentPage);
     currentP->update();
     
 }
@@ -117,9 +125,6 @@ void ofxSuperInterface::draw(){
         }
         
         
-      
-        
-        
         //draw it!
 
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -133,40 +138,43 @@ void ofxSuperInterface::draw(){
   
     
     
-    getCurrentPage()->draw();
+    dataManager.getPage(currentPage)->draw();
     if ( bShowSettings ) settingsPage.draw();
     
     menuPage.draw();
     
 }
 
-void ofxSuperInterface::addComponent(superInterfaceComponent * component, int numPage){
+void ofxSuperInterface::addComponent(superInterfaceComponent * component, int pageNumber){
 
     //components.push_back(component);
     
-    if ( numPage >= pages.size() ) {
+    if ( pageNumber >= dataManager.pages.size() ) {
         
-        int diff = numPage - pages.size()+1;
+        int diff = pageNumber - dataManager.pages.size()+1;
         for ( int i=0; i< diff; i++) {
-            addPage();
+            addPage(i);
+            
             //ofLog(OF_LOG_NOTICE, "Page %d does not exist - creating  page %d", numPage, i);
         }
         
         
     }
+    
     //ofLog(OF_LOG_NOTICE, "add component to page %d", numPage);
-    pages[numPage]->addComponent(component);    
+    
+    dataManager.pages[pageNumber]->addComponent(component);    
+    dataManager.addComponent(component, pageNumber);
     
 }
 void ofxSuperInterface::removeComponent(){
     
 }
 
-void ofxSuperInterface::addPage() {
-    superInterfacePage * page =  new superInterfacePage();
-    page->setup(this);
-    pages.push_back(page);
-    menuPage.setNumOfPages(pages.size());
+void ofxSuperInterface::addPage(int pageNumber) {
+    
+    dataManager.addPage(pageNumber);
+    menuPage.setNumOfPages(dataManager.pages.size());
 }
 
 void ofxSuperInterface::showPage(int id) {
@@ -180,21 +188,11 @@ void ofxSuperInterface::showGrid(bool bActive) {
 void ofxSuperInterface::enablePositionMode(bool bActive) {
     bPositionMode = bActive;
     //showGrid(bActive);
-    for ( int i = 0; i<components.size(); i++) {
-        components[i]->bEnabled = !bActive;
-    }
+    
     
 }
 
 
-superInterfacePage * ofxSuperInterface::getCurrentPage() {
-    if ( currentPage > pages.size()-1) {
-        ofLog(OF_LOG_ERROR, "oh nor!! %d", currentPage);
-    }
-    
-    return pages[currentPage];
-    
-}
 
 
 

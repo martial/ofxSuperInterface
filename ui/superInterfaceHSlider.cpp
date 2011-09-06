@@ -24,9 +24,9 @@ void superInterfaceHSlider::setup(ofxSuperInterface   * mom, float * value, int 
     this->hGridSize = hGridSize;
     this->minVal = minVal;
     this->maxVal = maxVal;
-    this->settings->label = label;
+ 
     
-    superInterfaceComponent::setup(mom);
+    superInterfaceComponent::setup(mom, label);
     
     
     minVal = 10;
@@ -58,6 +58,8 @@ void superInterfaceHSlider::update() {
 
 void superInterfaceHSlider::onMouseDragged (int x, int y) {
      
+	
+	
      pct = ( ((float)x - pos.x) / this->width );
      pct = ofClamp(pct, 0.0, 1.0);
      this->targetValue = (bRounded) ? int(minVal + (maxVal-minVal) * pct) : (minVal + (maxVal-minVal) * pct);

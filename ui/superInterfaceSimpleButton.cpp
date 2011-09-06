@@ -21,7 +21,7 @@ void superInterfaceSimpleButton::setup(ofxSuperInterface   * mom, bool &value, s
     this->hGridSize = hGridSize;
     this->settings->label = label;
     
-    superInterfaceSwitch::setup(mom, value);
+    superInterfaceSwitch::setup(mom, label, value);
   
 }
 
@@ -32,7 +32,7 @@ void superInterfaceSimpleButton::setup(ofxSuperInterface   * mom,  string label,
     this->hGridSize = hGridSize;
     this->settings->label = label;
     
-    superInterfaceSwitch::setup(mom);
+    superInterfaceSwitch::setup(mom, label);
     
 }
 

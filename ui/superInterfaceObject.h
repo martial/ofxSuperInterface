@@ -24,18 +24,18 @@ class superInterfaceObject {
     
     superInterfaceObject();
     
-    virtual void setup(ofxSuperInterface   * mom);
+    virtual void setup(ofxSuperInterface   * mom, string label);
     virtual void update();
     virtual void draw();
     
-    virtual void setPosition(int x, int y);
+    virtual void setGridPosByScreenCoords(int x, int y);
     virtual void setFixed(bool b, int fixedXPos = 0, int fixedYPos = 0,int fixedWidth = 0, int fixedHeight = 0);
     virtual void setSettings(superInterfaceCompSettings * settings);
     
     
-    
     void calculatePos();
     void calculateSize();
+	    
     virtual ofRectangle getBoundingBox();
    
     
@@ -44,9 +44,11 @@ class superInterfaceObject {
     int     wGridSize, hGridSize, width, height, fixedXPos, fixedYPos, fixedWidth, fixedHeight, cornerRadius;
     bool    bEnabled, bIsFixed, bIsFreePos;
     
+    
     // for custom purposes
     int id;
-    
+    int pageNum;
+	
     ofRectangle boundingBox;
     
     ofxSuperInterface   * mom;

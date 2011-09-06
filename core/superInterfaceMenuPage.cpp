@@ -19,7 +19,7 @@ void superInterfaceMenuPage::setup (ofxSuperInterface * mom)
 
 {
     
-    superInterfacePage::setup(mom);
+    superInterfacePage::setup(mom, -1);
     
     settingsBtn.setup(mom, mom->bShowSettings, "settings");
     settingsBtn.cornerRadius = 0;
@@ -76,6 +76,8 @@ void superInterfaceMenuPage::setNumOfPages(int val) {
 
 void superInterfaceMenuPage::onPageClickHandler(superInterfaceEventArgs & args) {
     
+
+	
     superInterfaceObject * comp = args.comp;
     
     for ( int i = 0; i<pagesBtn.size(); i++) {

@@ -24,9 +24,9 @@ superInterfaceInteractiveObject::superInterfaceInteractiveObject() {
 
 }
 
-void superInterfaceInteractiveObject::setup (ofxSuperInterface   * mom) {
+void superInterfaceInteractiveObject::setup (ofxSuperInterface   * mom, string label) {
     
-    superInterfaceObject::setup(mom);
+    superInterfaceObject::setup(mom, label);
     
 }
 
@@ -47,9 +47,9 @@ bool superInterfaceInteractiveObject::hitTest(ofPoint tPos) {
 
  #if !defined( TARGET_OF_IPHONE ) 
 
-void superInterfaceInteractiveObject::mousePressed(ofMouseEventArgs &e) { onDownHandler(e.x, e.y) }
-void superInterfaceInteractiveObject::mouseReleased(ofMouseEventArgs &e) {onUpHandler() }
-void superInterfaceInteractiveObject::mouseMoved(ofMouseEventArgs &e) {onMovedHandler(e.x, e.y) }
+void superInterfaceInteractiveObject::mousePressed(ofMouseEventArgs &e) { onDownHandler(e.x, e.y); }
+void superInterfaceInteractiveObject::mouseReleased(ofMouseEventArgs &e) {onUpHandler(); }
+void superInterfaceInteractiveObject::mouseMoved(ofMouseEventArgs &e) {ofLog(OF_LOG_NOTICE, "MOUSE MOVEED"); onMovedHandler(e.x, e.y); }
 
 #else 
 
@@ -64,6 +64,7 @@ void superInterfaceInteractiveObject::touchMoved(ofTouchEventArgs &touch) { onMo
 
 void superInterfaceInteractiveObject::onDownHandler(int x, int y, int id) {
     
+	ofLog(OF_LOG_NOTICE, "down handler from objects..");
     
     ofPoint mousePos;
     mousePos.set(x, y);
@@ -85,7 +86,7 @@ void superInterfaceInteractiveObject::onUpHandler(int id) {
 }
 
 void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
-
+	
     
     ofPoint mousePos;
     mousePos.set(x, y);
@@ -93,7 +94,8 @@ void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
     
     
     if ( isMouseDown && mom->bPositionMode && !bIsFixed) {
-        setPosition(x, y, true);
+        setGridPosByScreenCoords(x, y);
+		ofNotifyEvent(eventChangePos, eventsArgs, this);
     }
        
     if(!bEnabled) return;
@@ -103,10 +105,10 @@ void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
     
     if ( isMouseDown && assignedId == id) {
         
-        if ( bEnabled ) {
+       // if ( bEnabled ) {
         onMouseDragged(x, y);
         if (!isRollOver ) onRollOver();
-        }
+       // }
         
     } else {
         

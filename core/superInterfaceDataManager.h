@@ -15,30 +15,61 @@
 #include "superInterfaceEventArgs.h"
 #include "superInterfaceSettingsPage.h"
 
+class ofxSuperInterface;
+
 class superInterfaceDataManager {
   
 public:
     
-    void setup(superInterfaceSettings * interfaceSettings, superInterfaceSettingsPage * settingsPage);
+    void setup(ofxSuperInterface * mom, superInterfaceSettings * interfaceSettings, superInterfaceSettingsPage * settingsPage);
+	
     void createDefaultSettings();
     void updateSettings();
     void loadSettings(string initialDirectory);
     void saveSettings(superInterfaceEventArgs & e);
     void saveSettings();
     
-    void loadLayouts();
-    void saveLayouts();
+	
+    void addPage(int pageNumber);
+    void addComponent(superInterfaceComponent * component, int pageNumber);
+	superInterfacePage * getPage(int pageNumber );
     
-    superInterfaceSettingsPage * settingsPage;
-    superInterfaceSettings * interfaceSettings;
+	
+    void	loadLayouts();
+    void	saveLayouts();
+	
+	void	updateComponentPos(superInterfaceEventArgs & e);
+	
+	
+	int		getLayoutNodeByLabel(string label, int pageNum);
     
-    string                  xmlSettingsPath;
-    ofxXmlSettings          xmlSettings;
-    vector<ofxXmlSettings*> xmlLayouts;
+	
+	bool	checkIfComponentXmlExists(int pageNumber, superInterfaceComponent *component);
+    string	checkIfLayoutXmlExists(int pageNumber);
+	void	checkIfLabelExists(superInterfaceComponent *component); // used to avoid same labels in all GUI
+	
+	vector<superInterfaceComponent*>    components;
+    vector<superInterfacePage*>         pages;
+
+	
+private:
     
-    ofDirectory             dir;
+	ofxSuperInterface *					mom;
+    superInterfaceSettingsPage *		settingsPage;
+    superInterfaceSettings *			interfaceSettings;
+	
+	    
+    string								xmlSettingsPath;
+    ofxXmlSettings						xmlSettings;
+    vector<ofxXmlSettings*>				xmlLayouts;
     
-    string initialDirectory;
+    ofDirectory							dir;
+    
+    string								initialDirectory;
+	
+	
+	vector<string>						doubleLabels;
+	
 };
 
 

@@ -18,8 +18,8 @@ class superInterfaceSwitch : public superInterfaceComponent {
     public :
     
     superInterfaceSwitch();
-    void setup(ofxSuperInterface   * mom, bool &value);
-    void setup(ofxSuperInterface   * mom);
+    void setup(ofxSuperInterface   * mom, string label, bool &value);
+    void setup(ofxSuperInterface   * mom, string label);
     void update();
     void draw();
     

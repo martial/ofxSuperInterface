@@ -39,13 +39,20 @@ superInterfaceObject::superInterfaceObject() {
     
 }
 
-void superInterfaceObject::setup (ofxSuperInterface   * mom) {
+void superInterfaceObject::setup (ofxSuperInterface   * mom, string label) {
     
     this->mom = mom;
+	this->settings->label = label;
 }
 
-void superInterfaceObject::setPosition(int x, int y) {
-    
+void superInterfaceObject::setGridPosByScreenCoords(int x, int y) {
+	
+	float xSteps = ofGetWidth() / mom->settings.grid.x;
+	float ySteps = ofGetHeight() / mom->settings.grid.y;
+	gridPos.x = (int)( (x * xSteps ) / ofGetWidth()) - wGridSize * .5;
+	gridPos.y = (int)( (y * ySteps ) / ofGetHeight()) -4 - hGridSize * .5;
+	
+	ofLog(OF_LOG_NOTICE, "set grid pos.. %f", gridPos.x);
 }
 
 void superInterfaceObject::update() {
@@ -112,6 +119,8 @@ ofRectangle superInterfaceObject::getBoundingBox() {
     boundingBox.set(pos.x, pos.y, width, height);
     return boundingBox;
 }
+
+
 
 
 /*
