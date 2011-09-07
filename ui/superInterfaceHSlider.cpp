@@ -43,7 +43,11 @@ void superInterfaceHSlider::setup(ofxSuperInterface   * mom, float * value, int 
     pct = *value /  (minVal + (maxVal-minVal)); 
     
     txtLabel.setup(mom, pos.x, pos.y + height, label);
-    
+	
+	
+	eventsArgs.floatVals.push_back(&pct);
+    eventsArgs.floatVals.push_back(value);
+	
 }
 
 void superInterfaceHSlider::roundValues(bool bActive) {
@@ -65,6 +69,8 @@ void superInterfaceHSlider::onMouseDragged (int x, int y) {
      this->targetValue = (bRounded) ? int(minVal + (maxVal-minVal) * pct) : (minVal + (maxVal-minVal) * pct);
      *value = targetValue;    
     
+	
+	 ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 }
 
 
@@ -90,3 +96,7 @@ void superInterfaceHSlider::draw() {
     txtLabel.draw();
     
 }
+
+
+
+

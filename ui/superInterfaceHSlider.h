@@ -24,8 +24,8 @@ public:
     void draw();
     
     void onMouseDragged (int x, int y);
-    
     void roundValues(bool bActive);
+	
     
     float pct;
     float minVal, maxVal;

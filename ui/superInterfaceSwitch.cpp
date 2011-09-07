@@ -42,13 +42,13 @@ void superInterfaceSwitch::setTemporary(bool b) {
 
 void superInterfaceSwitch::isEnabled(bool b) {
      *value = b;
+	 ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 }
 
 void superInterfaceSwitch::toggle () {
 		
-	ofLog(OF_LOG_NOTICE, "toggle");
-      *value=! *value;
-    
+	*value=! *value;
+	ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 }
 
 void superInterfaceSwitch::onMousePressed() {

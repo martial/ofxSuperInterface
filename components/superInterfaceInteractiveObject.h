@@ -34,8 +34,12 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     
     bool         isMouseDown, isRollOver;
     
+	
+	
     void setPosition(int x, int y, bool bSnapToGrid = false) ;
     
+	
+	
     
     #if !defined( TARGET_OF_IPHONE ) 
     
@@ -58,9 +62,19 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     void onMovedHandler(int x, int y, int id = -1);
     void onUpHandler(int id = -1);
     
-
+	
+	
+	ofEvent<superInterfaceEventArgs>   eventOscEnabled;
+	ofEvent<superInterfaceEventArgs>   eventUpdateValues;
     ofEvent<superInterfaceEventArgs>   eventMouseDown;
 	ofEvent<superInterfaceEventArgs>   eventChangePos;
+	
+	
+	
+	virtual void enableOSC(bool bEnabled, string oscAdress = "");
+	virtual void sendOscValues ();
+	
+	
     
     private :
     
@@ -68,6 +82,8 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     bool hitTest(ofPoint tPos);
     int  roundToNumber(int val, int roundTo);
     
+	
+
    
    // void _onTouchDragged(ofMouseEventArgs &e);
     //void _onTouchMoved(ofMouseEventArgs &e);

@@ -26,6 +26,9 @@ public:
         grid.y = 10;
         
         disabledColor.set(125,125,125);
+		
+		oscHost = "localhost";
+		oscPort = 12345;
         
     }
     
@@ -39,6 +42,8 @@ public:
     
     ofColor disabledColor;
     
+	string oscHost;
+	int	   oscPort;
     
 };
 

@@ -49,7 +49,7 @@ bool superInterfaceInteractiveObject::hitTest(ofPoint tPos) {
 
 void superInterfaceInteractiveObject::mousePressed(ofMouseEventArgs &e) { onDownHandler(e.x, e.y); }
 void superInterfaceInteractiveObject::mouseReleased(ofMouseEventArgs &e) {onUpHandler(); }
-void superInterfaceInteractiveObject::mouseMoved(ofMouseEventArgs &e) {ofLog(OF_LOG_NOTICE, "MOUSE MOVEED"); onMovedHandler(e.x, e.y); }
+void superInterfaceInteractiveObject::mouseMoved(ofMouseEventArgs &e) {onMovedHandler(e.x, e.y); }
 
 #else 
 
@@ -64,7 +64,6 @@ void superInterfaceInteractiveObject::touchMoved(ofTouchEventArgs &touch) { onMo
 
 void superInterfaceInteractiveObject::onDownHandler(int x, int y, int id) {
     
-	ofLog(OF_LOG_NOTICE, "down handler from objects..");
     
     ofPoint mousePos;
     mousePos.set(x, y);
@@ -138,12 +137,8 @@ int superInterfaceInteractiveObject::roundToNumber(int val, int roundTo) {
 }
 
 
-
 void superInterfaceInteractiveObject::update() {
-    
-    superInterfaceObject::update();
-  
-    
+    superInterfaceObject::update();    
 }
 
 void superInterfaceInteractiveObject::draw() {
@@ -165,6 +160,19 @@ void superInterfaceInteractiveObject::draw() {
     
    // onMousePressed();
     
+}
+
+
+void superInterfaceInteractiveObject::enableOSC(bool bEnabled, string oscAdress) {
+		
+	this->settings->bOscEnabled = bEnabled;
+	if(oscAdress != "" ) this->settings->oscAdress = oscAdress + "/" + this->settings->label;
+	ofNotifyEvent(eventOscEnabled, eventsArgs, this);
+}
+
+void superInterfaceInteractiveObject::sendOscValues() {
+	
+	//typeid(x).name();
 }
 
 

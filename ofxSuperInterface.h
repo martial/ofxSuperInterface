@@ -17,7 +17,7 @@
 #include "superInterfaceSettingsPage.h"
 #include "superInterfaceMenuPage.h"
 #include "superInterfaceDataManager.h"
-
+#include "superInterfaceOscManager.h"
 
 class ofxSuperInterface {
     
@@ -87,8 +87,8 @@ public:
          if(bShowSettings) { settingsPage.touchUp(touch); return; }
 		 dataManager.getPage(currentPage)->touchUp(touch);
     };  
-    void touchDoubleTap(ofTouchEventArgs &touch){getCurrentPage()->touchDoubleTap(touch);}; 
-    void touchCancelled(ofTouchEventArgs &touch){getCurrentPage()->touchCancelled(touch);};
+    void touchDoubleTap(ofTouchEventArgs &touch){dataManager.getPage(currentPage)->touchDoubleTap(touch);}; 
+    void touchCancelled(ofTouchEventArgs &touch){dataManager.getPage(currentPage)->touchCancelled(touch);};
 
     #endif
     
@@ -104,9 +104,6 @@ private:
     
     
     superInterfaceDataManager           dataManager;
-    
-
-    
     superInterfaceSettingsPage          settingsPage;
     superInterfaceMenuPage              menuPage;
     

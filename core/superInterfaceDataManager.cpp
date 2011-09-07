@@ -47,7 +47,6 @@ void superInterfaceDataManager::loadSettings(string initialDirectory) {
 
 void superInterfaceDataManager::createDefaultSettings () {
     
-    ofLog(OF_LOG_NOTICE, "Create default settings");
     
     xmlSettings.addTag("settings");
     xmlSettings.pushTag("settings");
@@ -67,6 +66,10 @@ void superInterfaceDataManager::createDefaultSettings () {
     xmlSettings.addAttribute("labelFont", "size", 9, 0);
     
     
+	xmlSettings.addTag("osc");
+	xmlSettings.addAttribute("osc", "host", "localhost", 0);
+	xmlSettings.addAttribute("osc", "port", 12345, 0);
+	
     xmlSettings.popTag();
     
     xmlSettings.saveFile(xmlSettingsPath);
@@ -76,7 +79,6 @@ void superInterfaceDataManager::createDefaultSettings () {
 
 void superInterfaceDataManager::updateSettings () {
     
-    ofLog(OF_LOG_NOTICE, "Update Settings");
     
     xmlSettings.pushTag("settings");
     interfaceSettings->grid.x = xmlSettings.getAttribute("grid_size", "x", 0);
@@ -88,6 +90,10 @@ void superInterfaceDataManager::updateSettings () {
     
     interfaceSettings->labelFontPath = xmlSettings.getValue("labelFont", "Arial.ttf");
     interfaceSettings->labelFontSize = xmlSettings.getAttribute("labelFont", "size", 9);
+	
+	interfaceSettings->oscHost = xmlSettings.getAttribute("osc", "host", "localhost");
+    interfaceSettings->oscPort = xmlSettings.getAttribute("osc", "port", 12345);
+
 	
 	mom->bShowGrid = ( xmlSettings.getValue("showgrid", 1, 0) == 0 )?  false : true;
     
@@ -102,7 +108,6 @@ void superInterfaceDataManager::saveSettings(superInterfaceEventArgs & e) {
 void superInterfaceDataManager::saveSettings(){
     
     
-    ofLog(OF_LOG_NOTICE, "Save Settings");
 	
     xmlSettings.pushTag("settings");
     xmlSettings.setAttribute("grid_size", "x", interfaceSettings->grid.x, 0);
@@ -112,43 +117,6 @@ void superInterfaceDataManager::saveSettings(){
       
     xmlSettings.saveFile(xmlSettingsPath);
     
-}
-
-
-/*
- 
- ------------------------------------------------------------ layouts
- 
- */
-
-
-
-
-void superInterfaceDataManager::loadLayouts(){
-    
-    // first we'll need to check if we have some layouts files in local.
-    
-    
-    //dir.open(initialDirectory+layoutDirectory);
-    //int numOfFiles = dir.listDir("superInterface/"+layoutDirectory);
-    
-    int numOfFiles = dir.listDir(initialDirectory+"superInterface/layouts");
-    
-    ofLog(OF_LOG_NOTICE, "Num of layouts : %d", numOfFiles);
-    
-    numOfFiles = dir.listDir("");
-       ofLog(OF_LOG_NOTICE, "Num of files in root : %d", numOfFiles);
-    for ( int i = 0; i<numOfFiles; i++ ) {
-        
-           //ofLog(OF_LOG_NOTICE, "File : "+dir.getPath(i));
-        
-    }
-
-  
-    
-}
-void superInterfaceDataManager::saveLayouts(){
-            
 }
 
 
@@ -164,6 +132,8 @@ void superInterfaceDataManager::saveLayouts(){
 void superInterfaceDataManager::addComponent(superInterfaceComponent *component, int pageNumber) {
     
 	ofAddListener(component->eventChangePos, this, &superInterfaceDataManager::updateComponentPos);
+	ofAddListener(component->eventOscEnabled, this, &superInterfaceDataManager::onOscEnabled);
+	
 	component->pageNum = pageNumber;
 	
 	
@@ -173,21 +143,13 @@ void superInterfaceDataManager::addComponent(superInterfaceComponent *component,
     components.push_back(component);
 	
 	
-	
-	// and. Finaly. Update positions.
+	// and. Finaly. Update positions. 
+	// TODO put in separate function?
 	
 	ofxXmlSettings * layoutXml = xmlLayouts[pageNumber];
 	
 	int layoutNode = getLayoutNodeByLabel(component->settings->label, pageNumber);
 	
-	ofLog(OF_LOG_NOTICE, "Test %d", layoutNode);
-	ofLog(OF_LOG_NOTICE, "get layout node " + component->settings->label);
-	
-	
-	string debug;
-	layoutXml->copyXmlToString(debug);
-	
-	ofLog(OF_LOG_NOTICE, debug);
 	
 	layoutXml->pushTag("layout");
 	layoutXml->pushTag("component", layoutNode);
@@ -195,6 +157,8 @@ void superInterfaceDataManager::addComponent(superInterfaceComponent *component,
 	component->gridPos.y = layoutXml->getAttribute("pos", "y", 0, 0);
 	layoutXml->popTag();
 	layoutXml->popTag();
+	
+	
 }
 
 void superInterfaceDataManager::addPage(int pageNumber) {
@@ -219,7 +183,6 @@ bool superInterfaceDataManager::checkIfComponentXmlExists(int pageNumber, superI
 	 * add new component
 	 */
 		
-	ofLog(OF_LOG_NOTICE, "adding component..");
 		
 	layoutXml->pushTag("layout");
 	int tagNumber = layoutXml->addTag("component");
@@ -247,7 +210,6 @@ bool superInterfaceDataManager::checkIfComponentXmlExists(int pageNumber, superI
 
 string superInterfaceDataManager::checkIfLayoutXmlExists(int pageNumber) {
     
-    //int numOfFiles = dir.listDir(initialDirectory+"superInterface/layouts");
     
     ofFile layoutFile;
     string path = initialDirectory + "superInterface/layouts/" + ofToString(pageNumber) + "__layout.xml";
@@ -259,12 +221,11 @@ string superInterfaceDataManager::checkIfLayoutXmlExists(int pageNumber) {
         
         layoutXml->addTag("layout");
         layoutXml->saveFile(path);
-        //if(!layoutFile.create()) ofLog(OF_LOG_NOTICE, "error writing file");
         
     } else {
         
         if ( !layoutXml->loadFile(path) ) 
-        ofLog(OF_LOG_NOTICE, "seems that file exists! but error with loading..");
+        ofLog(OF_LOG_ERROR, "Error loading layout xml file");
         
     }
     
@@ -315,12 +276,10 @@ int superInterfaceDataManager::getLayoutNodeByLabel(string label, int pageNum) {
 	
 	int numOfComponents = layoutXml->getNumTags("component");
 	
-	ofLog(OF_LOG_NOTICE, "numOfComponents %d", numOfComponents);
 	for( int i= 0; i<numOfComponents; i++) {
 		
 		layoutXml->pushTag("component", i);
 		
-		ofLog(OF_LOG_NOTICE, "CHECK FOR " + layoutXml->getValue("label", "merde"));
 		
 		if ( layoutXml->getValue("label", "") == label ) {
 			layoutXml->popTag();
@@ -360,5 +319,28 @@ void superInterfaceDataManager::updateComponentPos(superInterfaceEventArgs & e) 
 	}
 	layoutXml->popTag();
 	layoutXml->saveFile();
+}
+
+
+
+void superInterfaceDataManager::onOscEnabled(superInterfaceEventArgs & e) {
+		
+	superInterfaceObject * comp = e.comp;
+	
+	if(comp->settings->bOscEnabled) {
+			
+		if(oscManager == NULL) {
+			oscManager = new superInterfaceOscManager ();
+			//oscManager->setup(interfaceSettings->oscHost, interfaceSettings->oscPort);
+            oscManager->setup("MARTIAL.local", 12345);
+		}
+		oscManager->addComponentListener(static_cast<superInterfaceInteractiveObject*>(comp));
+		
+	} else {
+		oscManager->removeComponentListener(static_cast<superInterfaceInteractiveObject*>(comp));
+	}
+	
+	
+	
 }
 

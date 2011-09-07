@@ -35,6 +35,8 @@ superInterfaceObject::superInterfaceObject() {
     settings->setupDefaults();
     
     eventsArgs.comp = this;
+	
+	
   
     
 }
@@ -45,6 +47,12 @@ void superInterfaceObject::setup (ofxSuperInterface   * mom, string label) {
 	this->settings->label = label;
 }
 
+void superInterfaceObject::setSettings(superInterfaceCompSettings * settings) {
+    
+    this->settings = NULL;
+    this->settings = settings;
+}
+
 void superInterfaceObject::setGridPosByScreenCoords(int x, int y) {
 	
 	float xSteps = ofGetWidth() / mom->settings.grid.x;
@@ -52,7 +60,6 @@ void superInterfaceObject::setGridPosByScreenCoords(int x, int y) {
 	gridPos.x = (int)( (x * xSteps ) / ofGetWidth()) - wGridSize * .5;
 	gridPos.y = (int)( (y * ySteps ) / ofGetHeight()) -4 - hGridSize * .5;
 	
-	ofLog(OF_LOG_NOTICE, "set grid pos.. %f", gridPos.x);
 }
 
 void superInterfaceObject::update() {
@@ -68,12 +75,6 @@ void superInterfaceObject::draw() {
     
 }
 
-
-void superInterfaceObject::setSettings(superInterfaceCompSettings * settings) {
-    
-    this->settings = NULL;
-    this->settings = settings;
-}
 
 void superInterfaceObject::setFixed(bool b, int fixedXPos, int fixedYPos, int fixedWidth, int fixedHeight) {
     

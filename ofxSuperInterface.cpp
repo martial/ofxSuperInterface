@@ -65,26 +65,14 @@ void ofxSuperInterface::addSettingsPage () {
     settingsPage.setup(this);
     menuPage.setup(this);
     
-    
-    //pages.push_back(&settingsPage);
-    
-    // then we always create an empty page;
-    
-    //addPage();
-    
 }
 
-void ofxSuperInterface::showSettings(bool b) {
-    bShowSettings = b;
-}
 
-void ofxSuperInterface::toggleSettings() {
-    bShowSettings = !bShowSettings;
-}
 
 void ofxSuperInterface::update(){
 	
-	
+	// for position mode 
+	// TODO quit of update, put as event 
 	
 	for ( int i = 0; i<dataManager.components.size(); i++) {
 		dataManager.components[i]->bEnabled = !bPositionMode;
@@ -97,36 +85,37 @@ void ofxSuperInterface::update(){
     currentP->update();
     
 }
+
 void ofxSuperInterface::draw(){
     
     if ( bShowGrid ) {
         
         
-            ofSetColor(125, 125, 125);
+		ofSetColor(125, 125, 125);
         
-            int xGrid = settings.grid.x;
-            int yGrid = settings.grid.y;
-                        
-            int numOfHPoint = (int)((float)ofGetWidth() / (float)xGrid) +1;
-            int numOfVPoint = (int)((float)ofGetHeight() / (float)yGrid) +1;
-            int totalPoints = (numOfHPoint * numOfVPoint);
-            
-            int numOfVertices = totalPoints*2;
-            float vertices[numOfVertices];
-            int vNum = 0;
-            for (int i = 0; i <totalPoints; i++)
-            {            
-                int row = (int)(i % numOfVPoint);
-                int col = floor(i / numOfVPoint);
-                
-                vertices[vNum++] = (GLfloat)(col*xGrid);
-                vertices[vNum++] = (GLfloat)(row*yGrid);
-                
+		int xGrid = settings.grid.x;
+		int yGrid = settings.grid.y;
+		
+		int numOfHPoint = (int)((float)ofGetWidth() / (float)xGrid) +1;
+		int numOfVPoint = (int)((float)ofGetHeight() / (float)yGrid) +1;
+		int totalPoints = (numOfHPoint * numOfVPoint);
+		
+		int numOfVertices = totalPoints*2;
+		float vertices[numOfVertices];
+		int vNum = 0;
+		for (int i = 0; i <totalPoints; i++)
+		{            
+			int row = (int)(i % numOfVPoint);
+			int col = floor(i / numOfVPoint);
+			
+			vertices[vNum++] = (GLfloat)(col*xGrid);
+			vertices[vNum++] = (GLfloat)(row*yGrid);
+			
         }
         
         
         //draw it!
-
+		
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(2, GL_FLOAT, 0, vertices);        
         glDrawArrays(GL_POINTS, 0, totalPoints);
@@ -135,9 +124,6 @@ void ofxSuperInterface::draw(){
         
     }
     
-  
-    
-    
     dataManager.getPage(currentPage)->draw();
     if ( bShowSettings ) settingsPage.draw();
     
@@ -145,23 +131,19 @@ void ofxSuperInterface::draw(){
     
 }
 
+
+
+
 void ofxSuperInterface::addComponent(superInterfaceComponent * component, int pageNumber){
 
-    //components.push_back(component);
     
     if ( pageNumber >= dataManager.pages.size() ) {
         
         int diff = pageNumber - dataManager.pages.size()+1;
-        for ( int i=0; i< diff; i++) {
-            addPage(i);
-            
-            //ofLog(OF_LOG_NOTICE, "Page %d does not exist - creating  page %d", numPage, i);
-        }
-        
-        
+        for ( int i=0; i< diff; i++) addPage(i);
+                   
     }
     
-    //ofLog(OF_LOG_NOTICE, "add component to page %d", numPage);
     
     dataManager.pages[pageNumber]->addComponent(component);    
     dataManager.addComponent(component, pageNumber);
@@ -192,6 +174,14 @@ void ofxSuperInterface::enablePositionMode(bool bActive) {
     
 }
 
+
+void ofxSuperInterface::showSettings(bool b) {
+    bShowSettings = b;
+}
+
+void ofxSuperInterface::toggleSettings() {
+    bShowSettings = !bShowSettings;
+}
 
 
 

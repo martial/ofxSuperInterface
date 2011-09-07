@@ -19,6 +19,13 @@ public:
     
     superInterfaceObject * comp;
     
+	// values - mostly used for OSC
+	
+	vector<string*>		strVals;
+	vector<int*>		intVals;
+	vector<float*>		floatVals;
+	
+	
 };
 
 #endif

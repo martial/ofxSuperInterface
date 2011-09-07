@@ -14,6 +14,7 @@
 #include "ofxXmlSettings.h"
 #include "superInterfaceEventArgs.h"
 #include "superInterfaceSettingsPage.h"
+#include "superInterfaceOscManager.h"
 
 class ofxSuperInterface;
 
@@ -32,43 +33,39 @@ public:
 	
     void addPage(int pageNumber);
     void addComponent(superInterfaceComponent * component, int pageNumber);
-	superInterfacePage * getPage(int pageNumber );
-    
+
 	
-    void	loadLayouts();
-    void	saveLayouts();
+	void updateComponentPos(superInterfaceEventArgs & e);
 	
-	void	updateComponentPos(superInterfaceEventArgs & e);
-	
-	
-	int		getLayoutNodeByLabel(string label, int pageNum);
-    
-	
-	bool	checkIfComponentXmlExists(int pageNumber, superInterfaceComponent *component);
-    string	checkIfLayoutXmlExists(int pageNumber);
-	void	checkIfLabelExists(superInterfaceComponent *component); // used to avoid same labels in all GUI
-	
+		
 	vector<superInterfaceComponent*>    components;
     vector<superInterfacePage*>         pages;
-
+	
+	superInterfacePage * getPage(int pageNumber );
 	
 private:
     
 	ofxSuperInterface *					mom;
     superInterfaceSettingsPage *		settingsPage;
     superInterfaceSettings *			interfaceSettings;
-	
+	superInterfaceOscManager	*		oscManager;
+
 	    
     string								xmlSettingsPath;
     ofxXmlSettings						xmlSettings;
     vector<ofxXmlSettings*>				xmlLayouts;
     
     ofDirectory							dir;
-    
     string								initialDirectory;
-	
-	
 	vector<string>						doubleLabels;
+	
+	int		getLayoutNodeByLabel(string label, int pageNum);
+    
+	bool	checkIfComponentXmlExists(int pageNumber, superInterfaceComponent *component);
+    string	checkIfLayoutXmlExists(int pageNumber);
+	void	checkIfLabelExists(superInterfaceComponent *component); // used to avoid same labels in all GUI
+	
+	void	onOscEnabled(superInterfaceEventArgs & e);
 	
 };
 

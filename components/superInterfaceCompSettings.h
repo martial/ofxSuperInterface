@@ -28,6 +28,10 @@ class superInterfaceCompSettings {
         labelOffColor.set(255,255,255);
         labelOnColor.set(0,0,0);        
         
+		
+		bOscEnabled = false;
+		oscAdress = "";
+		
     }
     
     string  label;
@@ -36,6 +40,9 @@ class superInterfaceCompSettings {
     
     ofColor bgColor, bgColorRoll, onColor, offColor, labelOnColor, labelOffColor;
     
+	bool	bOscEnabled;
+	string	oscAdress;
+	
 };
 
 
