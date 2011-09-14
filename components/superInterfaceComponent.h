@@ -13,7 +13,6 @@
 #include "superInterfaceInteractiveObject.h"
 #include "superInterfaceAssets.h"
 
-
 class superInterfaceComponent : public superInterfaceInteractiveObject {
     
 public:
@@ -24,7 +23,7 @@ public:
     void update();
     void draw();
     
-    void onMousePressed();
+    void onMousePressed(int x, int y, int id);
     void onMouseDragged(int x, int y);
     void onMouseMoved();
     void onMouseReleased();

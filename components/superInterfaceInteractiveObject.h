@@ -23,16 +23,16 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     void update();
     void draw();
     
-    virtual void onMousePressed(){};
+    virtual void onMousePressed(int x, int y,  int id){};
     virtual void onMouseDragged(int x, int y){};
     virtual void onMouseDragged(int x, int y, int id){};
     //virtual void onMouseMoved(){};
-    virtual void onMouseReleased(){};
+    virtual void onMouseReleased(int id){};
     
     virtual void onRollOver(){};
     virtual void onRollOut(){};
     
-    bool         isMouseDown, isRollOver;
+    bool         isMouseDown, isRollOver, isMultiTouch;
     
 	
 	
@@ -58,9 +58,9 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     void touchCancelled(ofTouchEventArgs &touch){};
     #endif
     
-    void onDownHandler(int x, int y, int id = -1);
-    void onMovedHandler(int x, int y, int id = -1);
-    void onUpHandler(int id = -1);
+    void onDownHandler(int x, int y, int id = 0);
+    void onMovedHandler(int x, int y, int id = 0);
+    void onUpHandler(int id = 0);
     
 	
 	
@@ -73,13 +73,15 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
 	
 	virtual void enableOSC(bool bEnabled, string oscAdress = "");
 	virtual void sendOscValues ();
+    virtual void sendCustomOsc(){};
 	
-	
+	 bool hitTest(ofPoint tPos);
     
     private :
     
     int  assignedId;
-    bool hitTest(ofPoint tPos);
+    int  nTouches;
+   
     int  roundToNumber(int val, int roundTo);
     
 	

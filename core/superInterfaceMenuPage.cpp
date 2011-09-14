@@ -21,10 +21,10 @@ void superInterfaceMenuPage::setup (ofxSuperInterface * mom)
     
     superInterfacePage::setup(mom, -1);
     
-    settingsBtn.setup(mom, mom->bShowSettings, "settings");
+    settingsBtn.setup(mom, mom->bShowSettings, "SETTINGS");
     settingsBtn.cornerRadius = 0;
     settingsBtn.bIsFreePos = true;
-    settingsBtn.hGridSize = 3;
+    settingsBtn.hGridSize = mom->settings.menuBarGridSize;
     settingsBtn.setFixed(false, 0, 0, 100, 0);
     
     
@@ -46,7 +46,7 @@ void superInterfaceMenuPage::setNumOfPages(int val) {
         for ( int i=0; i< val - pagesBtn.size(); i++ ) {
             
             superInterfaceSimpleButton * btn = new superInterfaceSimpleButton();
-            string pLabel = "Page " + ofToString(val-1);
+            string pLabel = "PAGE " + ofToString(val-1);
             
             btn->setup(mom, pLabel);
             btn->id = pagesBtn.size();
@@ -102,7 +102,7 @@ void superInterfaceMenuPage::update () {
     for ( int i = 0; i<pagesBtn.size(); i++) {
         pagesBtn[i]->cornerRadius = 0;
         pagesBtn[i]->bIsFreePos = true;
-        pagesBtn[i]->hGridSize = 3;
+        pagesBtn[i]->hGridSize = mom->settings.menuBarGridSize;
         pagesBtn[i]->setFixed(false, 100 + btnWidth * i, 0, btnWidth, 0);
      }
     

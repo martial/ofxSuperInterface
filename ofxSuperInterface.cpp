@@ -35,16 +35,17 @@ void ofxSuperInterface::setup(string initialDirectory) {
     #else 
     ofRegisterTouchEvents(this);
     #endif
-    
+    settings.setupDefaults();
     dataManager.setup(this, &settings, &settingsPage);
     dataManager.loadSettings(initialDirectory);
     
-    //settings.setupDefaults();
+    
     assets.setup(&settings);
     
     addSettingsPage();
        
     bPositionMode = false;
+	bShowSettings = false;
     
     showPage(0);
     

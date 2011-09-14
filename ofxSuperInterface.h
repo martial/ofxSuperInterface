@@ -41,7 +41,7 @@ public:
     void showGrid(bool bActive);
     void enablePositionMode(bool bActive);
     
-    void                addSettingsPage();
+    void  addSettingsPage();
     
     
     
@@ -99,6 +99,10 @@ public:
     
     int                     currentPage;
     string                  initialDirectory;
+    
+    
+    
+    
     
 private:
     

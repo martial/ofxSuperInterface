@@ -28,10 +28,10 @@ class superInterfaceSwitch : public superInterfaceComponent {
     void isEnabled(bool b);
     
     
-    void onMousePressed();
-    void onMouseDragged();
+    void onMousePressed(int x, int y, int id);
+    void onMouseDragged(int x, int y, int id ){};
     void onMouseMoved();
-    void onMouseReleased();
+    void onMouseReleased(int id);
     
     bool    inherentValue;
     bool    *value;

@@ -57,10 +57,11 @@ void superInterfaceHSlider::roundValues(bool bActive) {
 void superInterfaceHSlider::update() {
      superInterfaceComponent::update();
     
-    //txtLabel.update();
+     pct = *value /  (minVal + (maxVal-minVal)); 
+	 this->targetValue = (bRounded) ? int(minVal + (maxVal-minVal) * pct) : (minVal + (maxVal-minVal) * pct);
 }
 
-void superInterfaceHSlider::onMouseDragged (int x, int y) {
+void superInterfaceHSlider::onMouseDragged (int x, int y, int id ) {
      
 	
 	
@@ -83,16 +84,17 @@ void superInterfaceHSlider::draw() {
     } else {
         ofSetColor(  this->settings->bgColor );
     }
+    
     roundedRect(pos.x, pos.y, width, height, 4);
     
     ofSetColor( this->settings->onColor  );
     roundedRect(pos.x, pos.y, (bRounded) ? int(width*pct) : width*pct, height, 4);
     
     
-    txtLabel.settings->label = this->settings->label + " | " + ofToString(targetValue);
+    //txtLabel.settings->label = this->settings->label + " | " + ofToString(targetValue) + " " + extraText:
     
     txtLabel.pos.x = pos.x + 3;
-    txtLabel.pos.y = pos.y + height + txtLabel.getBoundingBox().height +3;
+    txtLabel.pos.y = pos.y + height + txtLabel.getBoundingBox().height +5;
     txtLabel.draw();
     
 }

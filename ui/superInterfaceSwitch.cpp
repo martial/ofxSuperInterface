@@ -15,11 +15,16 @@ superInterfaceSwitch::superInterfaceSwitch () {
     inherentValue = false;
     bTemporary = false;
     value = NULL;
+	
+	
+	
 }
 
 void superInterfaceSwitch::setup(ofxSuperInterface   * mom, string label, bool &value ) {
     this->value = &value;
     superInterfaceInteractiveObject::setup(mom, label);
+	
+	;
 }
 
 void superInterfaceSwitch::setup(ofxSuperInterface   * mom, string label) {
@@ -42,16 +47,22 @@ void superInterfaceSwitch::setTemporary(bool b) {
 
 void superInterfaceSwitch::isEnabled(bool b) {
      *value = b;
-	 ofNotifyEvent(eventUpdateValues, eventsArgs, this);
+	eventsArgs.intVals.clear();
+	int val = (*value == true) ? 1 : 0;
+	eventsArgs.intVals.push_back( &val);
+	ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 }
 
 void superInterfaceSwitch::toggle () {
 		
 	*value=! *value;
+	eventsArgs.intVals.clear();
+	int val = (*value == true) ? 1 : 0;
+	eventsArgs.intVals.push_back( &val);
 	ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 }
 
-void superInterfaceSwitch::onMousePressed() {
+void superInterfaceSwitch::onMousePressed(int x, int y, int id) {
     
     
     if ( bTemporary ){ 
@@ -65,7 +76,7 @@ void superInterfaceSwitch::onMousePressed() {
     }
 }
 
-void superInterfaceSwitch::onMouseReleased () {
+void superInterfaceSwitch::onMouseReleased (int id) {
     if ( bTemporary ) isEnabled(false);
     
 }

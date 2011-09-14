@@ -9,7 +9,6 @@
 #include "superInterfaceObject.h"
 #include "ofxSuperInterface.h"
 
-
 superInterfaceObject::superInterfaceObject() {
     
     
@@ -53,12 +52,13 @@ void superInterfaceObject::setSettings(superInterfaceCompSettings * settings) {
     this->settings = settings;
 }
 
+
 void superInterfaceObject::setGridPosByScreenCoords(int x, int y) {
 	
 	float xSteps = ofGetWidth() / mom->settings.grid.x;
 	float ySteps = ofGetHeight() / mom->settings.grid.y;
 	gridPos.x = (int)( (x * xSteps ) / ofGetWidth()) - wGridSize * .5;
-	gridPos.y = (int)( (y * ySteps ) / ofGetHeight()) -4 - hGridSize * .5;
+	gridPos.y = (int)( (y * ySteps ) / ofGetHeight()) - mom->settings.menuBarGridSize - hGridSize * .5;
 	
 }
 
@@ -72,7 +72,7 @@ void superInterfaceObject::update() {
 
 void superInterfaceObject::draw() {
     
-    
+   
 }
 
 
@@ -92,7 +92,7 @@ void superInterfaceObject::calculatePos() {
     pos.y = (fixedYPos == 0 ) ? mom->settings.grid.y * gridPos.y : fixedYPos;
     
     // up to bar menu ;)
-    if ( !bIsFreePos ) pos.y += mom->settings.grid.y * 4;
+    if ( !bIsFreePos ) pos.y += mom->settings.grid.y * mom->settings.menuBarGridSize;
 }
 
 void superInterfaceObject::calculateSize() {

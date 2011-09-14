@@ -48,7 +48,7 @@ void superInterfaceHTextLabel::draw() {
     
     ofSetColor(this->settings->labelOffColor);
     //float txtWidth = this->mom->assets.labelFont.stringWidth(this->settings->label.c_str());
-    this->mom->assets.headlineFont.drawString(this->settings->label.c_str(), pos.x, pos.y + boundingBox.height);
+    this->mom->assets.headlineFont.drawString(this->settings->label.c_str() , pos.x, pos.y + boundingBox.height);
     
     ofSetColor(100, 100, 100);
     

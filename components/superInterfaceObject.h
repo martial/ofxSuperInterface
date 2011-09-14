@@ -16,7 +16,6 @@
 
 class ofxSuperInterface;
 
-
 class superInterfaceObject {
     
     
@@ -64,7 +63,6 @@ class superInterfaceObject {
     private :
     
     void  quadraticBezierVertex(float cpx, float cpy, float x, float y, float prevX, float prevY);
-  
     
     
     

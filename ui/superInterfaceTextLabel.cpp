@@ -17,10 +17,8 @@ void superInterfaceTextLabel::setup(ofxSuperInterface   * mom, int xGridPos, int
     superInterfaceComponent::setup(mom, label);
     
     this->gridPos.set(xGridPos, xGridPos);
-    
-    // just to fix width and height on setup
-    //getBox();
-    update();
+    extraText = "";
+   
     
 }
 void superInterfaceTextLabel::update(){
@@ -48,7 +46,8 @@ void superInterfaceTextLabel::draw() {
     
     ofSetColor(this->settings->labelOffColor);
     //float txtWidth = this->mom->assets.labelFont.stringWidth(this->settings->label.c_str());
-    this->mom->assets.labelFont.drawString(this->settings->label.c_str(), pos.x, pos.y + height);
+	string txt = this->settings->label  + " " + extraText;
+    this->mom->assets.labelFont.drawString(txt, pos.x, pos.y + height);
     
     //ofSetColor(45, 45, 45);
     //ofLine(pos.x , pos.y + boundingBox.height, pos.x + boundingBox.width, pos.y + boundingBox.height);

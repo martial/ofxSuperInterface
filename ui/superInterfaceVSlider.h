@@ -1,25 +1,26 @@
-//
-//  superInterfaceHSlider.h
-//  emptyExample
-//
-//  Created by Martial Geoffre-Rouland on 05/08/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ *  superInterfaceVSlider.h
+ *  superInterface
+ *
+ *  Created by Martial on 07/09/2011.
+ *  Copyright 2011 __MyCompanyName__. All rights reserved.
+ *
+ */
 
-#ifndef SUPINTHSLIDER
-#define SUPINTHSLIDER
+#ifndef SUPINTVSLIDER
+#define SUPINTVSLIDER
 
 #include "ofMain.h"
 #include "superInterfaceComponent.h"
-#include "superInterfaceTextLabel.h"
 
-class superInterfaceHSlider : public superInterfaceComponent { 
+class superInterfaceVSlider : public superInterfaceComponent { 
     
     
 public:
     
-    superInterfaceHSlider();
+    superInterfaceVSlider();
     void setup(ofxSuperInterface   * mom, float * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal = 0.0, float maxVal = 1.0, string label = "slider" );
+	void setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal = 0.0, float maxVal = 1.0, string label = "slider" );
     void update();
     void draw();
     
@@ -37,7 +38,6 @@ public:
     bool bRounded;
     
     
-    superInterfaceTextLabel txtLabel;
     
     
 };

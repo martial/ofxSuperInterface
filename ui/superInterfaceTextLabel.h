@@ -22,7 +22,7 @@ class superInterfaceTextLabel : public superInterfaceComponent {
     void draw();
     
     ofRectangle getBoundingBox();
-       
+	string extraText;
 };
 
 

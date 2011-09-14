@@ -27,7 +27,7 @@ void superInterfaceComponent::draw(){
     
 }
 
-void superInterfaceComponent::onMousePressed(){
+void superInterfaceComponent::onMousePressed(int x, int y, int id){
     
 }
 void superInterfaceComponent::onMouseDragged(int x, int y){

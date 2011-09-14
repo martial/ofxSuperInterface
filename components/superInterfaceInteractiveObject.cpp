@@ -16,9 +16,10 @@ superInterfaceInteractiveObject::superInterfaceInteractiveObject() {
     
     isRollOver = false;
     isMouseDown = false;
-    
+    isMultiTouch = false;
    
    
+    nTouches = 0;
     //ofRegisterTouchEvents(this); 
     //ofxiPhoneAlerts.addListener(this);
 
@@ -69,18 +70,31 @@ void superInterfaceInteractiveObject::onDownHandler(int x, int y, int id) {
     mousePos.set(x, y);
     
     if ( hitTest(mousePos) ) {
-        onMousePressed();
+        onMousePressed(x,y, id);
         assignedId = id;
         isMouseDown = true;
+        nTouches++;
         ofNotifyEvent(eventMouseDown, eventsArgs, this );
     }
 
 }
 
 void superInterfaceInteractiveObject::onUpHandler(int id) {
-    if ( assignedId == id ) {
-        onMouseReleased();
-        isMouseDown = false;
+    
+    if(isMultiTouch) {
+        nTouches--;
+        if(nTouches<0) nTouches = 0;
+        onMouseReleased(id);
+        
+        if(nTouches==0) isMouseDown = false;
+        
+    } else {
+    
+        if ( assignedId == id ) {
+            onMouseReleased(id);
+            isMouseDown = false;
+        }
+        
     }
 }
 
@@ -100,12 +114,22 @@ void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
     if(!bEnabled) return;
     
       
+    if(isMultiTouch) {
     
+    if( isMouseDown) {
+        onMouseDragged(x, y, id);
+         if (!isRollOver ) onRollOver();
+    } else {
+        
+        if (isRollOver ) onRollOut();
+    }
     
+    } else {
+        
     if ( isMouseDown && assignedId == id) {
         
        // if ( bEnabled ) {
-        onMouseDragged(x, y);
+        onMouseDragged(x, y, id);
         if (!isRollOver ) onRollOver();
        // }
         
@@ -113,6 +137,9 @@ void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
         
         if (isRollOver ) onRollOut();
     }
+    
+    }
+    
     
     isRollOver = isMouseOver;
 
@@ -147,8 +174,6 @@ void superInterfaceInteractiveObject::draw() {
     
  
     ofSetColor((!bEnabled) ? this->mom->settings.disabledColor : (!isMouseDown) ? this->settings->bgColor : this->settings->bgColorRoll);
-    
-
     ofRect(pos.x, pos.y, width, height);
     
     if ( mom->bPositionMode ) {
