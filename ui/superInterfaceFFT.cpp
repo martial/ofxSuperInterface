@@ -109,7 +109,7 @@ void superInterfaceFFT::draw() {
 
 void superInterfaceFFT::updateValues(vector<float> * values) {
 	
-	for ( int i=0; i<sliders.size(); i++) {
+	for ( int i=0; i<values->size(); i++) {
 		int index = ( i< numOfFreqs/2) ? i : numOfFreqs -1- ( i - (numOfFreqs/2));
 		sliders[i]->pct =  values->at(index);
 	}
@@ -123,7 +123,7 @@ void superInterfaceFFT::onFreqBtnDown(superInterfaceEventArgs & e) {
 	for ( int i=0; i<numOfFreqs; i++) {
 				
 		if ( e.comp->id == freqBtns[i]->id ) {
-			*filterRange = i;
+			*filterRange = (i < numOfFreqs/2 ) ? i : numOfFreqs -1 - i;
 			targetFilterRange = i;
 		}
 	}
@@ -132,7 +132,7 @@ void superInterfaceFFT::onFreqBtnDown(superInterfaceEventArgs & e) {
 
 void superInterfaceFFT::setFilterRange(int num) {
 	
-	selectedFreq = num;
+	
 		
 	for ( int i=0; i<numOfFreqs; i++) {
 		
@@ -144,9 +144,11 @@ void superInterfaceFFT::setFilterRange(int num) {
 	}
 	
     // enable diff
-    freqBtns[numOfFreqs-1-selectedFreq]->isEnabled(true);
-    sliders[numOfFreqs-1-selectedFreq]->isMouseDown = true;
+    freqBtns[numOfFreqs-1-num]->isEnabled(true);
+    sliders[numOfFreqs-1-num]->isMouseDown = true;
 	
+    selectedFreq = (num < numOfFreqs/2 ) ? num : numOfFreqs - num-1;
+
 	ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 	
 	

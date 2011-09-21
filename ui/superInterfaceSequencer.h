@@ -31,6 +31,7 @@ public:
     superInterfaceSequencer();
     void setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize,   string label = "slider" );
     void update();
+	void update(ofEventArgs & e);
     void draw();
 	
 	
@@ -57,7 +58,7 @@ public:
 	
     superInterfaceInteractiveObject                 canvas;
     
-    bool    bIsPlaying;
+    bool    bIsPlaying, bMapperPreview;
     
 private:
 	

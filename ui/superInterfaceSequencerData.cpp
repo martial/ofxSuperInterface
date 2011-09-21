@@ -28,6 +28,7 @@ void superInterfaceSequencerData::setup(superInterfaceSequencer * sequencer){
     fillCount = 0;
     bIsFilling = true;
 	bIsRecording = false;
+    bPreviewMode = true;
     currentType = "DOT";
     
 	clear();
@@ -138,13 +139,34 @@ void superInterfaceSequencerData::debugDraw(){
                      * Now let's get poly :)
                      
                      */
-                    /*
+                    
                     ofVec2f polyPntA, polyPntB, polyPntC, polyPntD;
                     
                     polyPntA.set(a.x + 20  * cos(angle+ 45), a.y + 20  * sin(angle+ 45));
                     polyPntB.set(a.x + 20  * cos(angle- 45), a.y + 20  * sin(angle- 45));
                     polyPntC.set(b.x + 20  * cos(angle- 45), b.y + 20  * sin(angle- 45));
                     polyPntD.set(b.x + 20  * cos(angle+ 45), b.y + 20  * sin(angle+ 45));
+                    
+                    ofPolyline triangle1, triangle2;
+                    
+                    triangle1.addVertex(polyPntA);
+                    triangle1.addVertex(polyPntB);
+                    triangle1.addVertex(polyPntD);
+                    triangle1.setClosed(true);
+                    ofSetColor(0, 255, 0);
+                    ofFill();
+                    triangle1.draw();
+                    
+                    triangle2.addVertex(polyPntB);
+                    triangle2.addVertex(polyPntC);
+                    triangle2.addVertex(polyPntD);
+                    triangle2.setClosed(true);
+                    ofSetColor(0, 255, 0);
+                    ofFill();
+                    triangle2.draw();
+                    
+                    
+                    /*
                     
                     ofPolyline poly;
                     poly.addVertex(polyPntA);
@@ -277,7 +299,7 @@ void superInterfaceSequencerData::clearDrawing(int index){
     
     for( int i= 0; i<maxPoints; i++) {
         superInterfaceSequencerFrameData * frameData = &framesData[i];
-        if(index<frameData->anims.size()-1);
+        if(index<=frameData->anims.size()-1)
         frameData->anims.erase(frameData->anims.begin() + index);
     }
     

@@ -25,6 +25,7 @@ class superInterfaceObject {
     
     virtual void setup(ofxSuperInterface   * mom, string label);
     virtual void update();
+	virtual void update(ofEventArgs &e);
     virtual void draw();
     
     virtual void setGridPosByScreenCoords(int x, int y);

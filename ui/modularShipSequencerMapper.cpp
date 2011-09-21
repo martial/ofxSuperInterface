@@ -155,7 +155,8 @@ vector<int> * modularShipSequencerMapper::getActivePoints(vector<superInterfaceS
     clearPoints();
     
     
-    
+    ofVec2f polyPntA, polyPntB, polyPntC, polyPntD;
+    ofPolyline poly;
     
     for ( int i=0; i<anims->size(); i++ ) {
         
@@ -164,8 +165,36 @@ vector<int> * modularShipSequencerMapper::getActivePoints(vector<superInterfaceS
         for ( int j=0; j<anim->pnts.size(); j++ ) {
             
             ofVec2f animPnt = anim->pnts[j];
-           
             ofVec2f mappedPnt = getMappedPnt(&animPnt);
+            
+            
+            //
+            if ( j < anim->pnts.size()-1 && anim->type == "LINES" ) {
+                    
+                ofVec2f a = mappedPnt;
+                ofVec2f b = getMappedPnt(&anim->pnts[j+1]);
+                float angle = atan2(b.y - a.y, b.x - a.x);
+                
+               
+                
+                polyPntA.set(a.x + 20  * cos(angle+45), a.y + 20  * sin(angle+45));
+                polyPntB.set(a.x + 20  * cos(angle-45), a.y + 20  * sin(angle-45));
+                polyPntC.set(b.x + 20  * cos(angle-45), b.y + 20  * sin(angle-45));
+                polyPntD.set(b.x + 20  * cos(angle+45), b.y + 20  * sin(angle+45));
+                
+                
+                
+                
+                poly.clear();
+                poly.addVertex(polyPntA);
+                poly.addVertex(polyPntB);
+                poly.addVertex(polyPntC);
+                poly.addVertex(polyPntD);
+
+                
+            }
+            
+            
             
             //mappedPnt.set(animPnt.y - mapperPos.y, height - animPnt.x - mapperPos.x);
             
@@ -188,29 +217,23 @@ vector<int> * modularShipSequencerMapper::getActivePoints(vector<superInterfaceS
                         
                          if ( j < anim->pnts.size()-1) {
                         
-                        ofVec2f a = mappedPnt;
-                        ofVec2f b = getMappedPnt(&anim->pnts[j+1]);
-                        float angle = atan2(b.y - a.y, b.x - a.x);
-                        
-                        ofVec2f polyPntA, polyPntB, polyPntC, polyPntD;
-                        
-                        polyPntA.set(a.x + 20  * cos(angle+45), a.y + 20  * sin(angle+45));
-                        polyPntB.set(a.x + 20  * cos(angle-45), a.y + 20  * sin(angle-45));
-                        polyPntC.set(b.x + 20  * cos(angle-45), b.y + 20  * sin(angle-45));
-                        polyPntD.set(b.x + 20  * cos(angle+45), b.y + 20  * sin(angle+45));
-                        
-                        
-                        
-                        
-                        ofPolyline poly;
-                        poly.addVertex(polyPntA);
-                        poly.addVertex(polyPntB);
-                        poly.addVertex(polyPntC);
-                        poly.addVertex(polyPntD);
-                        
+                                              
+                        /*
+                        if ( isPointInTriangle(pnts[k], polyPntA, polyPntB, polyPntD) ) {
+                            activePoints.push_back(k);   
+                        }
+                             
+                        if (isPointInTriangle (pnts[k], polyPntB, polyPntC, polyPntD) ) {
+                            activePoints.push_back(k); 
+                        }  
+                          */   
+                              
+                              
                              if ( hitRectTest(pnts[k], poly.getBoundingBox())) {
                                  if(hitTestPoly(poly.getVertices(), pnts[k]))  activePoints.push_back(k);   
                              }
+                            
+                              
                          }
                         
                     }
@@ -345,5 +368,101 @@ bool modularShipSequencerMapper::hitTestPoly(vector<ofPoint> & vertices,  ofPoin
     return bHit;
 }
 
+
+bool modularShipSequencerMapper::hitAhouTestPoly(vector<ofPoint> & vertices,  ofPoint pnt)
+{   
+    
+    float x1,x2;
+    int numVerts = vertices.size();
+    int crossings = 0;
+    
+    /* Iterate through each line */
+    for ( int i = 0; i < numVerts; i++ ){
+        
+        /* This is done to ensure that we get the same result when
+         the line goes from left to right and right to left */
+        if ( vertices[i].x < vertices[ (i+1)%numVerts ].x ){
+            x1 = vertices[i].x;
+            x2 = vertices[(i+1)%numVerts].x;
+        } else {
+            x1 = vertices[(i+1)%numVerts].x;
+            x2 = vertices[i].x;
+        }
+        
+        /* First check if the ray is possible to cross the line */
+        if ( pnt.x > x1 && pnt.x <= x2 && ( pnt.y < vertices[i].y || pnt.y <= vertices[(i+1)%numVerts].y ) ) {
+            static const float eps = 0.000001;
+            
+            /* Calculate the equation of the line */
+            float dx = vertices[(i+1)%numVerts].x - vertices[i].x;
+            float dy = vertices[(i+1)%numVerts].y - vertices[i].y;
+            float k;
+            
+            if ( fabs(dx) < eps ){
+                k = INFINITY;   // math.h
+            } else {
+                k = dy/dx;
+            }
+            
+            float m = vertices[i].y - k * vertices[i].x;
+            
+            /* Find if the ray crosses the line */
+            float y2 = k * pnt.x + m;
+            if ( pnt.y <= y2 ){
+                crossings++;
+            }
+        }
+    }
+    
+    return ( crossings % 2 == 1 );
+    
+}
+
+bool modularShipSequencerMapper::sign(ofVec2f p1, ofVec2f p2, ofVec2f p3){  
+    return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+}
+
+bool modularShipSequencerMapper::isPointInTriangle(ofVec2f pt, ofVec2f p1, ofVec2f p2, ofVec2f p3){  
+    
+    float AB = (pt.y-p1.y)*(p2.x-p1.x) - (pt.x-p1.x)*(p2.y-p1.y);
+    float CA = (pt.y-p3.y)*(p1.x-p3.x) - (pt.x-p3.x)*(p1.y-p3.y);
+    float BC = (pt.y-p2.y)*(p3.x-p2.x) - (pt.x-p2.x)*(p3.y-p2.y);
+    
+    if (AB*BC>0.f && BC*CA>0.f)
+        return true;
+    return false;    
+
+}
+
+/*
+bool modularShipSequencerMapper::isPntInTri(ofVec2f a, ofVec2f b, ofVec2f c, ofVec2f pnt)
+{
+    // Prepare our barycentric variables
+    ofVec2f u = b - a;
+    ofVec2f v = c - a;
+    ofVec2f w = pnt - a;
+    ofVec2f vCrossW = v.cross(w);
+    ofVec2f vCrossU = v.cross(u);
+    
+    // Test sign of r
+    if (Vector3.Dot(vCrossW, vCrossU) < 0)
+        return false;
+    
+    Vector3 uCrossW = Vector3.Cross(u, w);
+    Vector3 uCrossV = Vector3.Cross(u, v);
+    
+    // Test sign of t
+    if (Vector3.Dot(uCrossW, uCrossV) < 0)
+        return false;
+    
+    // At this piont, we know that r and t and both > 0
+    float denom = uCrossV.Length();
+    float r = vCrossW.Length() / denom;
+    float t = uCrossW.Length() / denom;
+    
+    return (r <= 1 && t <= 1 && r + t <= 1);
+}
+
+*/
 
 

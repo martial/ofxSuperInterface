@@ -23,7 +23,7 @@ void superInterfacePage::setup(ofxSuperInterface * mom, int pageNumber){
 void superInterfacePage::update(){
     
     for ( int i = 0; i<components.size(); i++) {
-        components[i]->update();
+        if( !components[i]->bAutoUpdate ) components[i]->update();
     }
     
 }

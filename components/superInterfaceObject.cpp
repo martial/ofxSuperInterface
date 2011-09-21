@@ -62,6 +62,10 @@ void superInterfaceObject::setGridPosByScreenCoords(int x, int y) {
 	
 }
 
+void superInterfaceObject::update(ofEventArgs & e) {
+	update();
+}
+
 void superInterfaceObject::update() {
     
    

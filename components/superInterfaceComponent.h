@@ -21,6 +21,7 @@ public:
     void setup(ofxSuperInterface   * mom, string label);
     void setAssets( superInterfaceAssets * assets);
     void update();
+	void update(ofEventArgs & e);
     void draw();
     
     void onMousePressed(int x, int y, int id);

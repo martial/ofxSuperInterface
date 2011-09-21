@@ -32,6 +32,7 @@ void superInterfaceSequencer::setup(ofxSuperInterface   * mom, int xGridPos, int
     
     bIsRecording = false;
     bIsPlaying = false;
+    bMapperPreview = true;
     
     isMultiTouch = true;
     
@@ -46,6 +47,11 @@ void superInterfaceSequencer::setup(ofxSuperInterface   * mom, int xGridPos, int
     }
 	
 }
+
+void superInterfaceSequencer::update(ofEventArgs & e) {
+	update();
+}
+
 void superInterfaceSequencer::update() {
     
     
@@ -76,7 +82,7 @@ void superInterfaceSequencer::update() {
          }
     }
     
-    
+    sendOsc();
 	
 }
 void superInterfaceSequencer::draw() {
@@ -86,7 +92,7 @@ void superInterfaceSequencer::draw() {
     drawCanvas();
     
 	sequencerGui.draw();
-	sequencerData.debugDraw();
+	if ( bMapperPreview ) sequencerData.debugDraw();
     ofDisableAlphaBlending();
    
 }
@@ -126,7 +132,7 @@ void superInterfaceSequencer::drawCanvas() {
         
     } else {
         
-        mapper->draw(canvas.pos.x + ( canvas.width*.5 - mapper->height*.5), canvas.pos.y + ( canvas.height*.5 - mapper->width*.5));
+         mapper->draw(canvas.pos.x + ( canvas.width*.5 - mapper->height*.5), canvas.pos.y + ( canvas.height*.5 - mapper->width*.5));
         
     }
 	

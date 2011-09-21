@@ -17,7 +17,7 @@ superInterfaceInteractiveObject::superInterfaceInteractiveObject() {
     isRollOver = false;
     isMouseDown = false;
     isMultiTouch = false;
-   
+    bAutoUpdate = false;
    
     nTouches = 0;
     //ofRegisterTouchEvents(this); 
@@ -164,6 +164,10 @@ int superInterfaceInteractiveObject::roundToNumber(int val, int roundTo) {
 }
 
 
+void superInterfaceInteractiveObject::update(ofEventArgs & e) {
+    update();    
+}
+
 void superInterfaceInteractiveObject::update() {
     superInterfaceObject::update();    
 }
@@ -185,6 +189,12 @@ void superInterfaceInteractiveObject::draw() {
     
    // onMousePressed();
     
+}
+
+void superInterfaceInteractiveObject::enableAutoUpdate(bool bEnabled) {
+    
+    this->bAutoUpdate = bEnabled;
+    ofNotifyEvent(eventAutoUpdateEnabled, eventsArgs, this);
 }
 
 

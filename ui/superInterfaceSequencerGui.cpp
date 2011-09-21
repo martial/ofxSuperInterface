@@ -27,7 +27,9 @@ void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
 	nextBtn.setup(sequencer->mom, "NEXT", 0, 0, wGridSize, hGridSize);
 	clearBtn.setup(sequencer->mom, "CLEAR SLCT", 0, 0, wGridSize, hGridSize);
 	clearLastBtn.setup(sequencer->mom, "CLEAR ALL", 0, 0, wGridSize, hGridSize);
-	
+    previewBtn.setup(sequencer->mom, sequencer->bMapperPreview, "PREVIEW", 0, 0, wGridSize, hGridSize);
+    
+    
     timeLine.setup(sequencer->mom, &time, 0,0,0,1.0, 0.0, 1.0, "timeline");
     
     
@@ -49,7 +51,7 @@ void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
         ofAddListener(modeBtns[i]->eventMouseDown, this, &superInterfaceSequencerGui::onModeBtnHandler);
     }
     
-    
+    previewBtn.cornerRadius = 0;
     enabledBtn.cornerRadius = 0;
     nextBtn.cornerRadius = 0;
     clearBtn.cornerRadius = 0;
@@ -62,7 +64,6 @@ void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
     
     
     
-    
     nextBtn.setTemporary(true);
     clearBtn.setTemporary(true);
     clearLastBtn.setTemporary(true);
@@ -72,11 +73,11 @@ void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
 
 void superInterfaceSequencerGui::update(){
 	
-    enabledBtn.setFixed(false,sequencer->width - enabledBtn.width,0);
-    nextBtn.setFixed(false,sequencer->width -  nextBtn.width,enabledBtn.height);
+    enabledBtn.setFixed(false,sequencer->width - enabledBtn.width);
+    nextBtn.setFixed(false,sequencer->width -  nextBtn.width, enabledBtn.height);
     clearBtn.setFixed(false,sequencer->width -  clearBtn.width, nextBtn.pos.y + nextBtn.height  );
     clearLastBtn.setFixed(false,sequencer->width -  clearLastBtn.width, clearBtn.pos.y + clearBtn.height );
-    
+    previewBtn.setFixed(false,sequencer->width -  clearLastBtn.width, clearLastBtn.pos.y + clearLastBtn.height );
     
     float xPos = 0;
     
@@ -91,6 +92,7 @@ void superInterfaceSequencerGui::update(){
 	nextBtn.update();
 	clearBtn.update();
 	clearLastBtn.update();
+    previewBtn.update();
     
     time = sequencer->sequencerData.getPctElapsed();
     timeLine.update();
@@ -104,6 +106,7 @@ void superInterfaceSequencerGui::draw(){
 	nextBtn.draw();
 	clearBtn.draw();
 	clearLastBtn.draw();
+     previewBtn.draw();
     
     timeLine.setFixed(false,0,sequencer->height - timeLine.height,sequencer->canvas.width);
     timeLine.draw();
@@ -143,6 +146,9 @@ void superInterfaceSequencerGui::onModeBtnHandler(superInterfaceEventArgs & e){
 
 
 
+
+
+
 void superInterfaceSequencerGui::onMousePressed(int x, int y){
 	
 	
@@ -150,7 +156,7 @@ void superInterfaceSequencerGui::onMousePressed(int x, int y){
 	nextBtn.onDownHandler(x,y);
 	clearBtn.onDownHandler(x,y);
 	clearLastBtn.onDownHandler(x,y);
-	
+	  previewBtn.onDownHandler(x,y);
     for ( int i=0; i<modeBtns.size(); i++ ) {
         modeBtns[i]->onDownHandler(x,y);
     }
@@ -168,7 +174,7 @@ void superInterfaceSequencerGui::onMouseReleased(int id){
 	nextBtn.onMouseReleased(id);
 	clearBtn.onMouseReleased(id);
 	clearLastBtn.onMouseReleased(id);
-    
+     previewBtn.onMouseReleased(id);
     for ( int i=0; i<modeBtns.size(); i++ ) {
         modeBtns[i]->onMouseReleased(id);
     }

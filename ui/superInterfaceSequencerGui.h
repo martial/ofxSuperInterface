@@ -49,7 +49,7 @@ private:
 	
 	superInterfaceSequencer		* sequencer;
 	
-	superInterfaceSimpleButton	enabledBtn, nextBtn, clearBtn, clearLastBtn;
+	superInterfaceSimpleButton	enabledBtn, nextBtn, clearBtn, clearLastBtn, previewBtn;
     
     superInterfaceSimpleButton	dotMode, lineMode, circleMode, rectMode;
     vector<superInterfaceSimpleButton*> modeBtns;

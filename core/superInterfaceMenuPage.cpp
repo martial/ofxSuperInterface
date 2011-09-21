@@ -95,7 +95,7 @@ void superInterfaceMenuPage::update () {
     // adapt
     
     
-    int btnWidth = (int)((ofGetWidth()-100) / pagesBtn.size());
+    int btnWidth = (int)((1339-100) / pagesBtn.size());
     
     
     

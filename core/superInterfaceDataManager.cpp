@@ -133,7 +133,7 @@ void superInterfaceDataManager::addComponent(superInterfaceComponent *component,
     
 	ofAddListener(component->eventChangePos, this, &superInterfaceDataManager::updateComponentPos);
 	ofAddListener(component->eventOscEnabled, this, &superInterfaceDataManager::onOscEnabled);
-	
+	ofAddListener(component->eventAutoUpdateEnabled, this, &superInterfaceDataManager::onAutoUpdateEnabled);
 	component->pageNum = pageNumber;
 	
 	
@@ -342,5 +342,12 @@ void superInterfaceDataManager::onOscEnabled(superInterfaceEventArgs & e) {
 	
 	
 	
+}
+
+void superInterfaceDataManager::onAutoUpdateEnabled(superInterfaceEventArgs & e) {
+	superInterfaceObject * comp = e.comp;
+    ofAddListener(ofEvents.update, comp, &superInterfaceObject::update);
+
+    //ofAddListener(, <#ListenerClass *listener#>, <#void (ListenerClass::*listenerMethod)(const void *, ArgumentsType &)#>)
 }
 

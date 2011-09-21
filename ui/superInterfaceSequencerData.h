@@ -47,6 +47,8 @@ public:
     
 	void debugDraw();
     
+    bool  bPreviewMode;
+    
     int                             selectedAnim,numOfRecords;
     int   maxPoints;
     

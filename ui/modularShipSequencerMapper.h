@@ -27,8 +27,14 @@ class modularShipSequencerMapper : public  superInterfaceAbstractSequencerMapper
     bool hitRectTest(ofVec2f pnt, ofRectangle rect);
     bool hitTestPoly(vector<ofPoint> & vertices,  ofPoint pnt);
     bool hitOtherTestPoly(vector<ofPoint> & vertices,  ofPoint pnt);
+    bool hitAhouTestPoly(vector<ofPoint> & vertices,  ofPoint pnt);
     bool pnpoly(int nvert, float *vertx, float *verty, float testx, float testy);
-                     
+    
+    
+    bool isPointInTriangle(ofVec2f pt, ofVec2f p1, ofVec2f p2, ofVec2f p3);
+    bool sign(ofVec2f p1, ofVec2f p2, ofVec2f p3);
+    
+    
     ofVec3f		pos;
 	ofPoint		coords;
 	ofPoint		padding;

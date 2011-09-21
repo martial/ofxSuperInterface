@@ -21,6 +21,7 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     superInterfaceInteractiveObject();
     void setup(ofxSuperInterface   * mom, string label);
     void update();
+	void update(ofEventArgs &e);
     void draw();
     
     virtual void onMousePressed(int x, int y,  int id){};
@@ -32,7 +33,7 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     virtual void onRollOver(){};
     virtual void onRollOut(){};
     
-    bool         isMouseDown, isRollOver, isMultiTouch;
+    bool         isMouseDown, isRollOver, isMultiTouch, bAutoUpdate;
     
 	
 	
@@ -68,14 +69,16 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
 	ofEvent<superInterfaceEventArgs>   eventUpdateValues;
     ofEvent<superInterfaceEventArgs>   eventMouseDown;
 	ofEvent<superInterfaceEventArgs>   eventChangePos;
+    ofEvent<superInterfaceEventArgs>   eventAutoUpdateEnabled;
 	
 	
+    virtual void enableAutoUpdate(bool bEnabled);
 	
 	virtual void enableOSC(bool bEnabled, string oscAdress = "");
 	virtual void sendOscValues ();
     virtual void sendCustomOsc(){};
 	
-	 bool hitTest(ofPoint tPos);
+    bool hitTest(ofPoint tPos);
     
     private :
     

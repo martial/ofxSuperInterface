@@ -10,15 +10,18 @@
 
 
 superInterfaceComponent::superInterfaceComponent(){
-    
+     
 }
 void superInterfaceComponent::setup(ofxSuperInterface   * mom, string label){
      superInterfaceInteractiveObject::setup(mom, label);
 }
 
-
 void superInterfaceComponent::update(){
     superInterfaceInteractiveObject::update();
+}
+
+void superInterfaceComponent::update(ofEventArgs & e){
+    superInterfaceInteractiveObject::update(e);
 }
 void superInterfaceComponent::draw(){
     superInterfaceInteractiveObject::draw();

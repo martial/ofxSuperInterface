@@ -37,7 +37,7 @@ public:
 	
 	void updateComponentPos(superInterfaceEventArgs & e);
 	
-		
+	
 	vector<superInterfaceComponent*>    components;
     vector<superInterfacePage*>         pages;
 	
@@ -66,6 +66,7 @@ private:
 	void	checkIfLabelExists(superInterfaceComponent *component); // used to avoid same labels in all GUI
 	
 	void	onOscEnabled(superInterfaceEventArgs & e);
+    void    onAutoUpdateEnabled(superInterfaceEventArgs & e);
 	
 };
 
