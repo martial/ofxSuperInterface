@@ -38,6 +38,8 @@ public:
     
     void showSettings(bool b);
     void toggleSettings();
+	void showMenu(bool b);
+	
     void showGrid(bool bActive);
     void enablePositionMode(bool bActive);
     
@@ -92,7 +94,7 @@ public:
 
     #endif
     
-    bool bShowGrid, bPositionMode,bShowSettings;
+    bool bShowGrid, bPositionMode,bShowSettings,bShowMenuPage;
     
     superInterfaceSettings  settings;
     superInterfaceAssets    assets;

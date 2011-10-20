@@ -1,0 +1,17 @@
+ofxSuperInterface is an openSource GUI for openFrameworks, working on both desktop/iOs application.
+
+Working with a grid system + xml file.
+
+Basic use : 
+
+superInterface.setup();
+//superInterface.setup(ofxiPhoneGetDocumentsDirectory()); if you're using iOS
+
+Then declare your components i.e. : 
+
+slider.setup(&superInterface, &app->pct, 20, 20, 10, 2, 0.0, 1.0, "Glitch Intensity");
+
+add it to the GUI, choose which page
+
+superInterface.addComponent(&slider, 0);
+

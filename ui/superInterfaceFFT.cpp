@@ -59,7 +59,7 @@ void superInterfaceFFT::setup(ofxSuperInterface   * mom, int maxNumOfFreqs, int 
 	
 	this->settings->bgColor.set(0,0,0);
 	
-	setFilterRange(*filterRange);
+	//setFilterRange(*filterRange);
 	
     //txtLabel.setup(mom, pos.x, pos.y + height, label);
 }
@@ -143,6 +143,9 @@ void superInterfaceFFT::setFilterRange(int num) {
 		
 	}
 	
+	int index = numOfFreqs-1-num;
+	if ( index > freqBtns.size() - 1 ) index = freqBtns.size() - 1;
+	if ( index < 0 )index =  0;
     // enable diff
     freqBtns[numOfFreqs-1-num]->isEnabled(true);
     sliders[numOfFreqs-1-num]->isMouseDown = true;

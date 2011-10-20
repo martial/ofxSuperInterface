@@ -46,6 +46,7 @@ void ofxSuperInterface::setup(string initialDirectory) {
        
     bPositionMode = false;
 	bShowSettings = false;
+	bShowMenuPage = true;
     
     showPage(0);
     
@@ -81,7 +82,8 @@ void ofxSuperInterface::update(){
 	
     
     if ( bShowSettings ) settingsPage.update();
-    menuPage.update();
+    if ( bShowMenuPage ) menuPage.update();
+	
     superInterfacePage * currentP = dataManager.getPage(currentPage);
     currentP->update();
     
@@ -126,9 +128,9 @@ void ofxSuperInterface::draw(){
     }
     
     dataManager.getPage(currentPage)->draw();
+	
     if ( bShowSettings ) settingsPage.draw();
-    
-    menuPage.draw();
+    if ( bShowMenuPage ) menuPage.draw();
     
 }
 
@@ -186,6 +188,9 @@ void ofxSuperInterface::toggleSettings() {
 
 
 
+void ofxSuperInterface::showMenu(bool b) {
+    bShowMenuPage = b;
+}
 
 
 
