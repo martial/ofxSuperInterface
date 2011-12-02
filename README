@@ -1,6 +1,14 @@
 ofxSuperInterface is an openSource GUI for openFrameworks, working on both desktop/iOs application.
+Note : It's still very beta! 
 
 Working with a grid system + xml file.
+Also can send OSC information.
+
+Dependencies : 
+
+ofxXmlSettings
+ofxOsc
+ofxTween
 
 Basic use : 
 
@@ -15,3 +23,7 @@ add it to the GUI, choose which page
 
 superInterface.addComponent(&slider, 0);
 
+Then you can change positions in the settings menu, also the global size of the components
+
+See the example for more info ( listeners, components, OSC, etc.. )
+Don't forget to add the font in your data folder!

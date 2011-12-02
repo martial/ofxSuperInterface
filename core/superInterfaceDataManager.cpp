@@ -331,8 +331,8 @@ void superInterfaceDataManager::onOscEnabled(superInterfaceEventArgs & e) {
 			
 		if(oscManager == NULL) {
 			oscManager = new superInterfaceOscManager ();
-			//oscManager->setup(interfaceSettings->oscHost, interfaceSettings->oscPort);
-            oscManager->setup("MARTIAL.local", 12345);
+			oscManager->setup(interfaceSettings->oscHost, interfaceSettings->oscPort);
+            //oscManager->setup("MARTIAL.local", 12345);
 		}
 		oscManager->addComponentListener(static_cast<superInterfaceInteractiveObject*>(comp));
 		
