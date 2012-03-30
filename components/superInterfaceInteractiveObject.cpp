@@ -105,10 +105,10 @@ void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
     mousePos.set(x, y);
     bool isMouseOver =  hitTest(mousePos);
     
-    
+      
     if ( isMouseDown && mom->bPositionMode && !bIsFixed) {
         setGridPosByScreenCoords(x, y);
-		ofNotifyEvent(eventChangePos, eventsArgs, this);
+		ofNotifyEvent(eventChangePos, eventsArgs, this);        
     }
        
     if(!bEnabled) return;

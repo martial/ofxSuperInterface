@@ -39,11 +39,9 @@ void superInterfaceOscManager::sendOscValues(superInterfaceEventArgs & args) {
 	m.setAddress( comp->settings->oscAdress);
 	int i;
 	for (i=0; i<args.strVals.size(); i++) m.addStringArg(*args.strVals[i]);	
-	for (i=0; i<args.intVals.size(); i++) {
-        m.addIntArg(*args.intVals[i]);
-        
-    }
+	for (i=0; i<args.intVals.size(); i++) m.addIntArg(*args.intVals[i]);
 	for (i=0; i<args.floatVals.size(); i++) m.addFloatArg(*args.floatVals[i]);
+    
 	sender.sendMessage( m );
 	
 }

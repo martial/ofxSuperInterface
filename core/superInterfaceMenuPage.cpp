@@ -25,8 +25,7 @@ void superInterfaceMenuPage::setup (ofxSuperInterface * mom)
     settingsBtn.cornerRadius = 0;
     settingsBtn.bIsFreePos = true;
     settingsBtn.hGridSize = mom->settings.menuBarGridSize;
-    settingsBtn.setFixed(false, 0, 0, 100, 0);
-    
+    settingsBtn.setFixed(true, 0, 0, 100, mom->settings.grid.y * mom->settings.menuBarGridSize);
     
     //settingsBtn.setTemporary(true);
     addComponent(&settingsBtn);
@@ -93,7 +92,7 @@ void superInterfaceMenuPage::onPageClickHandler(superInterfaceEventArgs & args) 
 void superInterfaceMenuPage::update () {
     
     // adapt
-    
+     settingsBtn.setFixed(true, 0, 0, 100, mom->settings.grid.y * mom->settings.menuBarGridSize);
     
     int btnWidth = (int)((ofGetWidth()) / pagesBtn.size());
     
@@ -103,7 +102,7 @@ void superInterfaceMenuPage::update () {
         pagesBtn[i]->cornerRadius = 0;
         pagesBtn[i]->bIsFreePos = true;
         pagesBtn[i]->hGridSize = mom->settings.menuBarGridSize;
-        pagesBtn[i]->setFixed(false, 100 + btnWidth * i, 0, btnWidth, 0);
+        pagesBtn[i]->setFixed(true, 100 + btnWidth * i, 0, btnWidth, mom->settings.grid.y * mom->settings.menuBarGridSize);
      }
     
     superInterfacePage::update();

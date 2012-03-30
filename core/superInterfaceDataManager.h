@@ -14,7 +14,10 @@
 #include "ofxXmlSettings.h"
 #include "superInterfaceEventArgs.h"
 #include "superInterfaceSettingsPage.h"
+
+#ifdef USE_OSC
 #include "superInterfaceOscManager.h"
+#endif
 
 class ofxSuperInterface;
 
@@ -48,7 +51,7 @@ private:
 	ofxSuperInterface *					mom;
     superInterfaceSettingsPage *		settingsPage;
     superInterfaceSettings *			interfaceSettings;
-	superInterfaceOscManager	*		oscManager;
+    
 
 	    
     string								xmlSettingsPath;
@@ -65,8 +68,14 @@ private:
     string	checkIfLayoutXmlExists(int pageNumber);
 	void	checkIfLabelExists(superInterfaceComponent *component); // used to avoid same labels in all GUI
 	
-	void	onOscEnabled(superInterfaceEventArgs & e);
+	
     void    onAutoUpdateEnabled(superInterfaceEventArgs & e);
+    
+#ifdef USE_OSC
+	superInterfaceOscManager	*		oscManager;
+    void	onOscEnabled(superInterfaceEventArgs & e);
+#endif
+    
 	
 };
 

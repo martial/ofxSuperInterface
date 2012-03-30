@@ -24,10 +24,7 @@ void superInterfaceComponent::update(ofEventArgs & e){
     superInterfaceInteractiveObject::update(e);
 }
 void superInterfaceComponent::draw(){
-    superInterfaceInteractiveObject::draw();
-    
-    ///if(!assets) ofLog(0, "Warning - no assets detected");
-    
+    superInterfaceInteractiveObject::draw();    
 }
 
 void superInterfaceComponent::onMousePressed(int x, int y, int id){

@@ -103,8 +103,8 @@ void superInterfaceObject::calculateSize() {
     
     if ( bIsFixed ) {
         
-        width = 10 *  wGridSize;
-        height = 10 * hGridSize;
+        width = fixedWidth;
+        height = fixedHeight;
         
         
     } else {
@@ -134,6 +134,8 @@ ofRectangle superInterfaceObject::getBoundingBox() {
 */
 
 void superInterfaceObject::roundedRect(float x, float y, float w, float h, float r) {  
+    
+    r = 0;
     
     if(w== 0 || h==0) return;
     

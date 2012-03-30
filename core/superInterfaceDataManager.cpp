@@ -132,8 +132,12 @@ void superInterfaceDataManager::saveSettings(){
 void superInterfaceDataManager::addComponent(superInterfaceComponent *component, int pageNumber) {
     
 	ofAddListener(component->eventChangePos, this, &superInterfaceDataManager::updateComponentPos);
-	ofAddListener(component->eventOscEnabled, this, &superInterfaceDataManager::onOscEnabled);
 	ofAddListener(component->eventAutoUpdateEnabled, this, &superInterfaceDataManager::onAutoUpdateEnabled);
+    
+#ifdef USE_OSC
+    ofAddListener(component->eventOscEnabled, this, &superInterfaceDataManager::onOscEnabled);
+#endif
+    
 	component->pageNum = pageNumber;
 	
 	
@@ -322,7 +326,7 @@ void superInterfaceDataManager::updateComponentPos(superInterfaceEventArgs & e) 
 }
 
 
-
+#ifdef USE_OSC
 void superInterfaceDataManager::onOscEnabled(superInterfaceEventArgs & e) {
 		
 	superInterfaceObject * comp = e.comp;
@@ -343,6 +347,7 @@ void superInterfaceDataManager::onOscEnabled(superInterfaceEventArgs & e) {
 	
 	
 }
+#endif
 
 void superInterfaceDataManager::onAutoUpdateEnabled(superInterfaceEventArgs & e) {
 	superInterfaceObject * comp = e.comp;

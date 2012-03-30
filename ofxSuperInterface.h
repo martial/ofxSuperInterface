@@ -9,6 +9,8 @@
 #ifndef SUPINT
 #define SUPINT
 
+//#define USE_OSC
+
 #include "ofMain.h"
 #include "superInterfaceSettings.h"
 #include "superInterfaceAssets.h"
@@ -17,7 +19,8 @@
 #include "superInterfaceSettingsPage.h"
 #include "superInterfaceMenuPage.h"
 #include "superInterfaceDataManager.h"
-#include "superInterfaceOscManager.h"
+
+
 
 class ofxSuperInterface {
     
