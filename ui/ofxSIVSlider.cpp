@@ -1,23 +1,23 @@
 /*
- *  superInterfaceVSlider.cpp
- *  superInterface
+ *  ofxSIVSlider.cpp
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceVSlider.h"
+#include "ofxSIVSlider.h"
 
 
 
-superInterfaceVSlider::superInterfaceVSlider() {
+ofxSIVSlider::ofxSIVSlider() {
     
     value = NULL;
     
 }
 
-void superInterfaceVSlider::setup(ofxSuperInterface   * mom, float * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal, float maxVal, string label ) {
+void ofxSIVSlider::setup(ofxSuperInterface   * mom, float * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal, float maxVal, string label ) {
     
 	setup(mom, xGridPos,yGridPos, wGridSize, hGridSize, minVal, maxVal, label);
 	
@@ -28,7 +28,7 @@ void superInterfaceVSlider::setup(ofxSuperInterface   * mom, float * value, int 
    	
 }
 
-void superInterfaceVSlider::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal, float maxVal, string label ) {
+void ofxSIVSlider::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal, float maxVal, string label ) {
     
     this->gridPos.set(xGridPos, yGridPos);
     
@@ -42,7 +42,7 @@ void superInterfaceVSlider::setup(ofxSuperInterface   * mom, int xGridPos, int y
     targetValue = 0.0;
 	pct = 0.0;
 	
-    superInterfaceComponent::setup(mom, label);
+    ofxSIComponent::setup(mom, label);
     
     
     minVal = 10;
@@ -52,7 +52,7 @@ void superInterfaceVSlider::setup(ofxSuperInterface   * mom, int xGridPos, int y
     
     
     // get width/height
-    superInterfaceComponent::update();
+    ofxSIComponent::update();
   
 	
 	eventsArgs.floatVals.push_back(&pct);
@@ -60,17 +60,17 @@ void superInterfaceVSlider::setup(ofxSuperInterface   * mom, int xGridPos, int y
 	
 }
 
-void superInterfaceVSlider::roundValues(bool bActive) {
+void ofxSIVSlider::roundValues(bool bActive) {
     bRounded = bActive;
 }
 
-void superInterfaceVSlider::update() {
-	superInterfaceComponent::update();
+void ofxSIVSlider::update() {
+	ofxSIComponent::update();
     if (!isMouseDown && value != NULL) pct = *value /  (minVal + (maxVal-minVal)); 
     //txtLabel.update();
 }
 
-void superInterfaceVSlider::onMouseDragged (int x, int y, int id ) {
+void ofxSIVSlider::onMouseDragged (int x, int y, int id ) {
 	
 	
 	
@@ -84,9 +84,9 @@ void superInterfaceVSlider::onMouseDragged (int x, int y, int id ) {
 }
 
 
-void superInterfaceVSlider::draw() {
+void ofxSIVSlider::draw() {
     
-    superInterfaceComponent::draw();
+    ofxSIComponent::draw();
     
     if ( isMouseDown ) {
         ofSetColor(  this->settings->bgColorRoll );

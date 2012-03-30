@@ -1,6 +1,6 @@
 /*
- *  superInterfacePointData.h
- *  superInterface
+ *  ofxSIPointData.h
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -13,13 +13,13 @@
 #include "ofMain.h"
 
 
-class superInterfaceSequencerAnimData  { 
+class ofxSISequencerAnimData  { 
     
     
 public:
     
-    superInterfaceSequencerAnimData();
-    ~superInterfaceSequencerAnimData();
+    ofxSISequencerAnimData();
+    ~ofxSISequencerAnimData();
     string                      type;
 	vector<ofVec2f> pnts;
 	

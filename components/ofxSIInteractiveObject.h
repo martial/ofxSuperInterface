@@ -1,6 +1,6 @@
 //
-//  superInterfaceInteractiveObject.h
-//  superInterface
+//  ofxSIInteractiveObject.h
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 04/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -11,14 +11,14 @@
 
 #include "ofMain.h"
 #include "ofEvents.h"
-#include "superInterfaceObject.h"
-#include "superInterfaceEventArgs.h"
+#include "ofxSIObject.h"
+#include "ofxSIEventArgs.h"
 
 
-class superInterfaceInteractiveObject : public superInterfaceObject {
+class ofxSIInteractiveObject : public ofxSIObject {
     
     public:
-    superInterfaceInteractiveObject();
+    ofxSIInteractiveObject();
     void setup(ofxSuperInterface   * mom, string label);
     void update();
 	void update(ofEventArgs &e);
@@ -65,11 +65,11 @@ class superInterfaceInteractiveObject : public superInterfaceObject {
     
 	
 	
-	ofEvent<superInterfaceEventArgs>   eventOscEnabled;
-	ofEvent<superInterfaceEventArgs>   eventUpdateValues;
-    ofEvent<superInterfaceEventArgs>   eventMouseDown;
-	ofEvent<superInterfaceEventArgs>   eventChangePos;
-    ofEvent<superInterfaceEventArgs>   eventAutoUpdateEnabled;
+	ofEvent<ofxSIEventArgs>   eventOscEnabled;
+	ofEvent<ofxSIEventArgs>   eventUpdateValues;
+    ofEvent<ofxSIEventArgs>   eventMouseDown;
+	ofEvent<ofxSIEventArgs>   eventChangePos;
+    ofEvent<ofxSIEventArgs>   eventAutoUpdateEnabled;
 	
 	
     virtual void enableAutoUpdate(bool bEnabled);

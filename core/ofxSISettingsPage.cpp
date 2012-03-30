@@ -1,23 +1,23 @@
 //
-//  superInterfaceSettingsPage.cpp
+//  ofxSISettingsPage.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 08/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceSettingsPage.h"
+#include "ofxSISettingsPage.h"
 #include "ofxSuperInterface.h"
 
-superInterfaceSettingsPage::superInterfaceSettingsPage () {
+ofxSISettingsPage::ofxSISettingsPage () {
      enabled = true;
 }
 
-void superInterfaceSettingsPage::setup (ofxSuperInterface * mom)
+void ofxSISettingsPage::setup (ofxSuperInterface * mom)
 
 {
     
-    superInterfacePage::setup(mom, -1);
+    ofxSIPage::setup(mom, -1);
 
     
     label.setup(this->mom, 2,0, "Settings");
@@ -52,9 +52,9 @@ void superInterfaceSettingsPage::setup (ofxSuperInterface * mom)
     
 }
 
-void superInterfaceSettingsPage::update () {
+void ofxSISettingsPage::update () {
     
-    superInterfacePage::update();
+    ofxSIPage::update();
     
     label.setFixed(false, 20);
     xUnitSlider.setFixed(false, 20,  (label.height ) + 40 + this->mom->settings.grid.y, 400.0, 30.0);
@@ -65,14 +65,14 @@ void superInterfaceSettingsPage::update () {
     saveBtn.setFixed(false, 20, gridBtn.pos.y + gridBtn.height, 100,50);
 }
 
-void superInterfaceSettingsPage::draw() {
+void ofxSISettingsPage::draw() {
     
     ofEnableAlphaBlending();
     ofSetColor(bgColor);
     ofRect(0,0,ofGetWidth(), ofGetHeight());
     ofDisableAlphaBlending();
     
-    superInterfacePage::draw();
+    ofxSIPage::draw();
     
     
 }

@@ -12,13 +12,13 @@
 //#define USE_OSC
 
 #include "ofMain.h"
-#include "superInterfaceSettings.h"
-#include "superInterfaceAssets.h"
-#include "superInterfaceComponent.h"
-#include "superInterfacePage.h"
-#include "superInterfaceSettingsPage.h"
-#include "superInterfaceMenuPage.h"
-#include "superInterfaceDataManager.h"
+#include "ofxSISettings.h"
+#include "ofxSIAssets.h"
+#include "ofxSIComponent.h"
+#include "ofxSIPage.h"
+#include "ofxSISettingsPage.h"
+#include "ofxSIMenuPage.h"
+#include "ofxSIDataManager.h"
 
 
 
@@ -35,7 +35,7 @@ public:
     void addPage(int pageNumber);
     void showPage(int id);
     
-    void addComponent(superInterfaceComponent * component, int pageNumber);
+    void addComponent(ofxSIComponent * component, int pageNumber);
     void removeComponent();
     
     
@@ -99,8 +99,8 @@ public:
     
     bool bShowGrid, bPositionMode,bShowSettings,bShowMenuPage;
     
-    superInterfaceSettings  settings;
-    superInterfaceAssets    assets;
+    ofxSISettings  settings;
+    ofxSIAssets    assets;
     
     int                     currentPage;
     string                  initialDirectory;
@@ -112,9 +112,9 @@ public:
 private:
     
     
-    superInterfaceDataManager           dataManager;
-    superInterfaceSettingsPage          settingsPage;
-    superInterfaceMenuPage              menuPage;
+    ofxSIDataManager           dataManager;
+    ofxSISettingsPage          settingsPage;
+    ofxSIMenuPage              menuPage;
     
    
     

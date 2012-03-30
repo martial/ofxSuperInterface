@@ -1,18 +1,18 @@
 /*
- *  superInterfaceSequencerFrameData.cpp
- *  superInterface
+ *  ofxSISequencerFrameData.cpp
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceSequencerFrameData.h"
+#include "ofxSISequencerFrameData.h"
 
-superInterfaceSequencerFrameData::superInterfaceSequencerFrameData() {
+ofxSISequencerFrameData::ofxSISequencerFrameData() {
 
 }
 
-superInterfaceSequencerFrameData::~superInterfaceSequencerFrameData() {
+ofxSISequencerFrameData::~ofxSISequencerFrameData() {
     anims.clear();
 }

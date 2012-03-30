@@ -1,5 +1,5 @@
 /*
- *  superInterfaceImage.cpp
+ *  ofxSIImage.cpp
  *  MODULAR_SHIP
  *
  *  Created by Martial on 15/09/2011.
@@ -7,14 +7,14 @@
  *
  */
 
-#include "superInterfaceImage.h"
+#include "ofxSIImage.h"
 
 
-superInterfaceImage::superInterfaceImage() {
+ofxSIImage::ofxSIImage() {
 	bKeepProportions = true;
 }
 
-void superInterfaceImage::setup(ofxSuperInterface   * mom,  ofImage * img, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label  ) {
+void ofxSIImage::setup(ofxSuperInterface   * mom,  ofImage * img, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label  ) {
 	
 	
 	this->img = img;
@@ -22,15 +22,15 @@ void superInterfaceImage::setup(ofxSuperInterface   * mom,  ofImage * img, int x
     this->wGridSize = wGridSize;
     this->hGridSize = hGridSize;
 	
-    superInterfaceComponent::setup(mom, label);
+    ofxSIComponent::setup(mom, label);
     
 	
 	
 }
 
-void superInterfaceImage::update () {
+void ofxSIImage::update () {
 	
-	superInterfaceComponent::update();
+	ofxSIComponent::update();
 	
 	if(bKeepProportions) {
 		
@@ -60,7 +60,7 @@ void superInterfaceImage::update () {
 }
 
 
-void superInterfaceImage::draw() {
+void ofxSIImage::draw() {
 	
 	
 	ofEnableAlphaBlending();

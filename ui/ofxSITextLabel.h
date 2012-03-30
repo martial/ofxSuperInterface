@@ -1,5 +1,5 @@
 //
-//  superInterfaceTextLabel.h
+//  ofxSITextLabel.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 09/08/2011.
@@ -10,13 +10,13 @@
 #define SUPINTSTXTLABEL
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
+#include "ofxSIComponent.h"
 
-class superInterfaceTextLabel : public superInterfaceComponent {
+class ofxSITextLabel : public ofxSIComponent {
     
     public :
     
-    superInterfaceTextLabel();
+    ofxSITextLabel();
     void setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, string label = "button");
     void update();
     void draw();

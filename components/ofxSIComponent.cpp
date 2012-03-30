@@ -1,41 +1,41 @@
 //
-//  superInterfaceComponent.cpp
+//  ofxSIComponent.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 05/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceComponent.h"
+#include "ofxSIComponent.h"
 
 
-superInterfaceComponent::superInterfaceComponent(){
+ofxSIComponent::ofxSIComponent(){
      
 }
-void superInterfaceComponent::setup(ofxSuperInterface   * mom, string label){
-     superInterfaceInteractiveObject::setup(mom, label);
+void ofxSIComponent::setup(ofxSuperInterface   * mom, string label){
+     ofxSIInteractiveObject::setup(mom, label);
 }
 
-void superInterfaceComponent::update(){
-    superInterfaceInteractiveObject::update();
+void ofxSIComponent::update(){
+    ofxSIInteractiveObject::update();
 }
 
-void superInterfaceComponent::update(ofEventArgs & e){
-    superInterfaceInteractiveObject::update(e);
+void ofxSIComponent::update(ofEventArgs & e){
+    ofxSIInteractiveObject::update(e);
 }
-void superInterfaceComponent::draw(){
-    superInterfaceInteractiveObject::draw();    
+void ofxSIComponent::draw(){
+    ofxSIInteractiveObject::draw();    
 }
 
-void superInterfaceComponent::onMousePressed(int x, int y, int id){
+void ofxSIComponent::onMousePressed(int x, int y, int id){
     
 }
-void superInterfaceComponent::onMouseDragged(int x, int y){
+void ofxSIComponent::onMouseDragged(int x, int y){
     
 }
-void superInterfaceComponent::onMouseMoved(){
+void ofxSIComponent::onMouseMoved(){
     
 }
-void superInterfaceComponent::onMouseReleased(){
+void ofxSIComponent::onMouseReleased(){
     
 }

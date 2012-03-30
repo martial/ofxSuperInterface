@@ -1,19 +1,19 @@
 /*
- *  superInterfaceFbo.cpp
- *  superInterface
+ *  ofxSIFbo.cpp
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceFbo.h"
+#include "ofxSIFbo.h"
 
-superInterfaceFbo::superInterfaceFbo() {
+ofxSIFbo::ofxSIFbo() {
 	bKeepProportions = true;
 }
 
-void superInterfaceFbo::setup(ofxSuperInterface   * mom,  ofFbo * fbo, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label  ) {
+void ofxSIFbo::setup(ofxSuperInterface   * mom,  ofFbo * fbo, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label  ) {
 	
 	
 	this->fbo = fbo;
@@ -21,15 +21,15 @@ void superInterfaceFbo::setup(ofxSuperInterface   * mom,  ofFbo * fbo, int xGrid
     this->wGridSize = wGridSize;
     this->hGridSize = hGridSize;
 
-    superInterfaceComponent::setup(mom, label);
+    ofxSIComponent::setup(mom, label);
     
 	
 	
 }
 
-void superInterfaceFbo::update () {
+void ofxSIFbo::update () {
 		
-	superInterfaceComponent::update();
+	ofxSIComponent::update();
 	
 	if(bKeepProportions) {
 		
@@ -59,7 +59,7 @@ void superInterfaceFbo::update () {
 }
 
 
-void superInterfaceFbo::draw() {
+void ofxSIFbo::draw() {
 	
 	
 	ofEnableAlphaBlending();

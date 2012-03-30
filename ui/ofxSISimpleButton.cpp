@@ -1,51 +1,51 @@
 //
-//  superInterfaceSimpleButton.cpp
-//  superInterface
+//  ofxSISimpleButton.cpp
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 04/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceSimpleButton.h"
+#include "ofxSISimpleButton.h"
 #include "ofxSuperInterface.h"
 
 
-superInterfaceSimpleButton::superInterfaceSimpleButton () {
+ofxSISimpleButton::ofxSISimpleButton () {
 
 }
 
-void superInterfaceSimpleButton::setup(ofxSuperInterface   * mom, bool &value, string label,  int xGridPos, int yGridPos, int wGridSize, int hGridSize) {
+void ofxSISimpleButton::setup(ofxSuperInterface   * mom, bool &value, string label,  int xGridPos, int yGridPos, int wGridSize, int hGridSize) {
     
     this->gridPos.set(xGridPos, yGridPos);
     this->wGridSize = wGridSize;
     this->hGridSize = hGridSize;
     this->settings->label = label;
     
-    superInterfaceSwitch::setup(mom, label, value);
+    ofxSISwitch::setup(mom, label, value);
   
 }
 
-void superInterfaceSimpleButton::setup(ofxSuperInterface   * mom,  string label,  int xGridPos, int yGridPos, int wGridSize, int hGridSize) {
+void ofxSISimpleButton::setup(ofxSuperInterface   * mom,  string label,  int xGridPos, int yGridPos, int wGridSize, int hGridSize) {
     
     this->gridPos.set(xGridPos, yGridPos);
     this->wGridSize = wGridSize;
     this->hGridSize = hGridSize;
     this->settings->label = label;
     
-    superInterfaceSwitch::setup(mom, label);
+    ofxSISwitch::setup(mom, label);
     
 }
 
 
 
-void superInterfaceSimpleButton::update() {
+void ofxSISimpleButton::update() {
     
-    superInterfaceSwitch::update();
+    ofxSISwitch::update();
 }
 
-void superInterfaceSimpleButton::draw() {
+void ofxSISimpleButton::draw() {
     
-    superInterfaceSwitch::draw();
+    ofxSISwitch::draw();
     
    
     if (!value) return;
@@ -65,6 +65,6 @@ void superInterfaceSimpleButton::draw() {
     
 }
 
-void superInterfaceSimpleButton::setTemporary(bool b) {
-    superInterfaceSwitch::setTemporary(b);
+void ofxSISimpleButton::setTemporary(bool b) {
+    ofxSISwitch::setTemporary(b);
 }

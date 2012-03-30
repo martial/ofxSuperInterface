@@ -1,6 +1,6 @@
 /*
- *  superInterfaceFFT.h
- *  superInterface
+ *  ofxSIFFT.h
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -11,17 +11,17 @@
 #define SUPINTFFT
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
-#include "superInterfaceVSlider.h"
-#include "superInterfaceSimpleButton.h"
-#include "superInterfaceTextLabel.h"
+#include "ofxSIComponent.h"
+#include "ofxSIVSlider.h"
+#include "ofxSISimpleButton.h"
+#include "ofxSITextLabel.h"
 
-class superInterfaceFFT : public superInterfaceComponent { 
+class ofxSIFFT : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceFFT();
+    ofxSIFFT();
     void setup(ofxSuperInterface   * mom, int maxNumOfFreqs, int * filterRange, int xGridPos, int yGridPos, int wGridSize, int hGridSize, int xPadding = 3, int yPadding = 3, float freqBtnHeight = 30,  string label = "FFT" );
     void update();
     void draw();
@@ -29,7 +29,7 @@ public:
 	
 	void updateValues(vector<float> * values);
     
-	void onFreqBtnDown(superInterfaceEventArgs & e);
+	void onFreqBtnDown(ofxSIEventArgs & e);
 	void setFilterRange(int num);
 	
 	void onMousePressed(int x, int y, int id);
@@ -49,8 +49,8 @@ private:
 	int xPadding, yPadding;
 	float freqBtnHeight;
 	
-	vector<superInterfaceVSlider*> sliders;
-	vector<superInterfaceSimpleButton*> freqBtns;
+	vector<ofxSIVSlider*> sliders;
+	vector<ofxSISimpleButton*> freqBtns;
     
     
 };

@@ -1,18 +1,18 @@
 /*
- *  superInterfaceFFT.cpp
- *  superInterface
+ *  ofxSIFFT.cpp
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceFFT.h"
+#include "ofxSIFFT.h"
 
-superInterfaceFFT::superInterfaceFFT() {
+ofxSIFFT::ofxSIFFT() {
 	
 }
-void superInterfaceFFT::setup(ofxSuperInterface   * mom, int maxNumOfFreqs, int * filterRange,  int xGridPos, int yGridPos, int wGridSize, int hGridSize, int xPadding, int yPadding, float freqBtnHeight,  string label  ) {
+void ofxSIFFT::setup(ofxSuperInterface   * mom, int maxNumOfFreqs, int * filterRange,  int xGridPos, int yGridPos, int wGridSize, int hGridSize, int xPadding, int yPadding, float freqBtnHeight,  string label  ) {
 	
 	this->mom = mom;
 	this->settings->label = label;
@@ -28,7 +28,7 @@ void superInterfaceFFT::setup(ofxSuperInterface   * mom, int maxNumOfFreqs, int 
 	numOfFreqs = maxNumOfFreqs;
 	
 	// update values
-	superInterfaceComponent::update();
+	ofxSIComponent::update();
 	
 	// find one slider value
 	sliderWidth = width / numOfFreqs;
@@ -39,18 +39,18 @@ void superInterfaceFFT::setup(ofxSuperInterface   * mom, int maxNumOfFreqs, int 
 	
 	for ( int i=0; i<numOfFreqs; i++) {
 		
-		superInterfaceVSlider * slider = new superInterfaceVSlider();
+		ofxSIVSlider * slider = new ofxSIVSlider();
 		slider->setup(mom, 0, 0, 10, 10, 0, 1, "fft_"+ ofToString(i));
 		sliders.push_back(slider);
 		
 		
-		superInterfaceSimpleButton * freqBtn = new superInterfaceSimpleButton();
+		ofxSISimpleButton * freqBtn = new ofxSISimpleButton();
 		freqBtn->setup(mom,"-", 0,0,10,10);
 		freqBtn->cornerRadius = 2;
 		freqBtn->id = i;
 		freqBtns.push_back(freqBtn);
 		
-		ofAddListener(freqBtn->eventMouseDown, this, &superInterfaceFFT::onFreqBtnDown);
+		ofAddListener(freqBtn->eventMouseDown, this, &ofxSIFFT::onFreqBtnDown);
 	}
 	
 	
@@ -64,9 +64,9 @@ void superInterfaceFFT::setup(ofxSuperInterface   * mom, int maxNumOfFreqs, int 
     //txtLabel.setup(mom, pos.x, pos.y + height, label);
 }
 
-void superInterfaceFFT::update() {
+void ofxSIFFT::update() {
 	
-	superInterfaceComponent::update();
+	ofxSIComponent::update();
 	
 	sliderWidth = width / numOfFreqs;
 	
@@ -78,9 +78,9 @@ void superInterfaceFFT::update() {
 	
 }
 
-void superInterfaceFFT::draw() {
+void ofxSIFFT::draw() {
 	
-	superInterfaceComponent::draw();
+	ofxSIComponent::draw();
 	
 	
 	float sliderW = sliderWidth - (((float)xPadding * ( (float)numOfFreqs -1 )) / (float)numOfFreqs); 
@@ -107,7 +107,7 @@ void superInterfaceFFT::draw() {
 	
 }
 
-void superInterfaceFFT::updateValues(vector<float> * values) {
+void ofxSIFFT::updateValues(vector<float> * values) {
 	
 	for ( int i=0; i<values->size(); i++) {
 		int index = ( i< numOfFreqs/2) ? i : numOfFreqs -1- ( i - (numOfFreqs/2));
@@ -118,7 +118,7 @@ void superInterfaceFFT::updateValues(vector<float> * values) {
 
 }
 
-void superInterfaceFFT::onFreqBtnDown(superInterfaceEventArgs & e) {
+void ofxSIFFT::onFreqBtnDown(ofxSIEventArgs & e) {
 		
 	for ( int i=0; i<numOfFreqs; i++) {
 				
@@ -130,7 +130,7 @@ void superInterfaceFFT::onFreqBtnDown(superInterfaceEventArgs & e) {
     setFilterRange(targetFilterRange);
 }
 
-void superInterfaceFFT::setFilterRange(int num) {
+void ofxSIFFT::setFilterRange(int num) {
 	
 	
 		
@@ -158,7 +158,7 @@ void superInterfaceFFT::setFilterRange(int num) {
 }
 
 
-void superInterfaceFFT::onMousePressed(int x, int y, int id) {
+void ofxSIFFT::onMousePressed(int x, int y, int id) {
 	
 	
 	for ( int i=0; i<numOfFreqs; i++) {
@@ -167,13 +167,13 @@ void superInterfaceFFT::onMousePressed(int x, int y, int id) {
 	
 	
 }
-void superInterfaceFFT::onMouseDragged(int x, int y, int id) {
+void ofxSIFFT::onMouseDragged(int x, int y, int id) {
 
 }
-void superInterfaceFFT::onMouseMoved() {
+void ofxSIFFT::onMouseMoved() {
 
 }
-void superInterfaceFFT::onMouseReleased(int id) {
+void ofxSIFFT::onMouseReleased(int id) {
     
 	for ( int i=0; i<numOfFreqs; i++) {
 		freqBtns[i]->onMouseReleased(id);

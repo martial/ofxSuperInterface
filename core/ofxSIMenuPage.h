@@ -1,5 +1,5 @@
 //
-//  superInterfaceMenuPage.h
+//  ofxSIMenuPage.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 10/08/2011.
@@ -9,19 +9,19 @@
 #define SUPINTMENUPG
 
 #include "ofMain.h"
-#include "superInterfacePage.h"
-#include "superInterfaceHSlider.h"
-#include "superInterfaceSimpleButton.h"
-#include "superInterfaceHTextLabel.h"
-#include "superInterfaceEventArgs.h"
+#include "ofxSIPage.h"
+#include "ofxSIHSlider.h"
+#include "ofxSISimpleButton.h"
+#include "ofxSIHTextLabel.h"
+#include "ofxSIEventArgs.h"
 
 class ofxSuperInterface;
 
-class superInterfaceMenuPage : public superInterfacePage {
+class ofxSIMenuPage : public ofxSIPage {
     
 public:
     
-    superInterfaceMenuPage();
+    ofxSIMenuPage();
     
     void setup(ofxSuperInterface * mom);    
     void update();
@@ -29,10 +29,10 @@ public:
     
     void setNumOfPages(int val);
     
-    void onPageClickHandler(superInterfaceEventArgs & args);
+    void onPageClickHandler(ofxSIEventArgs & args);
     
-    superInterfaceSimpleButton          settingsBtn;
-    vector<superInterfaceSimpleButton*> pagesBtn;
+    ofxSISimpleButton          settingsBtn;
+    vector<ofxSISimpleButton*> pagesBtn;
    
     int height;
     

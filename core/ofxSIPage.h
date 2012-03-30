@@ -1,5 +1,5 @@
 //
-//  superInterfacePage.h
+//  ofxSIPage.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 08/08/2011.
@@ -10,20 +10,20 @@
 #define SUPINTPAGE
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
+#include "ofxSIComponent.h"
 
 
-class superInterfacePage {
+class ofxSIPage {
         
 public:
     
     
-    superInterfacePage();
+    ofxSIPage();
     virtual void setup(ofxSuperInterface * mom, int pageNumber);
     virtual void update();
     virtual void draw();
     
-    void addComponent(superInterfaceComponent * component);
+    void addComponent(ofxSIComponent * component);
     void removeComponentByLabel(string label);
     
     
@@ -48,7 +48,7 @@ public:
     ofColor                           bgColor;
     ofxSuperInterface               * mom;
     
-    vector<superInterfaceComponent*> components;
+    vector<ofxSIComponent*> components;
     
     bool enabled;
     int pageNumber;

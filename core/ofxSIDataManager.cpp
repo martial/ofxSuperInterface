@@ -1,22 +1,22 @@
 //
-//  superInterfaceDataManager.cpp
-//  superInterface
+//  ofxSIDataManager.cpp
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 11/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceDataManager.h"
+#include "ofxSIDataManager.h"
 #include "ofxSuperInterface.h"
 
 
-void superInterfaceDataManager::setup(ofxSuperInterface * mom, superInterfaceSettings * interfaceSettings, superInterfaceSettingsPage * settingsPage) {
+void ofxSIDataManager::setup(ofxSuperInterface * mom, ofxSISettings * interfaceSettings, ofxSISettingsPage * settingsPage) {
 	
 	this->mom = mom;
     this->interfaceSettings = interfaceSettings;
     this->settingsPage = settingsPage;
     
-    ofAddListener(settingsPage->saveBtn.eventMouseDown, this, &superInterfaceDataManager::saveSettings);
+    ofAddListener(settingsPage->saveBtn.eventMouseDown, this, &ofxSIDataManager::saveSettings);
 }
 
 
@@ -26,7 +26,7 @@ void superInterfaceDataManager::setup(ofxSuperInterface * mom, superInterfaceSet
  
  */
 
-void superInterfaceDataManager::loadSettings(string initialDirectory) {
+void ofxSIDataManager::loadSettings(string initialDirectory) {
     
     this->initialDirectory = initialDirectory;
     this->xmlSettingsPath =  initialDirectory + "settings.xml";
@@ -39,13 +39,10 @@ void superInterfaceDataManager::loadSettings(string initialDirectory) {
         
     }
 	    
-    updateSettings();
-    
-   // loadLayouts();
-    
+    updateSettings();    
 }
 
-void superInterfaceDataManager::createDefaultSettings () {
+void ofxSIDataManager::createDefaultSettings () {
     
     
     xmlSettings.addTag("settings");
@@ -65,7 +62,6 @@ void superInterfaceDataManager::createDefaultSettings () {
     xmlSettings.setValue("labelFont", "Arial.ttf");
     xmlSettings.addAttribute("labelFont", "size", 9, 0);
     
-    
 	xmlSettings.addTag("osc");
 	xmlSettings.addAttribute("osc", "host", "localhost", 0);
 	xmlSettings.addAttribute("osc", "port", 12345, 0);
@@ -77,7 +73,7 @@ void superInterfaceDataManager::createDefaultSettings () {
     
 }
 
-void superInterfaceDataManager::updateSettings () {
+void ofxSIDataManager::updateSettings () {
     
     
     xmlSettings.pushTag("settings");
@@ -101,11 +97,11 @@ void superInterfaceDataManager::updateSettings () {
     xmlSettings.popTag();
 }
 
-void superInterfaceDataManager::saveSettings(superInterfaceEventArgs & e) {
+void ofxSIDataManager::saveSettings(ofxSIEventArgs & e) {
     saveSettings();
 }
 
-void superInterfaceDataManager::saveSettings(){
+void ofxSIDataManager::saveSettings(){
     
     
 	
@@ -129,13 +125,13 @@ void superInterfaceDataManager::saveSettings(){
 
 
 
-void superInterfaceDataManager::addComponent(superInterfaceComponent *component, int pageNumber) {
+void ofxSIDataManager::addComponent(ofxSIComponent *component, int pageNumber) {
     
-	ofAddListener(component->eventChangePos, this, &superInterfaceDataManager::updateComponentPos);
-	ofAddListener(component->eventAutoUpdateEnabled, this, &superInterfaceDataManager::onAutoUpdateEnabled);
+	ofAddListener(component->eventChangePos, this, &ofxSIDataManager::updateComponentPos);
+	ofAddListener(component->eventAutoUpdateEnabled, this, &ofxSIDataManager::onAutoUpdateEnabled);
     
 #ifdef USE_OSC
-    ofAddListener(component->eventOscEnabled, this, &superInterfaceDataManager::onOscEnabled);
+    ofAddListener(component->eventOscEnabled, this, &ofxSIDataManager::onOscEnabled);
 #endif
     
 	component->pageNum = pageNumber;
@@ -165,17 +161,17 @@ void superInterfaceDataManager::addComponent(superInterfaceComponent *component,
 	
 }
 
-void superInterfaceDataManager::addPage(int pageNumber) {
+void ofxSIDataManager::addPage(int pageNumber) {
     
     checkIfLayoutXmlExists(pageNumber);
 	
-	superInterfacePage * page =  new superInterfacePage();
+	ofxSIPage * page =  new ofxSIPage();
     page->setup(mom, pageNumber);
 	pages.push_back(page);
 	
 }
 
-bool superInterfaceDataManager::checkIfComponentXmlExists(int pageNumber, superInterfaceComponent * component) {
+bool ofxSIDataManager::checkIfComponentXmlExists(int pageNumber, ofxSIComponent * component) {
 		
 	ofxXmlSettings * layoutXml = xmlLayouts[pageNumber];
     
@@ -212,11 +208,11 @@ bool superInterfaceDataManager::checkIfComponentXmlExists(int pageNumber, superI
 	
 }
 
-string superInterfaceDataManager::checkIfLayoutXmlExists(int pageNumber) {
+string ofxSIDataManager::checkIfLayoutXmlExists(int pageNumber) {
     
     
     ofFile layoutFile;
-    string path = initialDirectory + "superInterface/layouts/" + ofToString(pageNumber) + "__layout.xml";
+    string path = initialDirectory + "ofxSI/layouts/" + ofToString(pageNumber) + "__layout.xml";
     layoutFile.open(path);
     
     ofxXmlSettings * layoutXml = new ofxXmlSettings();
@@ -242,7 +238,7 @@ string superInterfaceDataManager::checkIfLayoutXmlExists(int pageNumber) {
 }
 
 
-superInterfacePage * superInterfaceDataManager::getPage(int pageNumber ) {
+ofxSIPage * ofxSIDataManager::getPage(int pageNumber ) {
     if ( pageNumber > pages.size()-1) {
         ofLog(OF_LOG_ERROR, "oh no!! %d", pageNumber);
     }
@@ -252,7 +248,7 @@ superInterfacePage * superInterfaceDataManager::getPage(int pageNumber ) {
 
 
 
-void superInterfaceDataManager::checkIfLabelExists(superInterfaceComponent *component) {
+void ofxSIDataManager::checkIfLabelExists(ofxSIComponent *component) {
 
 	for (int i=0; i<components.size(); i++) {
 		
@@ -272,7 +268,7 @@ void superInterfaceDataManager::checkIfLabelExists(superInterfaceComponent *comp
 	
 }
 
-int superInterfaceDataManager::getLayoutNodeByLabel(string label, int pageNum) {
+int ofxSIDataManager::getLayoutNodeByLabel(string label, int pageNum) {
 		
 	ofxXmlSettings * layoutXml = xmlLayouts[pageNum];
 	
@@ -299,8 +295,8 @@ int superInterfaceDataManager::getLayoutNodeByLabel(string label, int pageNum) {
 
 }
 
-void superInterfaceDataManager::updateComponentPos(superInterfaceEventArgs & e) {
-	superInterfaceObject * comp = e.comp;
+void ofxSIDataManager::updateComponentPos(ofxSIEventArgs & e) {
+	ofxSIObject * comp = e.comp;
 	// get layout comp
 	
 	ofxXmlSettings * layoutXml = xmlLayouts[comp->pageNum];
@@ -327,21 +323,21 @@ void superInterfaceDataManager::updateComponentPos(superInterfaceEventArgs & e) 
 
 
 #ifdef USE_OSC
-void superInterfaceDataManager::onOscEnabled(superInterfaceEventArgs & e) {
+void ofxSIDataManager::onOscEnabled(ofxSIEventArgs & e) {
 		
-	superInterfaceObject * comp = e.comp;
+	ofxSIObject * comp = e.comp;
 	
 	if(comp->settings->bOscEnabled) {
 			
 		if(oscManager == NULL) {
-			oscManager = new superInterfaceOscManager ();
+			oscManager = new ofxSIOscManager ();
 			oscManager->setup(interfaceSettings->oscHost, interfaceSettings->oscPort);
             //oscManager->setup("MARTIAL.local", 12345);
 		}
-		oscManager->addComponentListener(static_cast<superInterfaceInteractiveObject*>(comp));
+		oscManager->addComponentListener(static_cast<ofxSIInteractiveObject*>(comp));
 		
 	} else {
-		oscManager->removeComponentListener(static_cast<superInterfaceInteractiveObject*>(comp));
+		oscManager->removeComponentListener(static_cast<ofxSIInteractiveObject*>(comp));
 	}
 	
 	
@@ -349,9 +345,9 @@ void superInterfaceDataManager::onOscEnabled(superInterfaceEventArgs & e) {
 }
 #endif
 
-void superInterfaceDataManager::onAutoUpdateEnabled(superInterfaceEventArgs & e) {
-	superInterfaceObject * comp = e.comp;
-    ofAddListener(ofEvents.update, comp, &superInterfaceObject::update);
+void ofxSIDataManager::onAutoUpdateEnabled(ofxSIEventArgs & e) {
+	ofxSIObject * comp = e.comp;
+    ofAddListener(ofEvents.update, comp, &ofxSIObject::update);
 
     //ofAddListener(, <#ListenerClass *listener#>, <#void (ListenerClass::*listenerMethod)(const void *, ArgumentsType &)#>)
 }

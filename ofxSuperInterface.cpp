@@ -20,9 +20,9 @@ void ofxSuperInterface::setup(string initialDirectory) {
     
     
     ofDirectory dir;
-    dir.open(initialDirectory + "superInterface");
+    dir.open(initialDirectory + "ofxSI");
     if (!dir.exists()) dir.create();
-    dir.open(initialDirectory+"superInterface/layouts");
+    dir.open(initialDirectory+"ofxSI/layouts");
     if (!dir.exists()) {
         dir.create();
         ofLog(OF_LOG_NOTICE, "create layout folder");
@@ -84,7 +84,7 @@ void ofxSuperInterface::update(){
     if ( bShowSettings ) settingsPage.update();
     if ( bShowMenuPage ) menuPage.update();
 	
-    superInterfacePage * currentP = dataManager.getPage(currentPage);
+    ofxSIPage * currentP = dataManager.getPage(currentPage);
     currentP->update();
     
 }
@@ -137,7 +137,7 @@ void ofxSuperInterface::draw(){
 
 
 
-void ofxSuperInterface::addComponent(superInterfaceComponent * component, int pageNumber){
+void ofxSuperInterface::addComponent(ofxSIComponent * component, int pageNumber){
 
     
     if ( pageNumber >= dataManager.pages.size() ) {

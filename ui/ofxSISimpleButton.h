@@ -1,6 +1,6 @@
 //
-//  superInterfaceSimpleButton.h
-//  superInterface
+//  ofxSISimpleButton.h
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 04/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -10,13 +10,13 @@
 #define SUPINTSMPLBTN
     
 #include "ofMain.h"
-#include "superInterfaceSwitch.h"
+#include "ofxSISwitch.h"
 
-class superInterfaceSimpleButton : public superInterfaceSwitch {
+class ofxSISimpleButton : public ofxSISwitch {
         
     public :
     
-    superInterfaceSimpleButton();
+    ofxSISimpleButton();
     void setup(ofxSuperInterface   * mom, bool &value, string label = "button",  int xGridPos = 0, int yGridPos = 0, int wGridSize = 0, int hGridSize = 0);
     void setup(ofxSuperInterface   * mom, string label = "button",  int xGridPos = 0, int yGridPos = 0, int wGridSize = 0, int hGridSize = 0);
     void update();

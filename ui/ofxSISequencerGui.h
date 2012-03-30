@@ -1,6 +1,6 @@
 /*
- *  superInterfaceSequencerGui.h
- *  superInterface
+ *  ofxSISequencerGui.h
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -13,46 +13,46 @@
 
 #include "ofMain.h"
 
-#include "superInterfaceComponent.h"
-#include "superInterfaceHSlider.h"
-#include "superInterfaceSimpleButton.h"
-#include "superInterfaceEventArgs.h"
+#include "ofxSIComponent.h"
+#include "ofxSIHSlider.h"
+#include "ofxSISimpleButton.h"
+#include "ofxSIEventArgs.h"
 
-class superInterfaceSequencer;
+class ofxSISequencer;
 
-class superInterfaceSequencerGui : public superInterfaceComponent { 
+class ofxSISequencerGui : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceSequencerGui();
-    void setup(superInterfaceSequencer * sequencer);
+    ofxSISequencerGui();
+    void setup(ofxSISequencer * sequencer);
     void update();
     void draw();
 	
 	
-	void onPlayBtnHandler(superInterfaceEventArgs & e);
-	void onClearLastBtnHandler(superInterfaceEventArgs & e);
-	void onClearBtnHandler(superInterfaceEventArgs & e);
-	void onNextBtnHandler(superInterfaceEventArgs & e);
-	void onModeBtnHandler(superInterfaceEventArgs & e);
+	void onPlayBtnHandler(ofxSIEventArgs & e);
+	void onClearLastBtnHandler(ofxSIEventArgs & e);
+	void onClearBtnHandler(ofxSIEventArgs & e);
+	void onNextBtnHandler(ofxSIEventArgs & e);
+	void onModeBtnHandler(ofxSIEventArgs & e);
     
 	void onMousePressed(int x, int y);
     void onMouseDragged(int x, int y, int id );
     void onMouseMoved();
     void onMouseReleased(int id);
 	
-	superInterfaceHSlider		timeLine;
+	ofxSIHSlider		timeLine;
 
 	
 private:
 	
-	superInterfaceSequencer		* sequencer;
+	ofxSISequencer		* sequencer;
 	
-	superInterfaceSimpleButton	enabledBtn, nextBtn, clearBtn, clearLastBtn, previewBtn;
+	ofxSISimpleButton	enabledBtn, nextBtn, clearBtn, clearLastBtn, previewBtn;
     
-    superInterfaceSimpleButton	dotMode, lineMode, circleMode, rectMode;
-    vector<superInterfaceSimpleButton*> modeBtns;
+    ofxSISimpleButton	dotMode, lineMode, circleMode, rectMode;
+    vector<ofxSISimpleButton*> modeBtns;
 		
     float                       time;
     

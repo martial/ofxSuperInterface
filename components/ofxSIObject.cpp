@@ -1,15 +1,15 @@
 //
-//  superInterfaceObject.cpp
+//  ofxSIObject.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 04/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceObject.h"
+#include "ofxSIObject.h"
 #include "ofxSuperInterface.h"
 
-superInterfaceObject::superInterfaceObject() {
+ofxSIObject::ofxSIObject() {
     
     
     pos.x           = 0;
@@ -30,7 +30,7 @@ superInterfaceObject::superInterfaceObject() {
     bIsFixed        = false;
     bIsFreePos      = false;
     
-    settings = new superInterfaceCompSettings();
+    settings = new ofxSICompSettings();
     settings->setupDefaults();
     
     eventsArgs.comp = this;
@@ -40,20 +40,20 @@ superInterfaceObject::superInterfaceObject() {
     
 }
 
-void superInterfaceObject::setup (ofxSuperInterface   * mom, string label) {
+void ofxSIObject::setup (ofxSuperInterface   * mom, string label) {
     
     this->mom = mom;
 	this->settings->label = label;
 }
 
-void superInterfaceObject::setSettings(superInterfaceCompSettings * settings) {
+void ofxSIObject::setSettings(ofxSICompSettings * settings) {
     
     this->settings = NULL;
     this->settings = settings;
 }
 
 
-void superInterfaceObject::setGridPosByScreenCoords(int x, int y) {
+void ofxSIObject::setGridPosByScreenCoords(int x, int y) {
 	
 	float xSteps = ofGetWidth() / mom->settings.grid.x;
 	float ySteps = ofGetHeight() / mom->settings.grid.y;
@@ -62,11 +62,11 @@ void superInterfaceObject::setGridPosByScreenCoords(int x, int y) {
 	
 }
 
-void superInterfaceObject::update(ofEventArgs & e) {
+void ofxSIObject::update(ofEventArgs & e) {
 	update();
 }
 
-void superInterfaceObject::update() {
+void ofxSIObject::update() {
     
    
     calculatePos();
@@ -74,13 +74,13 @@ void superInterfaceObject::update() {
    
 }
 
-void superInterfaceObject::draw() {
+void ofxSIObject::draw() {
     
    
 }
 
 
-void superInterfaceObject::setFixed(bool b, int fixedXPos, int fixedYPos, int fixedWidth, int fixedHeight) {
+void ofxSIObject::setFixed(bool b, int fixedXPos, int fixedYPos, int fixedWidth, int fixedHeight) {
     
     bIsFixed = b;
     this->fixedXPos = fixedXPos;
@@ -91,7 +91,7 @@ void superInterfaceObject::setFixed(bool b, int fixedXPos, int fixedYPos, int fi
     
 }
 
-void superInterfaceObject::calculatePos() {
+void ofxSIObject::calculatePos() {
     pos.x = (fixedXPos == 0 ) ? mom->settings.grid.x * gridPos.x : fixedXPos;
     pos.y = (fixedYPos == 0 ) ? mom->settings.grid.y * gridPos.y : fixedYPos;
     
@@ -99,7 +99,7 @@ void superInterfaceObject::calculatePos() {
     if ( !bIsFreePos ) pos.y += mom->settings.grid.y * mom->settings.menuBarGridSize;
 }
 
-void superInterfaceObject::calculateSize() {
+void ofxSIObject::calculateSize() {
     
     if ( bIsFixed ) {
         
@@ -119,7 +119,7 @@ void superInterfaceObject::calculateSize() {
     
 }
 
-ofRectangle superInterfaceObject::getBoundingBox() {
+ofRectangle ofxSIObject::getBoundingBox() {
     
     boundingBox.set(pos.x, pos.y, width, height);
     return boundingBox;
@@ -133,7 +133,7 @@ ofRectangle superInterfaceObject::getBoundingBox() {
  utils
 */
 
-void superInterfaceObject::roundedRect(float x, float y, float w, float h, float r) {  
+void ofxSIObject::roundedRect(float x, float y, float w, float h, float r) {  
     
     r = 0;
     
@@ -153,7 +153,7 @@ void superInterfaceObject::roundedRect(float x, float y, float w, float h, float
     
     }  
 
-void superInterfaceObject::quadraticBezierVertex(float cpx, float cpy, float x, float y, float prevX, float prevY) {  
+void ofxSIObject::quadraticBezierVertex(float cpx, float cpy, float x, float y, float prevX, float prevY) {  
     float cp1x = prevX + 2.0/3.0*(cpx - prevX);  
     float cp1y = prevY + 2.0/3.0*(cpy - prevY);  
     float cp2x = cp1x + (x - prevX)/3.0;  

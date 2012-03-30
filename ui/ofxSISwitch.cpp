@@ -1,17 +1,17 @@
 //
-//  superInterfaceSwitch.cpp
-//  superInterface
+//  ofxSISwitch.cpp
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 04/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceSwitch.h"
+#include "ofxSISwitch.h"
 
 
-superInterfaceSwitch::superInterfaceSwitch () {
+ofxSISwitch::ofxSISwitch () {
     
-    superInterfaceInteractiveObject::superInterfaceInteractiveObject();
+    ofxSIInteractiveObject::ofxSIInteractiveObject();
     inherentValue = false;
     bTemporary = false;
     value = NULL;
@@ -20,32 +20,32 @@ superInterfaceSwitch::superInterfaceSwitch () {
 	
 }
 
-void superInterfaceSwitch::setup(ofxSuperInterface   * mom, string label, bool &value ) {
+void ofxSISwitch::setup(ofxSuperInterface   * mom, string label, bool &value ) {
     this->value = &value;
-    superInterfaceInteractiveObject::setup(mom, label);
+    ofxSIInteractiveObject::setup(mom, label);
 	
 	;
 }
 
-void superInterfaceSwitch::setup(ofxSuperInterface   * mom, string label) {
+void ofxSISwitch::setup(ofxSuperInterface   * mom, string label) {
     this->value = &inherentValue;
-    superInterfaceInteractiveObject::setup(mom, label);
+    ofxSIInteractiveObject::setup(mom, label);
 }
 
-void superInterfaceSwitch::update() {
-    superInterfaceInteractiveObject::update();
+void ofxSISwitch::update() {
+    ofxSIInteractiveObject::update();
 }
 
-void superInterfaceSwitch::draw() {
-    superInterfaceInteractiveObject::draw();
+void ofxSISwitch::draw() {
+    ofxSIInteractiveObject::draw();
     
 }
 
-void superInterfaceSwitch::setTemporary(bool b) {
+void ofxSISwitch::setTemporary(bool b) {
     bTemporary = b;
 }
 
-void superInterfaceSwitch::isEnabled(bool b) {
+void ofxSISwitch::isEnabled(bool b) {
      *value = b;
 	eventsArgs.intVals.clear();
 	int val = (*value == true) ? 1 : 0;
@@ -53,7 +53,7 @@ void superInterfaceSwitch::isEnabled(bool b) {
 	ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 }
 
-void superInterfaceSwitch::toggle () {
+void ofxSISwitch::toggle () {
 		
 	*value=! *value;
 	eventsArgs.intVals.clear();
@@ -62,7 +62,7 @@ void superInterfaceSwitch::toggle () {
 	ofNotifyEvent(eventUpdateValues, eventsArgs, this);
 }
 
-void superInterfaceSwitch::onMousePressed(int x, int y, int id) {
+void ofxSISwitch::onMousePressed(int x, int y, int id) {
     
     
     if ( bTemporary ){ 
@@ -76,7 +76,7 @@ void superInterfaceSwitch::onMousePressed(int x, int y, int id) {
     }
 }
 
-void superInterfaceSwitch::onMouseReleased (int id) {
+void ofxSISwitch::onMouseReleased (int id) {
     if ( bTemporary ) isEnabled(false);
     
 }

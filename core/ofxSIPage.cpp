@@ -1,18 +1,18 @@
 //
-//  superInterfacePage.cpp
+//  ofxSIPage.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 08/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfacePage.h"
+#include "ofxSIPage.h"
 
 
-superInterfacePage::superInterfacePage(){
+ofxSIPage::ofxSIPage(){
      enabled = true;
 }
-void superInterfacePage::setup(ofxSuperInterface * mom, int pageNumber){
+void ofxSIPage::setup(ofxSuperInterface * mom, int pageNumber){
     this->mom = mom;
     this->pageNumber = pageNumber;
     
@@ -20,14 +20,14 @@ void superInterfacePage::setup(ofxSuperInterface * mom, int pageNumber){
    
     
 }
-void superInterfacePage::update(){
+void ofxSIPage::update(){
     
     for ( int i = 0; i<components.size(); i++) {
         if( !components[i]->bAutoUpdate ) components[i]->update();
     }
     
 }
-void superInterfacePage::draw(){
+void ofxSIPage::draw(){
     
   
     for ( int i = 0; i<components.size(); i++) {
@@ -36,13 +36,13 @@ void superInterfacePage::draw(){
     
 }
 
-void superInterfacePage::addComponent(superInterfaceComponent * component){
+void ofxSIPage::addComponent(ofxSIComponent * component){
     components.push_back(component);
 }
-void superInterfacePage::removeComponentByLabel(string label){
+void ofxSIPage::removeComponentByLabel(string label){
     
     for ( int i = components.size()-1; i>= 0; i--) {
-        superInterfaceComponent * comp = components[i];
+        ofxSIComponent * comp = components[i];
         if ( comp->settings->label == label ){
             components.erase (components.begin() + i);
         }
@@ -60,17 +60,17 @@ void superInterfacePage::removeComponentByLabel(string label){
 
 #if !defined( TARGET_OF_IPHONE ) 
 
-void superInterfacePage::mouseMoved(ofMouseEventArgs &e){
+void ofxSIPage::mouseMoved(ofMouseEventArgs &e){
     
 }
-void superInterfacePage::mouseDragged(ofMouseEventArgs &e){
+void ofxSIPage::mouseDragged(ofMouseEventArgs &e){
 	
     for ( int i = 0; i<components.size(); i++) {
         components[i]->mouseMoved(e);
     }
 }
 
-void superInterfacePage::mousePressed(ofMouseEventArgs &e){
+void ofxSIPage::mousePressed(ofMouseEventArgs &e){
     
     
     for ( int i = 0; i<components.size(); i++) {
@@ -79,7 +79,7 @@ void superInterfacePage::mousePressed(ofMouseEventArgs &e){
     
 }
 
-void superInterfacePage::mouseReleased(ofMouseEventArgs &e){
+void ofxSIPage::mouseReleased(ofMouseEventArgs &e){
     
     for ( int i = 0; i<components.size(); i++) {
         components[i]->mouseReleased(e);
@@ -90,7 +90,7 @@ void superInterfacePage::mouseReleased(ofMouseEventArgs &e){
 
 #else
 
-void superInterfacePage::touchDown(ofTouchEventArgs &touch){
+void ofxSIPage::touchDown(ofTouchEventArgs &touch){
     
     if(!enabled ) return;
     for ( int i = 0; i<components.size(); i++) {
@@ -98,7 +98,7 @@ void superInterfacePage::touchDown(ofTouchEventArgs &touch){
     }    
 }
 
-void superInterfacePage::touchMoved(ofTouchEventArgs &touch){
+void ofxSIPage::touchMoved(ofTouchEventArgs &touch){
     if(!enabled ) return;
     
     
@@ -110,7 +110,7 @@ void superInterfacePage::touchMoved(ofTouchEventArgs &touch){
     
 }
 
-void superInterfacePage::touchUp(ofTouchEventArgs &touch){
+void ofxSIPage::touchUp(ofTouchEventArgs &touch){
     
      if(!enabled ) return;
     for ( int i = 0; i<components.size(); i++) {
@@ -119,11 +119,11 @@ void superInterfacePage::touchUp(ofTouchEventArgs &touch){
     
 }
 
-void superInterfacePage::touchDoubleTap(ofTouchEventArgs &touch){
+void ofxSIPage::touchDoubleTap(ofTouchEventArgs &touch){
      if(!enabled ) return;
 }
 
-void superInterfacePage::touchCancelled(ofTouchEventArgs &touch){
+void ofxSIPage::touchCancelled(ofTouchEventArgs &touch){
      if(!enabled ) return;
 }
 

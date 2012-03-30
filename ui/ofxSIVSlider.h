@@ -1,6 +1,6 @@
 /*
- *  superInterfaceVSlider.h
- *  superInterface
+ *  ofxSIVSlider.h
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -11,14 +11,14 @@
 #define SUPINTVSLIDER
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
+#include "ofxSIComponent.h"
 
-class superInterfaceVSlider : public superInterfaceComponent { 
+class ofxSIVSlider : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceVSlider();
+    ofxSIVSlider();
     void setup(ofxSuperInterface   * mom, float * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal = 0.0, float maxVal = 1.0, string label = "slider" );
 	void setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal = 0.0, float maxVal = 1.0, string label = "slider" );
     void update();

@@ -1,27 +1,27 @@
 //
-//  superInterfaceHTextLabel.cpp
+//  ofxSIHTextLabel.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 09/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceTextLabel.h"
+#include "ofxSITextLabel.h"
 #include "ofxSuperInterface.h"
 
-superInterfaceTextLabel::superInterfaceTextLabel() {
+ofxSITextLabel::ofxSITextLabel() {
     
 }
-void superInterfaceTextLabel::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, string label) {
+void ofxSITextLabel::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, string label) {
     
-    superInterfaceComponent::setup(mom, label);
+    ofxSIComponent::setup(mom, label);
     
     this->gridPos.set(xGridPos, xGridPos);
     extraText = "";
    
     
 }
-void superInterfaceTextLabel::update(){
+void ofxSITextLabel::update(){
     
     // have to find how many units it is!
     
@@ -33,13 +33,13 @@ void superInterfaceTextLabel::update(){
     hGridSize = (int)(boundingBox.height / this->mom->settings.grid.y);
     
     // don't update size here
-    //superInterfaceComponent::update(); 
+    //ofxSIComponent::update(); 
     
     
 }
-void superInterfaceTextLabel::draw() {
+void ofxSITextLabel::draw() {
     
-    superInterfaceComponent::draw(); 
+    ofxSIComponent::draw(); 
     
     ofSetColor(255,0,0);
     //ofRect(pos.x, pos.y, boundingBox.width, boundingBox.height);
@@ -55,7 +55,7 @@ void superInterfaceTextLabel::draw() {
     
 }
 
-ofRectangle superInterfaceTextLabel::getBoundingBox() {
+ofRectangle ofxSITextLabel::getBoundingBox() {
     
     boundingBox = this->mom->assets.labelFont.getStringBoundingBox(this->settings->label.c_str(), pos.x, pos.y);
     return boundingBox;

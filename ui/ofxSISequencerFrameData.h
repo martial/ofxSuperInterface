@@ -1,6 +1,6 @@
 /*
- *  superInterfaceSequencerFrameData.h
- *  superInterface
+ *  ofxSISequencerFrameData.h
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -11,16 +11,16 @@
 #define SUPINTFRDATA
 
 #include "ofMain.h"
-#include "superInterfaceSequencerAnimData.h"
+#include "ofxSISequencerAnimData.h"
 
-class superInterfaceSequencerFrameData  { 
+class ofxSISequencerFrameData  { 
     
     
 public:
     
-    superInterfaceSequencerFrameData();
-    ~superInterfaceSequencerFrameData();
-    vector<superInterfaceSequencerAnimData> anims;
+    ofxSISequencerFrameData();
+    ~ofxSISequencerFrameData();
+    vector<ofxSISequencerAnimData> anims;
 	
 	
 	

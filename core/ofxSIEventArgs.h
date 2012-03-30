@@ -1,6 +1,6 @@
 //
-//  superInterfaceEvent.h
-//  superInterface
+//  ofxSIEvent.h
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 10/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -11,13 +11,13 @@
 
 #include "ofMain.h"
 
-class superInterfaceObject;
+class ofxSIObject;
 
-class superInterfaceEventArgs : public ofEventArgs {
+class ofxSIEventArgs : public ofEventArgs {
     
 public:
     
-    superInterfaceObject * comp;
+    ofxSIObject * comp;
     
 	// values - mostly used for OSC
 	

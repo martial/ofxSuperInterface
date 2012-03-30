@@ -1,5 +1,5 @@
 //
-//  superInterfaceAbstractSequencerMapper.h
+//  ofxSIAbstractSequencerMapper.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 13/09/2011.
@@ -10,16 +10,16 @@
 #define SUPTINTABSTRCTMAPP
 
 #include "ofMain.h"
-#include "superInterfaceSequencerAnimData.h"
+#include "ofxSISequencerAnimData.h"
 
-class superInterfaceAbstractSequencerMapper {
+class ofxSIAbstractSequencerMapper {
     
   
 public:
         
     virtual void setPoints(){};
     virtual void draw(float x, float y){};
-    virtual vector<int> * getActivePoints(vector<superInterfaceSequencerAnimData> * anims){};
+    virtual vector<int> * getActivePoints(vector<ofxSISequencerAnimData> * anims){};
     void    clearPoints() {activePoints.clear();} ;
     vector<ofVec2f> pnts;
     vector<int>     activePoints;

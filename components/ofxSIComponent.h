@@ -1,5 +1,5 @@
 //
-//  superInterfaceComponent.h
+//  ofxSIComponent.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 05/08/2011.
@@ -10,16 +10,16 @@
 #define SUPINTCOMP
 
 #include "ofMain.h"
-#include "superInterfaceInteractiveObject.h"
-#include "superInterfaceAssets.h"
+#include "ofxSIInteractiveObject.h"
+#include "ofxSIAssets.h"
 
-class superInterfaceComponent : public superInterfaceInteractiveObject {
+class ofxSIComponent : public ofxSIInteractiveObject {
     
 public:
     
-    superInterfaceComponent();
+    ofxSIComponent();
     void setup(ofxSuperInterface   * mom, string label);
-    void setAssets( superInterfaceAssets * assets);
+    void setAssets( ofxSIAssets * assets);
     void update();
 	void update(ofEventArgs & e);
     void draw();

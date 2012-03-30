@@ -1,5 +1,5 @@
 //
-//  superInterfaceMenuPage.cpp
+//  ofxSIMenuPage.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 10/08/2011.
@@ -7,19 +7,19 @@
 //
 
 
-#include "superInterfaceMenuPage.h"
+#include "ofxSIMenuPage.h"
 #include "ofxSuperInterface.h"
 
-superInterfaceMenuPage::superInterfaceMenuPage () {
+ofxSIMenuPage::ofxSIMenuPage () {
     enabled = true;
     height = 40;
 }
 
-void superInterfaceMenuPage::setup (ofxSuperInterface * mom)
+void ofxSIMenuPage::setup (ofxSuperInterface * mom)
 
 {
     
-    superInterfacePage::setup(mom, -1);
+    ofxSIPage::setup(mom, -1);
     
     settingsBtn.setup(mom, mom->bShowSettings, "SETTINGS");
     settingsBtn.cornerRadius = 0;
@@ -32,7 +32,7 @@ void superInterfaceMenuPage::setup (ofxSuperInterface * mom)
     //pagesBtn.push_back(&settingsBtn);
 }
 
-void superInterfaceMenuPage::setNumOfPages(int val) {
+void ofxSIMenuPage::setNumOfPages(int val) {
     
     // take the settings btn 
     
@@ -44,13 +44,13 @@ void superInterfaceMenuPage::setNumOfPages(int val) {
         
         for ( int i=0; i< val - pagesBtn.size(); i++ ) {
             
-            superInterfaceSimpleButton * btn = new superInterfaceSimpleButton();
+            ofxSISimpleButton * btn = new ofxSISimpleButton();
             string pLabel = "PAGE " + ofToString(val-1);
             
             btn->setup(mom, pLabel);
             btn->id = pagesBtn.size();
         
-            ofAddListener(btn->eventMouseDown, this, &superInterfaceMenuPage::onPageClickHandler);
+            ofAddListener(btn->eventMouseDown, this, &ofxSIMenuPage::onPageClickHandler);
         
             // btn->setTemporary(true);
             pagesBtn.push_back(btn);
@@ -63,7 +63,7 @@ void superInterfaceMenuPage::setNumOfPages(int val) {
         // we should not be in that case.. But who knows
         // TODO check for destructors
         
-        superInterfaceSimpleButton * btnToRemove = pagesBtn[pagesBtn.size()-1];
+        ofxSISimpleButton * btnToRemove = pagesBtn[pagesBtn.size()-1];
         removeComponentByLabel(btnToRemove->settings->label);
         pagesBtn.erase (pagesBtn.end(),pagesBtn.end()+1);
         
@@ -73,14 +73,14 @@ void superInterfaceMenuPage::setNumOfPages(int val) {
     
 }
 
-void superInterfaceMenuPage::onPageClickHandler(superInterfaceEventArgs & args) {
+void ofxSIMenuPage::onPageClickHandler(ofxSIEventArgs & args) {
     
 
 	
-    superInterfaceObject * comp = args.comp;
+    ofxSIObject * comp = args.comp;
     
     for ( int i = 0; i<pagesBtn.size(); i++) {
-        superInterfaceSimpleButton * btn = pagesBtn[i];
+        ofxSISimpleButton * btn = pagesBtn[i];
          btn->isEnabled(( comp->id == btn->id ));
                   
     }
@@ -89,7 +89,7 @@ void superInterfaceMenuPage::onPageClickHandler(superInterfaceEventArgs & args) 
     
 }
 
-void superInterfaceMenuPage::update () {
+void ofxSIMenuPage::update () {
     
     // adapt
      settingsBtn.setFixed(true, 0, 0, 100, mom->settings.grid.y * mom->settings.menuBarGridSize);
@@ -105,12 +105,12 @@ void superInterfaceMenuPage::update () {
         pagesBtn[i]->setFixed(true, 100 + btnWidth * i, 0, btnWidth, mom->settings.grid.y * mom->settings.menuBarGridSize);
      }
     
-    superInterfacePage::update();
+    ofxSIPage::update();
 }
 
-void superInterfaceMenuPage::draw() {
+void ofxSIMenuPage::draw() {
     
-    superInterfacePage::draw();
+    ofxSIPage::draw();
     
 }
 

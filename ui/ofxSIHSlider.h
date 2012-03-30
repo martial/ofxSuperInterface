@@ -1,5 +1,5 @@
 //
-//  superInterfaceHSlider.h
+//  ofxSIHSlider.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 05/08/2011.
@@ -10,15 +10,15 @@
 #define SUPINTHSLIDER
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
-#include "superInterfaceTextLabel.h"
+#include "ofxSIComponent.h"
+#include "ofxSITextLabel.h"
 
-class superInterfaceHSlider : public superInterfaceComponent { 
+class ofxSIHSlider : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceHSlider();
+    ofxSIHSlider();
     void setup(ofxSuperInterface   * mom, float * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal = 0.0, float maxVal = 1.0, string label = "slider" );
     void update();
     void draw();
@@ -37,7 +37,7 @@ public:
     bool bRounded;
     
     
-    superInterfaceTextLabel txtLabel;
+    ofxSITextLabel txtLabel;
     
     
 };

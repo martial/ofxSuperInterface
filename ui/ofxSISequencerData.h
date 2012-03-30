@@ -1,6 +1,6 @@
 /*
- *  superInterfaceSequencerData.h
- *  superInterface
+ *  ofxSISequencerData.h
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -12,18 +12,18 @@
 
 #include "ofMain.h"
 
-#include "superInterfaceSequencerFrameData.h"
-#include "superInterfaceSequencerAnimData.h"
+#include "ofxSISequencerFrameData.h"
+#include "ofxSISequencerAnimData.h"
 
-class superInterfaceSequencer;
+class ofxSISequencer;
 
-class superInterfaceSequencerData  { 
+class ofxSISequencerData  { 
     
     
 public:
     
-    superInterfaceSequencerData();
-    void setup(superInterfaceSequencer * sequencer);
+    ofxSISequencerData();
+    void setup(ofxSISequencer * sequencer);
     void update();
     void draw();
 	
@@ -52,11 +52,11 @@ public:
     int                             selectedAnim,numOfRecords;
     int   maxPoints;
     
-    superInterfaceSequencerFrameData * getCurrentFrameData();
-	vector<superInterfaceSequencerFrameData>				framesData;
+    ofxSISequencerFrameData * getCurrentFrameData();
+	vector<ofxSISequencerFrameData>				framesData;
 private:
 	
-	superInterfaceSequencer		*	sequencer;
+	ofxSISequencer		*	sequencer;
 	
 	
 	int								currentCount, fillCount, speed;

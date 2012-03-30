@@ -1,5 +1,5 @@
 //
-//  superInterfaceAssets.h
+//  ofxSIAssets.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 05/08/2011.
@@ -10,18 +10,18 @@
 #define SUPINTASSETS
 
 #include "ofMain.h"
-#include "superInterfaceSettings.h"
+#include "ofxSISettings.h"
 
-class superInterfaceAssets {
+class ofxSIAssets {
     
         
 public:
     
-    void setup(superInterfaceSettings * settings);
+    void setup(ofxSISettings * settings);
     void loadFonts();
     
     
-    superInterfaceSettings * settings;
+    ofxSISettings * settings;
     
     ofTrueTypeFont headlineFont;
     ofTrueTypeFont labelFont;

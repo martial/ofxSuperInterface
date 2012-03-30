@@ -1,19 +1,19 @@
 /*
- *  superInterfacePointData.cpp
- *  superInterface
+ *  ofxSIPointData.cpp
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceSequencerAnimData.h"
+#include "ofxSISequencerAnimData.h"
 
-superInterfaceSequencerAnimData::superInterfaceSequencerAnimData() {
+ofxSISequencerAnimData::ofxSISequencerAnimData() {
     
 
 }
 
-superInterfaceSequencerAnimData::~superInterfaceSequencerAnimData() {
+ofxSISequencerAnimData::~ofxSISequencerAnimData() {
     pnts.clear();
 }

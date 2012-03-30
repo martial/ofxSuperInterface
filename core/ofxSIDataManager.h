@@ -1,6 +1,6 @@
 //
-//  superInterfaceDataManager.h
-//  superInterface
+//  ofxSIDataManager.h
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 11/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -10,47 +10,47 @@
 #define SUPINTDATAMNG
 
 #include "ofMain.h"
-#include "superInterfaceSettings.h"
+#include "ofxSISettings.h"
 #include "ofxXmlSettings.h"
-#include "superInterfaceEventArgs.h"
-#include "superInterfaceSettingsPage.h"
+#include "ofxSIEventArgs.h"
+#include "ofxSISettingsPage.h"
 
 #ifdef USE_OSC
-#include "superInterfaceOscManager.h"
+#include "ofxSIOscManager.h"
 #endif
 
 class ofxSuperInterface;
 
-class superInterfaceDataManager {
+class ofxSIDataManager {
   
 public:
     
-    void setup(ofxSuperInterface * mom, superInterfaceSettings * interfaceSettings, superInterfaceSettingsPage * settingsPage);
+    void setup(ofxSuperInterface * mom, ofxSISettings * interfaceSettings, ofxSISettingsPage * settingsPage);
 	
     void createDefaultSettings();
     void updateSettings();
     void loadSettings(string initialDirectory);
-    void saveSettings(superInterfaceEventArgs & e);
+    void saveSettings(ofxSIEventArgs & e);
     void saveSettings();
     
 	
     void addPage(int pageNumber);
-    void addComponent(superInterfaceComponent * component, int pageNumber);
+    void addComponent(ofxSIComponent * component, int pageNumber);
 
 	
-	void updateComponentPos(superInterfaceEventArgs & e);
+	void updateComponentPos(ofxSIEventArgs & e);
 	
 	
-	vector<superInterfaceComponent*>    components;
-    vector<superInterfacePage*>         pages;
+	vector<ofxSIComponent*>    components;
+    vector<ofxSIPage*>         pages;
 	
-	superInterfacePage * getPage(int pageNumber );
+	ofxSIPage * getPage(int pageNumber );
 	
 private:
     
 	ofxSuperInterface *					mom;
-    superInterfaceSettingsPage *		settingsPage;
-    superInterfaceSettings *			interfaceSettings;
+    ofxSISettingsPage *		settingsPage;
+    ofxSISettings *			interfaceSettings;
     
 
 	    
@@ -64,16 +64,16 @@ private:
 	
 	int		getLayoutNodeByLabel(string label, int pageNum);
     
-	bool	checkIfComponentXmlExists(int pageNumber, superInterfaceComponent *component);
+	bool	checkIfComponentXmlExists(int pageNumber, ofxSIComponent *component);
     string	checkIfLayoutXmlExists(int pageNumber);
-	void	checkIfLabelExists(superInterfaceComponent *component); // used to avoid same labels in all GUI
+	void	checkIfLabelExists(ofxSIComponent *component); // used to avoid same labels in all GUI
 	
 	
-    void    onAutoUpdateEnabled(superInterfaceEventArgs & e);
+    void    onAutoUpdateEnabled(ofxSIEventArgs & e);
     
 #ifdef USE_OSC
-	superInterfaceOscManager	*		oscManager;
-    void	onOscEnabled(superInterfaceEventArgs & e);
+	ofxSIOscManager	*		oscManager;
+    void	onOscEnabled(ofxSIEventArgs & e);
 #endif
     
 	

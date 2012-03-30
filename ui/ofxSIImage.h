@@ -1,5 +1,5 @@
 /*
- *  superInterfaceImage.h
+ *  ofxSIImage.h
  *  MODULAR_SHIP
  *
  *  Created by Martial on 15/09/2011.
@@ -11,15 +11,15 @@
 #define SUPINTOFIMG
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
+#include "ofxSIComponent.h"
 
 
-class superInterfaceImage : public superInterfaceComponent { 
+class ofxSIImage : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceImage();
+    ofxSIImage();
     void setup(ofxSuperInterface   * mom, ofImage * img, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label = "img" );
 	void update();
     void draw();

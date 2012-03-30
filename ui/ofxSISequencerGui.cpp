@@ -1,20 +1,20 @@
 /*
- *  superInterfaceSequencerGui.cpp
- *  superInterface
+ *  ofxSISequencerGui.cpp
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceSequencerGui.h"
-#include "superInterfaceSequencer.h"
+#include "ofxSISequencerGui.h"
+#include "ofxSISequencer.h"
 
-superInterfaceSequencerGui::superInterfaceSequencerGui(){
+ofxSISequencerGui::ofxSISequencerGui(){
 }
 
 
-void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
+void ofxSISequencerGui::setup(ofxSISequencer * sequencer){
 	
 	this->sequencer = sequencer;
     
@@ -48,7 +48,7 @@ void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
     for ( int i=0; i<modeBtns.size(); i++ ) {
         
         modeBtns[i]->cornerRadius = 0;
-        ofAddListener(modeBtns[i]->eventMouseDown, this, &superInterfaceSequencerGui::onModeBtnHandler);
+        ofAddListener(modeBtns[i]->eventMouseDown, this, &ofxSISequencerGui::onModeBtnHandler);
     }
     
     previewBtn.cornerRadius = 0;
@@ -57,10 +57,10 @@ void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
     clearBtn.cornerRadius = 0;
     clearLastBtn.cornerRadius = 0;
 	
-	ofAddListener(enabledBtn.eventMouseDown, this, &superInterfaceSequencerGui::onPlayBtnHandler);
-	ofAddListener(nextBtn.eventMouseDown, this, &superInterfaceSequencerGui::onNextBtnHandler);
-	ofAddListener(clearBtn.eventMouseDown, this, &superInterfaceSequencerGui::onClearBtnHandler);
-	ofAddListener(clearLastBtn.eventMouseDown, this, &superInterfaceSequencerGui::onClearLastBtnHandler);
+	ofAddListener(enabledBtn.eventMouseDown, this, &ofxSISequencerGui::onPlayBtnHandler);
+	ofAddListener(nextBtn.eventMouseDown, this, &ofxSISequencerGui::onNextBtnHandler);
+	ofAddListener(clearBtn.eventMouseDown, this, &ofxSISequencerGui::onClearBtnHandler);
+	ofAddListener(clearLastBtn.eventMouseDown, this, &ofxSISequencerGui::onClearLastBtnHandler);
     
     
     
@@ -71,7 +71,7 @@ void superInterfaceSequencerGui::setup(superInterfaceSequencer * sequencer){
 	
 }
 
-void superInterfaceSequencerGui::update(){
+void ofxSISequencerGui::update(){
 	
     enabledBtn.setFixed(false,sequencer->width - enabledBtn.width);
     nextBtn.setFixed(false,sequencer->width -  nextBtn.width, enabledBtn.height);
@@ -98,7 +98,7 @@ void superInterfaceSequencerGui::update(){
     timeLine.update();
 }
 
-void superInterfaceSequencerGui::draw(){
+void ofxSISequencerGui::draw(){
     
    
 	
@@ -118,23 +118,23 @@ void superInterfaceSequencerGui::draw(){
      }
 }
 
-void superInterfaceSequencerGui::onPlayBtnHandler(superInterfaceEventArgs & e){
+void ofxSISequencerGui::onPlayBtnHandler(ofxSIEventArgs & e){
 	//sequencer->bIsPlaying = enabledBtn
 }
 
-void superInterfaceSequencerGui::onClearLastBtnHandler(superInterfaceEventArgs & e){
+void ofxSISequencerGui::onClearLastBtnHandler(ofxSIEventArgs & e){
 	sequencer->clear();
 }
 
-void superInterfaceSequencerGui::onClearBtnHandler(superInterfaceEventArgs & e){
+void ofxSISequencerGui::onClearBtnHandler(ofxSIEventArgs & e){
 	sequencer->sequencerData.clearDrawing(sequencer->sequencerData.selectedAnim);
 }
 
-void superInterfaceSequencerGui::onNextBtnHandler(superInterfaceEventArgs & e){
+void ofxSISequencerGui::onNextBtnHandler(ofxSIEventArgs & e){
 	sequencer->sequencerData.pushSelected();
 }
 
-void superInterfaceSequencerGui::onModeBtnHandler(superInterfaceEventArgs & e){
+void ofxSISequencerGui::onModeBtnHandler(ofxSIEventArgs & e){
     string label = e.comp->settings->label;
 	sequencer->sequencerData.setType(e.comp->settings->label);
     
@@ -149,7 +149,7 @@ void superInterfaceSequencerGui::onModeBtnHandler(superInterfaceEventArgs & e){
 
 
 
-void superInterfaceSequencerGui::onMousePressed(int x, int y){
+void ofxSISequencerGui::onMousePressed(int x, int y){
 	
 	
 	enabledBtn.onDownHandler(x,y);
@@ -163,13 +163,13 @@ void superInterfaceSequencerGui::onMousePressed(int x, int y){
     
 }
 
-void superInterfaceSequencerGui::onMouseDragged(int x, int y, int id ){
+void ofxSISequencerGui::onMouseDragged(int x, int y, int id ){
 }
 
-void superInterfaceSequencerGui::onMouseMoved(){
+void ofxSISequencerGui::onMouseMoved(){
 }
 
-void superInterfaceSequencerGui::onMouseReleased(int id){
+void ofxSISequencerGui::onMouseReleased(int id){
     enabledBtn.onMouseReleased(id);
 	nextBtn.onMouseReleased(id);
 	clearBtn.onMouseReleased(id);

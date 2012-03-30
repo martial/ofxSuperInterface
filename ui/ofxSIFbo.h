@@ -1,6 +1,6 @@
 /*
- *  superInterfaceFbo.h
- *  superInterface
+ *  ofxSIFbo.h
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -11,15 +11,15 @@
 #define SUPINTFBO
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
+#include "ofxSIComponent.h"
 
 
-class superInterfaceFbo : public superInterfaceComponent { 
+class ofxSIFbo : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceFbo();
+    ofxSIFbo();
     void setup(ofxSuperInterface   * mom, ofFbo * fbo, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label = "fbo" );
 	void update();
     void draw();

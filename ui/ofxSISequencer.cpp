@@ -1,21 +1,21 @@
 /*
- *  superInterfaceSequencer.cpp
- *  superInterface
+ *  ofxSISequencer.cpp
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceSequencer.h"
+#include "ofxSISequencer.h"
 
-superInterfaceSequencer::superInterfaceSequencer() {
+ofxSISequencer::ofxSISequencer() {
     
     mapper = NULL;
     
 	
 }
-void superInterfaceSequencer::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label) {
+void ofxSISequencer::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize, string label) {
 	
 	this->mom = mom;
 	this->settings->label = label;
@@ -48,18 +48,18 @@ void superInterfaceSequencer::setup(ofxSuperInterface   * mom, int xGridPos, int
 	
 }
 
-void superInterfaceSequencer::update(ofEventArgs & e) {
+void ofxSISequencer::update(ofEventArgs & e) {
 	update();
 }
 
-void superInterfaceSequencer::update() {
+void ofxSISequencer::update() {
     
     
     
     //this->wGridSize = mom->settings.getFullScreenGridSize().x;
     this->hGridSize =  mom->settings.getFullScreenGridSize().y;
     
-    superInterfaceComponent::update();
+    ofxSIComponent::update();
     
     this->width = ofGetWidth();
     
@@ -85,8 +85,8 @@ void superInterfaceSequencer::update() {
     sendOsc();
 	
 }
-void superInterfaceSequencer::draw() {
-	superInterfaceComponent::draw();
+void ofxSISequencer::draw() {
+	ofxSIComponent::draw();
     ofEnableAlphaBlending();
 
     drawCanvas();
@@ -98,7 +98,7 @@ void superInterfaceSequencer::draw() {
 }
 
 
-void superInterfaceSequencer::setMapperAsCanvas(superInterfaceAbstractSequencerMapper * mapper) {
+void ofxSISequencer::setMapperAsCanvas(ofxSIAbstractSequencerMapper * mapper) {
     
     this->mapper = mapper;
     
@@ -106,24 +106,24 @@ void superInterfaceSequencer::setMapperAsCanvas(superInterfaceAbstractSequencerM
 }
 
 	
-void superInterfaceSequencer::togglePlay() {
+void ofxSISequencer::togglePlay() {
 }
 
-void superInterfaceSequencer::toggleRecord () {
+void ofxSISequencer::toggleRecord () {
 	
 }
 
-void superInterfaceSequencer::clear() {
+void ofxSISequencer::clear() {
     sequencerData.clear();
 }
 
-void superInterfaceSequencer::clearLast() {
+void ofxSISequencer::clearLast() {
 
     sequencerData.clearLast();
     
 }
 
-void superInterfaceSequencer::drawCanvas() {
+void ofxSISequencer::drawCanvas() {
     
     if(mapper == NULL) {
         
@@ -137,15 +137,15 @@ void superInterfaceSequencer::drawCanvas() {
     }
 	
 }
-void superInterfaceSequencer::setFullScreen(bool bFullScreen) {
+void ofxSISequencer::setFullScreen(bool bFullScreen) {
 	
 }
 
-void superInterfaceSequencer::recordValues() {
+void ofxSISequencer::recordValues() {
 	
 }
 
-void superInterfaceSequencer::onMousePressed(int x, int y,int id ) {
+void ofxSISequencer::onMousePressed(int x, int y,int id ) {
 	
     
     numOfTouches++;
@@ -168,7 +168,7 @@ void superInterfaceSequencer::onMousePressed(int x, int y,int id ) {
     sequencerGui.onMousePressed(x, y);
     
 }
-void superInterfaceSequencer::onMouseDragged(int x, int y, int id ) {
+void ofxSISequencer::onMouseDragged(int x, int y, int id ) {
     
          
     ofPoint pos;
@@ -185,10 +185,10 @@ void superInterfaceSequencer::onMouseDragged(int x, int y, int id ) {
 	
 	
 }
-void superInterfaceSequencer::onMouseMoved() {
+void ofxSISequencer::onMouseMoved() {
 	
 }
-void superInterfaceSequencer::onMouseReleased(int id) {
+void ofxSISequencer::onMouseReleased(int id) {
 	
     numOfTouches--;
     if(numOfTouches<0) numOfTouches = 0;
@@ -202,7 +202,7 @@ void superInterfaceSequencer::onMouseReleased(int id) {
     sequencerGui.onMouseReleased(id);
 }
 
-void superInterfaceSequencer::sendOsc() {
+void ofxSISequencer::sendOsc() {
     
     
     int playing = (bIsPlaying) ? 1 : 0;
@@ -221,7 +221,7 @@ void superInterfaceSequencer::sendOsc() {
     
     
     
-    superInterfaceSequencerFrameData * frameData = sequencerData.getCurrentFrameData();
+    ofxSISequencerFrameData * frameData = sequencerData.getCurrentFrameData();
         
         if(mapper != NULL) {
         
@@ -245,7 +245,7 @@ void superInterfaceSequencer::sendOsc() {
             
             if(frameData->anims.size()<i) break;
             
-            superInterfaceSequencerAnimData * animData = &frameData->anims[i];
+            ofxSISequencerAnimData * animData = &frameData->anims[i];
             
             eventsArgs.floatVals.clear();
             

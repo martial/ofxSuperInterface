@@ -1,5 +1,5 @@
 /*
- *  superInterfacePalettePicker.cpp
+ *  ofxSIPalettePicker.cpp
  *  MODULAR_SHIP
  *
  *  Created by Martial on 12/09/2011.
@@ -7,13 +7,13 @@
  *
  */
 
-#include "superInterfacePalettePicker.h"
+#include "ofxSIPalettePicker.h"
 
-superInterfacePalettePicker::superInterfacePalettePicker() {
+ofxSIPalettePicker::ofxSIPalettePicker() {
 	
 }
 
-void superInterfacePalettePicker:: setup(ofxSuperInterface   * mom, ofColor * currentColor, string label,  int xGridPos, int yGridPos , int wGridSize , int hGridSize ) {
+void ofxSIPalettePicker:: setup(ofxSuperInterface   * mom, ofColor * currentColor, string label,  int xGridPos, int yGridPos , int wGridSize , int hGridSize ) {
 	
 	
     this->gridPos.set(xGridPos, yGridPos);
@@ -22,28 +22,28 @@ void superInterfacePalettePicker:: setup(ofxSuperInterface   * mom, ofColor * cu
     this->settings->label = label;
 	this->currentColor = currentColor;
     
-    superInterfaceComponent::setup(mom, label);
+    ofxSIComponent::setup(mom, label);
 	
     txtLabel.setup(mom, pos.x, pos.y + height, label);
 	
 }
 
-void superInterfacePalettePicker::addColor(ofColor color) {
+void ofxSIPalettePicker::addColor(ofColor color) {
 	
 	colors.push_back(color);
 	
 }
 
-void superInterfacePalettePicker::setColor(ofColor color){
+void ofxSIPalettePicker::setColor(ofColor color){
 	
 	currentColor->r = color.r;
 	currentColor->g = color.g;
 	currentColor->b = color.b;
 }
 
-void superInterfacePalettePicker::update() {
+void ofxSIPalettePicker::update() {
 	
-	superInterfaceComponent::update();
+	ofxSIComponent::update();
 
 	
 	if (tweens[0].isRunning()){
@@ -89,7 +89,7 @@ void superInterfacePalettePicker::update() {
 	
 }
 
-void superInterfacePalettePicker::setRandomColor () {
+void ofxSIPalettePicker::setRandomColor () {
 	
 	int rdmVal = floor(ofRandom(0, colors.size()-1));
 	for ( int i=0; i<4; i++) {
@@ -98,9 +98,9 @@ void superInterfacePalettePicker::setRandomColor () {
 }
 
 
-void superInterfacePalettePicker::draw() {
+void ofxSIPalettePicker::draw() {
 	
-	superInterfaceComponent::draw();
+	ofxSIComponent::draw();
 
 	
 	glPushMatrix();

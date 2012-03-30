@@ -1,6 +1,6 @@
 /*
- *  superInterfaceSequencer.h
- *  superInterface
+ *  ofxSISequencer.h
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -13,22 +13,22 @@
 
 #include "ofMain.h"
 #include "ofxSuperInterface.h"
-#include "superInterfaceSequencer.h"
-#include "superInterfaceComponent.h"
-#include "superInterfaceVSlider.h"
-#include "superInterfaceSimpleButton.h"
-#include "superInterfaceEventArgs.h"
-#include "superInterfaceSequencerGui.h"
-#include "superInterfaceSequencerData.h"
-#include "superInterfaceAbstractSequencerMapper.h"
+#include "ofxSISequencer.h"
+#include "ofxSIComponent.h"
+#include "ofxSIVSlider.h"
+#include "ofxSISimpleButton.h"
+#include "ofxSIEventArgs.h"
+#include "ofxSISequencerGui.h"
+#include "ofxSISequencerData.h"
+#include "ofxSIAbstractSequencerMapper.h"
 
 
-class superInterfaceSequencer : public superInterfaceComponent { 
+class ofxSISequencer : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceSequencer();
+    ofxSISequencer();
     void setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, int wGridSize, int hGridSize,   string label = "slider" );
     void update();
 	void update(ofEventArgs & e);
@@ -47,16 +47,16 @@ public:
 	
     void sendOsc();
     
-    void setMapperAsCanvas(superInterfaceAbstractSequencerMapper * mapper);
+    void setMapperAsCanvas(ofxSIAbstractSequencerMapper * mapper);
     
 	void onMousePressed(int x, int y, int id);
     void onMouseDragged(int x, int y, int id );
     void onMouseMoved();
     void onMouseReleased(int id);
 	
-	superInterfaceSequencerData	sequencerData;
+	ofxSISequencerData	sequencerData;
 	
-    superInterfaceInteractiveObject                 canvas;
+    ofxSIInteractiveObject                 canvas;
     
     bool    bIsPlaying, bMapperPreview;
     
@@ -69,11 +69,11 @@ private:
     	
     vector<ofPoint>             fingersRecord;
 	int                         numOfTouches;
-	superInterfaceSequencerGui	sequencerGui;
+	ofxSISequencerGui	sequencerGui;
 	
 	bool bIsRecording;
 	
-	superInterfaceAbstractSequencerMapper                 *   mapper;
+	ofxSIAbstractSequencerMapper                 *   mapper;
     
 };
 

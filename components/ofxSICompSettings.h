@@ -1,5 +1,5 @@
 //
-//  superInterfaceCompSettings.h
+//  ofxSICompSettings.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 05/08/2011.
@@ -11,7 +11,7 @@
 
 #include "ofMain.h"
 
-class superInterfaceCompSettings {
+class ofxSICompSettings {
     
     public :
     

@@ -1,17 +1,17 @@
 //
-//  superInterfaceInteractiveObject.cpp
-//  superInterface
+//  ofxSIInteractiveObject.cpp
+//  ofxSI
 //
 //  Created by Martial Geoffre-Rouland on 04/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceInteractiveObject.h"
+#include "ofxSIInteractiveObject.h"
 #include "ofxSuperInterface.h"
 
-superInterfaceInteractiveObject::superInterfaceInteractiveObject() {
+ofxSIInteractiveObject::ofxSIInteractiveObject() {
     
-    superInterfaceObject::superInterfaceObject();
+    ofxSIObject::ofxSIObject();
     
     
     isRollOver = false;
@@ -25,9 +25,9 @@ superInterfaceInteractiveObject::superInterfaceInteractiveObject() {
 
 }
 
-void superInterfaceInteractiveObject::setup (ofxSuperInterface   * mom, string label) {
+void ofxSIInteractiveObject::setup (ofxSuperInterface   * mom, string label) {
     
-    superInterfaceObject::setup(mom, label);
+    ofxSIObject::setup(mom, label);
     
 }
 
@@ -41,29 +41,29 @@ void superInterfaceInteractiveObject::setup (ofxSuperInterface   * mom, string l
 
 
 
-bool superInterfaceInteractiveObject::hitTest(ofPoint tPos) {
+bool ofxSIInteractiveObject::hitTest(ofPoint tPos) {
         return ((tPos.x > pos.x) && (tPos.x < pos.x + width) && (tPos.y > pos.y) && (tPos.y < pos.y + height));
 }
 
 
  #if !defined( TARGET_OF_IPHONE ) 
 
-void superInterfaceInteractiveObject::mousePressed(ofMouseEventArgs &e) { onDownHandler(e.x, e.y); }
-void superInterfaceInteractiveObject::mouseReleased(ofMouseEventArgs &e) {onUpHandler(); }
-void superInterfaceInteractiveObject::mouseMoved(ofMouseEventArgs &e) {onMovedHandler(e.x, e.y); }
+void ofxSIInteractiveObject::mousePressed(ofMouseEventArgs &e) { onDownHandler(e.x, e.y); }
+void ofxSIInteractiveObject::mouseReleased(ofMouseEventArgs &e) {onUpHandler(); }
+void ofxSIInteractiveObject::mouseMoved(ofMouseEventArgs &e) {onMovedHandler(e.x, e.y); }
 
 #else 
 
 
-void superInterfaceInteractiveObject::touchDown(ofTouchEventArgs &touch) { onDownHandler(touch.x, touch.y, touch.id);}
-void superInterfaceInteractiveObject::touchUp(ofTouchEventArgs &touch) { onUpHandler(touch.id);}
-void superInterfaceInteractiveObject::touchMoved(ofTouchEventArgs &touch) { onMovedHandler(touch.x, touch.y, touch.id);}
+void ofxSIInteractiveObject::touchDown(ofTouchEventArgs &touch) { onDownHandler(touch.x, touch.y, touch.id);}
+void ofxSIInteractiveObject::touchUp(ofTouchEventArgs &touch) { onUpHandler(touch.id);}
+void ofxSIInteractiveObject::touchMoved(ofTouchEventArgs &touch) { onMovedHandler(touch.x, touch.y, touch.id);}
 
 #endif
 
 
 
-void superInterfaceInteractiveObject::onDownHandler(int x, int y, int id) {
+void ofxSIInteractiveObject::onDownHandler(int x, int y, int id) {
     
     
     ofPoint mousePos;
@@ -79,7 +79,7 @@ void superInterfaceInteractiveObject::onDownHandler(int x, int y, int id) {
 
 }
 
-void superInterfaceInteractiveObject::onUpHandler(int id) {
+void ofxSIInteractiveObject::onUpHandler(int id) {
     
     if(isMultiTouch) {
         nTouches--;
@@ -98,7 +98,7 @@ void superInterfaceInteractiveObject::onUpHandler(int id) {
     }
 }
 
-void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
+void ofxSIInteractiveObject::onMovedHandler(int x, int y, int id) {
 	
     
     ofPoint mousePos;
@@ -146,7 +146,7 @@ void superInterfaceInteractiveObject::onMovedHandler(int x, int y, int id) {
     
 }
 
-void superInterfaceInteractiveObject::setPosition(int x, int y, bool bSnapToGrid) {
+void ofxSIInteractiveObject::setPosition(int x, int y, bool bSnapToGrid) {
     
     x -= width*.5; 
     y -= height*.5;
@@ -156,7 +156,7 @@ void superInterfaceInteractiveObject::setPosition(int x, int y, bool bSnapToGrid
     
 }
 
-int superInterfaceInteractiveObject::roundToNumber(int val, int roundTo) {
+int ofxSIInteractiveObject::roundToNumber(int val, int roundTo) {
     
     if (roundTo == 0) return 0;
     return ((val + roundTo - 1) / roundTo) * roundTo;
@@ -164,17 +164,17 @@ int superInterfaceInteractiveObject::roundToNumber(int val, int roundTo) {
 }
 
 
-void superInterfaceInteractiveObject::update(ofEventArgs & e) {
+void ofxSIInteractiveObject::update(ofEventArgs & e) {
     update();    
 }
 
-void superInterfaceInteractiveObject::update() {
-    superInterfaceObject::update();    
+void ofxSIInteractiveObject::update() {
+    ofxSIObject::update();    
 }
 
-void superInterfaceInteractiveObject::draw() {
+void ofxSIInteractiveObject::draw() {
     
-    superInterfaceObject::draw();
+    ofxSIObject::draw();
     
  
     ofSetColor((!bEnabled) ? this->mom->settings.disabledColor : (!isMouseDown) ? this->settings->bgColor : this->settings->bgColorRoll);
@@ -191,21 +191,21 @@ void superInterfaceInteractiveObject::draw() {
     
 }
 
-void superInterfaceInteractiveObject::enableAutoUpdate(bool bEnabled) {
+void ofxSIInteractiveObject::enableAutoUpdate(bool bEnabled) {
     
     this->bAutoUpdate = bEnabled;
     ofNotifyEvent(eventAutoUpdateEnabled, eventsArgs, this);
 }
 
 
-void superInterfaceInteractiveObject::enableOSC(bool bEnabled, string oscAdress) {
+void ofxSIInteractiveObject::enableOSC(bool bEnabled, string oscAdress) {
 		
 	this->settings->bOscEnabled = bEnabled;
 	if(oscAdress != "" ) this->settings->oscAdress = oscAdress + "/" + this->settings->label;
 	ofNotifyEvent(eventOscEnabled, eventsArgs, this);
 }
 
-void superInterfaceInteractiveObject::sendOscValues() {
+void ofxSIInteractiveObject::sendOscValues() {
 	
 	//typeid(x).name();
 }

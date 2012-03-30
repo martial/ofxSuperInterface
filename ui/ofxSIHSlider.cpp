@@ -1,20 +1,20 @@
 //
-//  superInterfaceHSlider.cpp
+//  ofxSIHSlider.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 05/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceHSlider.h"
+#include "ofxSIHSlider.h"
 
 
 
-superInterfaceHSlider::superInterfaceHSlider() {
+ofxSIHSlider::ofxSIHSlider() {
     
     
 }
-void superInterfaceHSlider::setup(ofxSuperInterface   * mom, float * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal, float maxVal, string label ) {
+void ofxSIHSlider::setup(ofxSuperInterface   * mom, float * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal, float maxVal, string label ) {
     
     this->gridPos.set(xGridPos, yGridPos);
     
@@ -26,7 +26,7 @@ void superInterfaceHSlider::setup(ofxSuperInterface   * mom, float * value, int 
     this->maxVal = maxVal;
  
     
-    superInterfaceComponent::setup(mom, label);
+    ofxSIComponent::setup(mom, label);
     
     
     minVal = 10;
@@ -38,7 +38,7 @@ void superInterfaceHSlider::setup(ofxSuperInterface   * mom, float * value, int 
     this->targetValue = *value;
     
     // get width/height
-    superInterfaceComponent::update();
+    ofxSIComponent::update();
     
     pct = *value /  (minVal + (maxVal-minVal)); 
     
@@ -50,18 +50,18 @@ void superInterfaceHSlider::setup(ofxSuperInterface   * mom, float * value, int 
 	
 }
 
-void superInterfaceHSlider::roundValues(bool bActive) {
+void ofxSIHSlider::roundValues(bool bActive) {
     bRounded = bActive;
 }
 
-void superInterfaceHSlider::update() {
-     superInterfaceComponent::update();
+void ofxSIHSlider::update() {
+     ofxSIComponent::update();
     
      pct = *value /  (minVal + (maxVal-minVal)); 
 	 this->targetValue = (bRounded) ? int(minVal + (maxVal-minVal) * pct) : (minVal + (maxVal-minVal) * pct);
 }
 
-void superInterfaceHSlider::onMouseDragged (int x, int y, int id ) {
+void ofxSIHSlider::onMouseDragged (int x, int y, int id ) {
      
 	
 	
@@ -75,9 +75,9 @@ void superInterfaceHSlider::onMouseDragged (int x, int y, int id ) {
 }
 
 
-void superInterfaceHSlider::draw() {
+void ofxSIHSlider::draw() {
     
-    superInterfaceComponent::draw();
+    ofxSIComponent::draw();
     
     if ( isMouseDown ) {
         ofSetColor(  this->settings->bgColorRoll );

@@ -1,6 +1,6 @@
 /*
- *  superInterfaceOscManager.h
- *  superInterface
+ *  ofxSIOscManager.h
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -12,19 +12,19 @@
 
 #include "ofMain.h"
 #include "ofxOsc.h"
-#include "superInterfaceInteractiveObject.h"
-#include "superInterfaceObject.h"
-#include "superInterfaceEventArgs.h"
+#include "ofxSIInteractiveObject.h"
+#include "ofxSIObject.h"
+#include "ofxSIEventArgs.h"
 
-class superInterfaceOscManager {
+class ofxSIOscManager {
 	
 public:
 	
-	superInterfaceOscManager();
+	ofxSIOscManager();
 	void setup(string host, int port);
-	void addComponentListener(superInterfaceInteractiveObject * comp);
-	void removeComponentListener(superInterfaceInteractiveObject * comp);
-	void sendOscValues(superInterfaceEventArgs & args);
+	void addComponentListener(ofxSIInteractiveObject * comp);
+	void removeComponentListener(ofxSIInteractiveObject * comp);
+	void sendOscValues(ofxSIEventArgs & args);
 	
 	
 private:

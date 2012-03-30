@@ -1,5 +1,5 @@
 //
-//  superInterfaceSettingsPage.h
+//  ofxSISettingsPage.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 08/08/2011.
@@ -10,29 +10,29 @@
 #define SUPINTSETTPG
 
 #include "ofMain.h"
-#include "superInterfacePage.h"
-#include "superInterfaceHSlider.h"
-#include "superInterfaceSimpleButton.h"
-#include "superInterfaceHTextLabel.h"
+#include "ofxSIPage.h"
+#include "ofxSIHSlider.h"
+#include "ofxSISimpleButton.h"
+#include "ofxSIHTextLabel.h"
 
 class ofxSuperInterface;
 
-class superInterfaceSettingsPage : public superInterfacePage {
+class ofxSISettingsPage : public ofxSIPage {
     
 public:
     
-    superInterfaceSettingsPage();
+    ofxSISettingsPage();
     
     void setup(ofxSuperInterface * mom);    
     void update();
     void draw();
     
-    superInterfaceHSlider           xUnitSlider;
-    superInterfaceHSlider           yUnitSlider;
-	superInterfaceSimpleButton      gridBtn;
-    superInterfaceSimpleButton      saveBtn;
-	superInterfaceSimpleButton      positionBtn;
-    superInterfaceHTextLabel        label;
+    ofxSIHSlider           xUnitSlider;
+    ofxSIHSlider           yUnitSlider;
+	ofxSISimpleButton      gridBtn;
+    ofxSISimpleButton      saveBtn;
+	ofxSISimpleButton      positionBtn;
+    ofxSIHTextLabel        label;
     
     
 };

@@ -1,36 +1,36 @@
 /*
- *  superInterfaceOscManager.cpp
- *  superInterface
+ *  ofxSIOscManager.cpp
+ *  ofxSI
  *
  *  Created by Martial on 07/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceOscManager.h"
+#include "ofxSIOscManager.h"
 
-superInterfaceOscManager::superInterfaceOscManager () {
+ofxSIOscManager::ofxSIOscManager () {
 	
 	
 	
 }
 
-void superInterfaceOscManager::setup(string host, int port) {
+void ofxSIOscManager::setup(string host, int port) {
 	
 	sender.setup( host, port );
 }
 
-void superInterfaceOscManager::addComponentListener(superInterfaceInteractiveObject * comp) {
-	ofAddListener(comp->eventUpdateValues, this, &superInterfaceOscManager::sendOscValues);
+void ofxSIOscManager::addComponentListener(ofxSIInteractiveObject * comp) {
+	ofAddListener(comp->eventUpdateValues, this, &ofxSIOscManager::sendOscValues);
 
 	
 }
-void superInterfaceOscManager::removeComponentListener(superInterfaceInteractiveObject * comp) {
-	ofRemoveListener(comp->eventUpdateValues, this, &superInterfaceOscManager::sendOscValues);
+void ofxSIOscManager::removeComponentListener(ofxSIInteractiveObject * comp) {
+	ofRemoveListener(comp->eventUpdateValues, this, &ofxSIOscManager::sendOscValues);
 }
-void superInterfaceOscManager::sendOscValues(superInterfaceEventArgs & args) {
+void ofxSIOscManager::sendOscValues(ofxSIEventArgs & args) {
 	
-	superInterfaceObject * comp = args.comp;
+	ofxSIObject * comp = args.comp;
     
     
 	// format message and send it!

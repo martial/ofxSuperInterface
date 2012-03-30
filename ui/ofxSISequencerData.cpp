@@ -1,20 +1,20 @@
 /*
- *  superInterfaceSequencerData.cpp
- *  superInterface
+ *  ofxSISequencerData.cpp
+ *  ofxSI
  *
  *  Created by Martial on 08/09/2011.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
 
-#include "superInterfaceSequencerData.h"
-#include "superInterfaceSequencer.h"
+#include "ofxSISequencerData.h"
+#include "ofxSISequencer.h"
 
-superInterfaceSequencerData::superInterfaceSequencerData(){
+ofxSISequencerData::ofxSISequencerData(){
 }
 
 
-void superInterfaceSequencerData::setup(superInterfaceSequencer * sequencer){
+void ofxSISequencerData::setup(ofxSISequencer * sequencer){
 	
 	this->sequencer = sequencer;
 	
@@ -40,13 +40,13 @@ void superInterfaceSequencerData::setup(superInterfaceSequencer * sequencer){
 	
 }
 
-void superInterfaceSequencerData::update(){
+void ofxSISequencerData::update(){
 	
     
     if(bIsFilling && bIsRecording) {
                 
-        superInterfaceSequencerFrameData frameData;
-        superInterfaceSequencerAnimData animData;
+        ofxSISequencerFrameData frameData;
+        ofxSISequencerAnimData animData;
         
         animData.type = currentType;
         frameData.anims.push_back(animData);
@@ -63,21 +63,21 @@ void superInterfaceSequencerData::update(){
     
 }
 
-void superInterfaceSequencerData::draw(){
+void ofxSISequencerData::draw(){
 	
 	
 		
 }
 
-void superInterfaceSequencerData::debugDraw(){
-	superInterfaceSequencerFrameData * frameData = getCurrentFrameData();
+void ofxSISequencerData::debugDraw(){
+	ofxSISequencerFrameData * frameData = getCurrentFrameData();
 	
 	
 	for ( int i=0; i<numOfRecords; i++ ) {
                 
         if(frameData->anims.size()<i) break;
         
-		superInterfaceSequencerAnimData * animData = &frameData->anims[i];
+		ofxSISequencerAnimData * animData = &frameData->anims[i];
         
         ofColor dotColor;
         bool bSelectednim = false;
@@ -207,7 +207,7 @@ void superInterfaceSequencerData::debugDraw(){
 	}
 }
 
-void superInterfaceSequencerData::addRecord(){
+void ofxSISequencerData::addRecord(){
 	
 	// we add another entry to the global vector
     
@@ -223,9 +223,9 @@ void superInterfaceSequencerData::addRecord(){
         
         // add animation 
         for( int i= 0; i<maxPoints; i++) {
-            superInterfaceSequencerFrameData * frameData = &framesData[i];
+            ofxSISequencerFrameData * frameData = &framesData[i];
             if ( frameData->anims.size() < numOfRecords ) {
-                superInterfaceSequencerAnimData animData;
+                ofxSISequencerAnimData animData;
                 animData.type = currentType;
                 frameData->anims.push_back(animData);
             }
@@ -237,7 +237,7 @@ void superInterfaceSequencerData::addRecord(){
       
 }
 
-void superInterfaceSequencerData::stopRecording(){
+void ofxSISequencerData::stopRecording(){
 	
 	if(numOfRecords==1 && bIsFilling) {
         bIsFilling = false;
@@ -246,10 +246,10 @@ void superInterfaceSequencerData::stopRecording(){
     bIsRecording = false;
 }
 
-void superInterfaceSequencerData::record(int x, int y, int id, int numOfTouches) {
+void ofxSISequencerData::record(int x, int y, int id, int numOfTouches) {
 	    
-	superInterfaceSequencerFrameData * frameData = getCurrentFrameData();
-    superInterfaceSequencerAnimData * animData = &frameData->anims[numOfRecords-1];
+	ofxSISequencerFrameData * frameData = getCurrentFrameData();
+    ofxSISequencerAnimData * animData = &frameData->anims[numOfRecords-1];
 	//vector<ofPoint> * animData = &frameData->anims[numOfRecords-1];
 	
 	if(!animData) return;
@@ -274,7 +274,7 @@ void superInterfaceSequencerData::record(int x, int y, int id, int numOfTouches)
 }
 
 
-void superInterfaceSequencerData::clear() {
+void ofxSISequencerData::clear() {
 	
 	
     numOfRecords = 0;
@@ -283,7 +283,7 @@ void superInterfaceSequencerData::clear() {
     framesData.clear();
 }
 
-void superInterfaceSequencerData::clearLast() {
+void ofxSISequencerData::clearLast() {
 	
 	//for ( int i=0; i<framesData.size(); i++) framesData[i].clear();
     //	framesData.clear();
@@ -293,12 +293,12 @@ void superInterfaceSequencerData::clearLast() {
 	
 }
 
-void superInterfaceSequencerData::clearDrawing(int index){
+void ofxSISequencerData::clearDrawing(int index){
     
     if(numOfRecords==0 ) return;
     
     for( int i= 0; i<maxPoints; i++) {
-        superInterfaceSequencerFrameData * frameData = &framesData[i];
+        ofxSISequencerFrameData * frameData = &framesData[i];
         if(index<=frameData->anims.size()-1)
         frameData->anims.erase(frameData->anims.begin() + index);
     }
@@ -318,7 +318,7 @@ void superInterfaceSequencerData::clearDrawing(int index){
     
 }
 
-void superInterfaceSequencerData::pushSelected() {
+void ofxSISequencerData::pushSelected() {
     
     if(numOfRecords == 0) return;
     
@@ -327,29 +327,29 @@ void superInterfaceSequencerData::pushSelected() {
     
 }
 
-void superInterfaceSequencerData::setType(string type) {
+void ofxSISequencerData::setType(string type) {
     
     currentType = type;
     
     
 }
 
-float superInterfaceSequencerData::getPctElapsed() {
+float ofxSISequencerData::getPctElapsed() {
 		
 	return (float)currentCount / (float)maxPoints;
 }
 
 
 
-void superInterfaceSequencerData::onMousePressed(int x, int y, int id){
+void ofxSISequencerData::onMousePressed(int x, int y, int id){
 	
 	
 }
 
-void superInterfaceSequencerData::onMouseDragged(int x, int y, int id ){
+void ofxSISequencerData::onMouseDragged(int x, int y, int id ){
 }
 
-superInterfaceSequencerFrameData * superInterfaceSequencerData::getCurrentFrameData() {
+ofxSISequencerFrameData * ofxSISequencerData::getCurrentFrameData() {
     
     int index = ( bIsFilling ) ? currentCount-1 : currentCount;
     return &framesData[index];

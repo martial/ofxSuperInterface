@@ -1,5 +1,5 @@
 //
-//  superInterfaceObject.h
+//  ofxSIObject.h
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 04/08/2011.
@@ -11,17 +11,17 @@
 
 #include "ofMain.h"
 //#include "ofxSuperInterface.h"
-#include "superInterfaceCompSettings.h"
-#include "superInterfaceEventArgs.h"
+#include "ofxSICompSettings.h"
+#include "ofxSIEventArgs.h"
 
 class ofxSuperInterface;
 
-class superInterfaceObject {
+class ofxSIObject {
     
     
     public:
     
-    superInterfaceObject();
+    ofxSIObject();
     
     virtual void setup(ofxSuperInterface   * mom, string label);
     virtual void update();
@@ -30,7 +30,7 @@ class superInterfaceObject {
     
     virtual void setGridPosByScreenCoords(int x, int y);
     virtual void setFixed(bool b, int fixedXPos = 0, int fixedYPos = 0,int fixedWidth = 0, int fixedHeight = 0);
-    virtual void setSettings(superInterfaceCompSettings * settings);
+    virtual void setSettings(ofxSICompSettings * settings);
     
     
     void calculatePos();
@@ -53,8 +53,8 @@ class superInterfaceObject {
     
     ofxSuperInterface   * mom;
     
-    superInterfaceCompSettings * settings;
-    superInterfaceEventArgs      eventsArgs;
+    ofxSICompSettings * settings;
+    ofxSIEventArgs      eventsArgs;
     
     
     void roundedRect(float x, float y, float w, float h, float r);

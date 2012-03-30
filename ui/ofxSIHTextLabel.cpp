@@ -1,20 +1,20 @@
 //
-//  superInterfaceHTextLabel.cpp
+//  ofxSIHTextLabel.cpp
 //  emptyExample
 //
 //  Created by Martial Geoffre-Rouland on 09/08/2011.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "superInterfaceHTextLabel.h"
+#include "ofxSIHTextLabel.h"
 #include "ofxSuperInterface.h"
 
-superInterfaceHTextLabel::superInterfaceHTextLabel() {
+ofxSIHTextLabel::ofxSIHTextLabel() {
     
 }
-void superInterfaceHTextLabel::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, string label) {
+void ofxSIHTextLabel::setup(ofxSuperInterface   * mom, int xGridPos, int yGridPos, string label) {
     
-     superInterfaceComponent::setup(mom, label);
+     ofxSIComponent::setup(mom, label);
     
     this->gridPos.set(xGridPos, yGridPos);
  
@@ -24,7 +24,7 @@ void superInterfaceHTextLabel::setup(ofxSuperInterface   * mom, int xGridPos, in
     update();
     
 }
-void superInterfaceHTextLabel::update(){
+void ofxSIHTextLabel::update(){
     
      // have to find how many units it is!
     
@@ -35,13 +35,13 @@ void superInterfaceHTextLabel::update(){
     wGridSize = (int)(boundingBox.width / this->mom->settings.grid.x);
     hGridSize = (int)(boundingBox.height / this->mom->settings.grid.y);
 
-    //superInterfaceComponent::update(); 
+    //ofxSIComponent::update(); 
 
     
 }
-void superInterfaceHTextLabel::draw() {
+void ofxSIHTextLabel::draw() {
     
-    superInterfaceComponent::draw(); 
+    ofxSIComponent::draw(); 
     
     ofSetColor(0,0,0);
     ofRect(pos.x, pos.y, boundingBox.width, boundingBox.height);
@@ -57,7 +57,7 @@ void superInterfaceHTextLabel::draw() {
     
 }
 
-ofRectangle superInterfaceHTextLabel::getBoundingBox() {
+ofRectangle ofxSIHTextLabel::getBoundingBox() {
     
     boundingBox = this->mom->assets.headlineFont.getStringBoundingBox(this->settings->label.c_str(), 0, 0);
     return boundingBox;

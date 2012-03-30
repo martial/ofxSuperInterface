@@ -1,5 +1,5 @@
 /*
- *  superInterfaceHIntSlider.h
+ *  ofxSIHIntSlider.h
  *  MODULAR_SHIP
  *
  *  Created by Martial on 12/09/2011.
@@ -11,15 +11,15 @@
 #define SUPINTHINTSLIDER
 
 #include "ofMain.h"
-#include "superInterfaceComponent.h"
-#include "superInterfaceTextLabel.h"
+#include "ofxSIComponent.h"
+#include "ofxSITextLabel.h"
 
-class superInterfaceHIntSlider : public superInterfaceComponent { 
+class ofxSIHIntSlider : public ofxSIComponent { 
     
     
 public:
     
-    superInterfaceHIntSlider();
+    ofxSIHIntSlider();
     void setup(ofxSuperInterface   * mom, int * value, int xGridPos, int yGridPos, int wGridSize, int hGridSize, float minVal = 0.0, float maxVal = 1.0, string label = "slider" );
     void update();
     void draw();
@@ -37,7 +37,7 @@ public:
     
     
     
-    superInterfaceTextLabel txtLabel;
+    ofxSITextLabel txtLabel;
     
     
 };
