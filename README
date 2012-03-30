@@ -2,13 +2,15 @@ ofxSuperInterface is an openSource GUI for openFrameworks, working on both deskt
 Note : It's still very beta! 
 
 Working with a grid system + xml file.
+Interface is liquid, you can dynamically change the position of the components and scale them.
 Also can send OSC information.
 
 Dependencies : 
 
 ofxXmlSettings
-ofxOsc
 ofxTween
+
+ofxOsc is needed if you want to enable OSC communication by adding #define USE_OSC in superInterfaceDataManager.h
 
 Basic use : 
 
