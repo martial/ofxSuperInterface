@@ -12,6 +12,7 @@
 #include "ofMain.h"
 #include "ofxSIComponent.h"
 
+class ofxSuperInterface;
 
 class ofxSIPage {
         
@@ -25,6 +26,8 @@ public:
     
     void addComponent(ofxSIComponent * component);
     void removeComponentByLabel(string label);
+    
+    void alignAll();
     
     
 #if !defined( TARGET_OF_IPHONE ) 
@@ -46,7 +49,7 @@ public:
     
     
     ofColor                           bgColor;
-    ofxSuperInterface               * mom;
+    ofxSuperInterface                 * mom;
     
     vector<ofxSIComponent*> components;
     

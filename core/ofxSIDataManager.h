@@ -36,8 +36,8 @@ public:
 	
     void addPage(int pageNumber);
     void addComponent(ofxSIComponent * component, int pageNumber);
-
-	
+    
+        
 	void updateComponentPos(ofxSIEventArgs & e);
 	
 	

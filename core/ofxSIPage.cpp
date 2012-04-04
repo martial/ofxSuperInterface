@@ -7,7 +7,7 @@
 //
 
 #include "ofxSIPage.h"
-
+#include "ofxSuperInterface.h"
 
 ofxSIPage::ofxSIPage(){
      enabled = true;
@@ -52,7 +52,32 @@ void ofxSIPage::removeComponentByLabel(string label){
 }
 
 
-
+void ofxSIPage::alignAll () {
+    
+    int numOfGridX = ofGetWidth() / mom->settings.grid.x;
+    
+    int xGridPos = 0;
+    int yGridPos = 0;
+    int maxHGridSize = 0;
+    for ( int i = 0; i<components.size(); i++) {
+        
+        components[i]->gridPos.x = xGridPos;
+        components[i]->gridPos.y = yGridPos;
+        components[i]->savePositionValues();
+         
+        xGridPos += components[i]->wGridSize + 1;
+        maxHGridSize = max(components[i]->hGridSize, maxHGridSize);
+        
+        if ( i< components.size()-1 && xGridPos + components[i+1]->wGridSize  > numOfGridX ) {
+            xGridPos = 0;
+            yGridPos += maxHGridSize +1;
+            maxHGridSize = 0;
+            
+        }
+        
+    }
+    
+}
 
 
 /* events */
@@ -61,12 +86,15 @@ void ofxSIPage::removeComponentByLabel(string label){
 #if !defined( TARGET_OF_IPHONE ) 
 
 void ofxSIPage::mouseMoved(ofMouseEventArgs &e){
+    for ( int i = 0; i<components.size(); i++) {
+        components[i]->mouseMoved(e);
+    }
     
 }
 void ofxSIPage::mouseDragged(ofMouseEventArgs &e){
 	
     for ( int i = 0; i<components.size(); i++) {
-        components[i]->mouseMoved(e);
+        components[i]->mouseDragged(e);
     }
 }
 

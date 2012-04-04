@@ -46,6 +46,9 @@ public:
     void showGrid(bool bActive);
     void enablePositionMode(bool bActive);
     
+    void alignAll(ofxSIEventArgs & e) {alignAll();};
+    void alignAll();
+    
     void  addSettingsPage();
     
     

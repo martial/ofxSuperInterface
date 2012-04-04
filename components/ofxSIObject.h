@@ -10,7 +10,6 @@
 #define SUPINTOBJ
 
 #include "ofMain.h"
-//#include "ofxSuperInterface.h"
 #include "ofxSICompSettings.h"
 #include "ofxSIEventArgs.h"
 

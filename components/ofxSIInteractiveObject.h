@@ -24,10 +24,12 @@ class ofxSIInteractiveObject : public ofxSIObject {
 	void update(ofEventArgs &e);
     void draw();
     
+    void savePositionValues();
+    
     virtual void onMousePressed(int x, int y,  int id){};
     virtual void onMouseDragged(int x, int y){};
     virtual void onMouseDragged(int x, int y, int id){};
-    //virtual void onMouseMoved(){};
+    virtual void onMouseMoved(){};
     virtual void onMouseReleased(int id){};
     
     virtual void onRollOver(){};
@@ -60,6 +62,7 @@ class ofxSIInteractiveObject : public ofxSIObject {
     #endif
     
     void onDownHandler(int x, int y, int id = 0);
+    void onDraggedHandler(int x, int y, int id = 0);
     void onMovedHandler(int x, int y, int id = 0);
     void onUpHandler(int id = 0);
     

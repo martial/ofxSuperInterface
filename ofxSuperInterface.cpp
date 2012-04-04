@@ -50,7 +50,7 @@ void ofxSuperInterface::setup(string initialDirectory) {
     
     showPage(0);
     
-;
+
     
 }
 
@@ -172,9 +172,6 @@ void ofxSuperInterface::showGrid(bool bActive) {
 
 void ofxSuperInterface::enablePositionMode(bool bActive) {
     bPositionMode = bActive;
-    //showGrid(bActive);
-    
-    
 }
 
 
@@ -192,7 +189,13 @@ void ofxSuperInterface::showMenu(bool b) {
     bShowMenuPage = b;
 }
 
-
+void ofxSuperInterface::alignAll() {
+    
+    for( int i=0; i< dataManager.pages.size(); i++) {
+        ofxSIPage * currentP = dataManager.getPage(currentPage);
+        currentP->alignAll();
+    }
+}
 
 
 

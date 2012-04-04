@@ -26,9 +26,13 @@ void ofxSISettingsPage::setup (ofxSuperInterface * mom)
     yUnitSlider.setup(this->mom, &this->mom->settings.grid.y, 44, label.hGridSize+ 2, 40, 4, 10.0, 80.0, "Grille Y" );
     
 	gridBtn.setup(mom, mom->bShowGrid, "Show Grid", 0, 0, 10, 10);
-	
 	positionBtn.setup(mom, mom->bPositionMode, "Position Mode", 0, 0, 10, 10);
-	
+    
+    alignBtn.setup(mom, "Align all", 0, 0, 10, 10);
+	alignBtn.setTemporary(true);
+    
+    ofAddListener(alignBtn.eventMouseDown, mom, &ofxSuperInterface::alignAll);
+    
 	saveBtn.setup(mom, "Save settings", 0,0, 10,10);
     saveBtn.setTemporary(true);
 	
@@ -41,6 +45,7 @@ void ofxSISettingsPage::setup (ofxSuperInterface * mom)
     addComponent(&yUnitSlider);
 	addComponent(&gridBtn);
 	addComponent(&positionBtn);
+    addComponent(&alignBtn);
 
     addComponent(&saveBtn);
     
@@ -62,6 +67,8 @@ void ofxSISettingsPage::update () {
 	
 	gridBtn.setFixed(false, 20, yUnitSlider.pos.y + yUnitSlider.height, 100,50);
 	positionBtn.setFixed(false, 140, yUnitSlider.pos.y + yUnitSlider.height, 100,50);
+    
+    alignBtn.setFixed(false, 260, yUnitSlider.pos.y + yUnitSlider.height, 100,50);
     saveBtn.setFixed(false, 20, gridBtn.pos.y + gridBtn.height, 100,50);
 }
 

@@ -46,18 +46,18 @@ bool ofxSIInteractiveObject::hitTest(ofPoint tPos) {
 }
 
 
- #if !defined( TARGET_OF_IPHONE ) 
+#if !defined( TARGET_OF_IPHONE ) 
 
 void ofxSIInteractiveObject::mousePressed(ofMouseEventArgs &e) { onDownHandler(e.x, e.y); }
 void ofxSIInteractiveObject::mouseReleased(ofMouseEventArgs &e) {onUpHandler(); }
 void ofxSIInteractiveObject::mouseMoved(ofMouseEventArgs &e) {onMovedHandler(e.x, e.y); }
-
+void ofxSIInteractiveObject::mouseDragged(ofMouseEventArgs &e) {onDraggedHandler(e.x, e.y); }
 #else 
 
 
 void ofxSIInteractiveObject::touchDown(ofTouchEventArgs &touch) { onDownHandler(touch.x, touch.y, touch.id);}
 void ofxSIInteractiveObject::touchUp(ofTouchEventArgs &touch) { onUpHandler(touch.id);}
-void ofxSIInteractiveObject::touchMoved(ofTouchEventArgs &touch) { onMovedHandler(touch.x, touch.y, touch.id);}
+void ofxSIInteractiveObject::touchMoved(ofTouchEventArgs &touch) { onDraggedHandler(touch.x, touch.y, touch.id); onMovedHandler(e.x, e.y);}
 
 #endif
 
@@ -98,17 +98,16 @@ void ofxSIInteractiveObject::onUpHandler(int id) {
     }
 }
 
-void ofxSIInteractiveObject::onMovedHandler(int x, int y, int id) {
+void ofxSIInteractiveObject::onDraggedHandler(int x, int y, int id) {
 	
     
     ofPoint mousePos;
     mousePos.set(x, y);
-    bool isMouseOver =  hitTest(mousePos);
     
       
     if ( isMouseDown && mom->bPositionMode && !bIsFixed) {
         setGridPosByScreenCoords(x, y);
-		ofNotifyEvent(eventChangePos, eventsArgs, this);        
+		savePositionValues();        
     }
        
     if(!bEnabled) return;
@@ -116,33 +115,39 @@ void ofxSIInteractiveObject::onMovedHandler(int x, int y, int id) {
       
     if(isMultiTouch) {
     
-    if( isMouseDown) {
+    if( isMouseDown) 
         onMouseDragged(x, y, id);
-         if (!isRollOver ) onRollOver();
-    } else {
-        
-        if (isRollOver ) onRollOut();
-    }
     
     } else {
         
-    if ( isMouseDown && assignedId == id) {
-        
-       // if ( bEnabled ) {
+    if ( isMouseDown && assignedId == id) 
         onMouseDragged(x, y, id);
-        if (!isRollOver ) onRollOver();
-       // }
-        
-    } else {
-        
-        if (isRollOver ) onRollOut();
-    }
     
     }
     
     
-    isRollOver = isMouseOver;
 
+    
+}
+
+void ofxSIInteractiveObject::onMovedHandler(int x, int y, int id) {
+	
+    
+    ofPoint mousePos;
+    mousePos.set(x, y);
+    bool isMouseOver =  hitTest(mousePos);
+    
+    
+    
+    if(!bEnabled) return;
+    
+    onMouseMoved();
+      
+    (!isRollOver ) ? onRollOver() : onRollOut();
+        
+        
+    isRollOver = isMouseOver;
+    
     
 }
 
@@ -180,14 +185,6 @@ void ofxSIInteractiveObject::draw() {
     ofSetColor((!bEnabled) ? this->mom->settings.disabledColor : (!isMouseDown) ? this->settings->bgColor : this->settings->bgColorRoll);
     ofRect(pos.x, pos.y, width, height);
     
-    if ( mom->bPositionMode ) {
-        
-       // ofSetColor(255, 0, 0);
-       // ofDrawBitmapString(this->settings->label, pos.x, pos.y);
-        
-    }
-    
-   // onMousePressed();
     
 }
 
@@ -210,4 +207,7 @@ void ofxSIInteractiveObject::sendOscValues() {
 	//typeid(x).name();
 }
 
+void ofxSIInteractiveObject::savePositionValues() {
+    ofNotifyEvent(eventChangePos, eventsArgs, this);    
+}
 

@@ -31,6 +31,7 @@ public:
     ofxSIHSlider           yUnitSlider;
 	ofxSISimpleButton      gridBtn;
     ofxSISimpleButton      saveBtn;
+    ofxSISimpleButton      alignBtn;
 	ofxSISimpleButton      positionBtn;
     ofxSIHTextLabel        label;
     

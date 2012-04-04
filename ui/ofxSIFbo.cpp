@@ -39,6 +39,12 @@ void ofxSIFbo::update () {
 		float wScale = width / fbo->getWidth();
 		float hScale = height / fbo->getHeight();
 		
+        float minScale = min(wScale, hScale);
+        
+        fboWidth = fbo->getWidth() * minScale;
+        fboHeight = fbo->getHeight() * minScale;
+        
+        /*
 		if (compAspectRatio >= fboAspectRatio) {
 			
 			fboWidth = width;
@@ -48,7 +54,10 @@ void ofxSIFbo::update () {
 			fboHeight = height;
 			fboWidth = height * fboAspectRatio;
 		}
-		
+		*/
+        
+        
+        
 				
 		
 	} else {
@@ -56,6 +65,9 @@ void ofxSIFbo::update () {
 		fboWidth = width;
 		fboHeight = height;
 	}
+    
+    // finally 
+    
 }
 
 
@@ -64,10 +76,12 @@ void ofxSIFbo::draw() {
 	
 	ofEnableAlphaBlending();
 	
-	ofSetColor(0, 0, 0);
+  
+	ofSetColor(25, 25, 25);
 	ofRect(pos.x, pos.y, width, height);
+   
 	ofSetColor(255, 255, 255);
-	fbo->draw(pos.x, pos.y, fboWidth, fboHeight);
+	fbo->draw(pos.x + ( width*.5 - fboWidth * .5), pos.y+ ( height*.5 - fboHeight * .5), fboWidth, fboHeight);
 	
 	ofDisableAlphaBlending();
 	

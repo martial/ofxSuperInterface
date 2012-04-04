@@ -22,9 +22,11 @@ class ofxSICompSettings {
         height  = 0;
         
         bgColor.set(38,38,38);
+        
         bgColorRoll.set(50,50,50);
-        onColor.set(0, 255, 255);
-        offColor.set(125,125,125);
+        onColor.set(160, 230, 245);
+        offColor.set(38,38,38);
+        
         labelOffColor.set(255,255,255);
         labelOnColor.set(0,0,0);        
         

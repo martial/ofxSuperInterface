@@ -30,7 +30,7 @@ class ofxSISwitch : public ofxSIComponent {
     
     void onMousePressed(int x, int y, int id);
     void onMouseDragged(int x, int y, int id ){};
-    void onMouseMoved();
+    void onMouseMoved(){};
     void onMouseReleased(int id);
     
     bool    inherentValue;

@@ -322,6 +322,8 @@ void ofxSIDataManager::updateComponentPos(ofxSIEventArgs & e) {
 }
 
 
+
+
 #ifdef USE_OSC
 void ofxSIDataManager::onOscEnabled(ofxSIEventArgs & e) {
 		
